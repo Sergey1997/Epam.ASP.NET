@@ -4,7 +4,7 @@
 
 * Implementation and testing of sorts.
 * Creating a multi-file assembly.
-* Implementation of FindDigit.
+* Implementation of FilterDigit.
 
 
 
