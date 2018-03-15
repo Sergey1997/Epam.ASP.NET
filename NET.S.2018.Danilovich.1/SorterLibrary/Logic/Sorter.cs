@@ -1,33 +1,10 @@
-﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-// file:	Sorter.cs
-//
-// summary:	Implements the sorter class
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Logic
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>   A sorter. </summary>
-    ///
-    /// <remarks>   Sergey, 14.03.2018. </remarks>
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static class Sorter
     {
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   An int[] extension method that quick sort. </summary>
-        ///
-        /// <remarks>   Sergey, 14.03.2018. </remarks>
-        ///
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        ///
-        /// <param name="array">    The array to act on. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        
         public static void QuickSort(this int[] array)
         {
             try
@@ -39,21 +16,6 @@ namespace Logic
                 throw e;
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   An int[] extension method that quick sort. </summary>
-        ///
-        /// <remarks>   Sergey, 14.03.2018. </remarks>
-        ///
-        /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
-        ///                                                 the required range. </exception>
-        /// <exception cref="ArgumentNullException">        Thrown when one or more required arguments
-        ///                                                 are null. </exception>
-        ///
-        /// <param name="array">    The array to act on. </param>
-        /// <param name="left">     The left. </param>
-        /// <param name="right">    The right. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public static void QuickSort(this int[] array, int left, int right)
         {
@@ -105,19 +67,6 @@ namespace Logic
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   An int[] extension method that merge sort. </summary>
-        ///
-        /// <remarks>   Sergey, 14.03.2018. </remarks>
-        ///
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        ///
-        /// <param name="array">    The array to act on. </param>
-        ///
-        /// <returns>   An int[]. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static int[] MergeSort(this int[] array)
         {
             if (array == null)
@@ -133,17 +82,6 @@ namespace Logic
             int middle = array.Length / 2;
             return Merge(MergeSort(array.Take(middle).ToArray()), MergeSort(array.Skip(middle).ToArray()));
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Merges. </summary>
-        ///
-        /// <remarks>   Sergey, 14.03.2018. </remarks>
-        ///
-        /// <param name="arr1"> The first array. </param>
-        /// <param name="arr2"> The second array. </param>
-        ///
-        /// <returns>   An int[]. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static int[] Merge(int[] arr1, int[] arr2)
         {
