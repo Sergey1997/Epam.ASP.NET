@@ -21,13 +21,12 @@ namespace Logic
             }
 
             List<int> result = new List<int>();
-            List<int> temp = new List<int>(array);
 
-            for (int i = 0; i < temp.Count; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                if (IsContain(temp[i], digit) == true)
+                if (IsContain(array[i], digit) == true)
                 {
-                    result.Add(temp[i]);
+                    result.Add(result[i]);
                 }
             }
 
