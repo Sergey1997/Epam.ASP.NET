@@ -53,9 +53,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FilterDigitLogic\Logic.csproj">
+    <ProjectReference Include="..\FilterDigitLogic\FilterDigitLogic.csproj">
       <Project>{204f32b2-9604-45d1-9481-4129988e73b1}</Project>
-      <Name>Logic</Name>
+      <Name>FilterDigitLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

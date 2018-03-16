@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "FilterDigitLogic\Logic.csproj", "{204F32B2-9604-45D1-9481-4129988E73B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogic", "FilterDigitLogic\FilterDigitLogic.csproj", "{204F32B2-9604-45D1-9481-4129988E73B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTests", "LogicTests\LogicTests.csproj", "{A9FC666B-DBEE-427D-A753-D674772FBBC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterdigitLogicTests", "LogicTests\FilterdigitLogicTests.csproj", "{A9FC666B-DBEE-427D-A753-D674772FBBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTests-NUnit", "LogicTests-NUnit\LogicTests-NUnit.csproj", "{44862C41-8BA8-4DEF-A141-992EF45D40B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTests-DDT", "LogicTests-DDT\LogicTests-DDT.csproj", "{F4D4D2EC-D925-4899-BEA5-21801AD24282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogicTests-NUnit", "LogicTests-NUnit\FilterDigitLogicTests-NUnit.csproj", "{44862C41-8BA8-4DEF-A141-992EF45D40B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{44862C41-8BA8-4DEF-A141-992EF45D40B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44862C41-8BA8-4DEF-A141-992EF45D40B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44862C41-8BA8-4DEF-A141-992EF45D40B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4D4D2EC-D925-4899-BEA5-21801AD24282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4D4D2EC-D925-4899-BEA5-21801AD24282}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4D4D2EC-D925-4899-BEA5-21801AD24282}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4D4D2EC-D925-4899-BEA5-21801AD24282}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
