@@ -2,6 +2,5 @@
 
 #### Task 1:
 
-- Implementation and testing of sorts.
-- Creating a multi-file assembly.
-- Implementation of FilterDigit.
+- Cоздать многофайловую сборку. Назначить сборке строгое имя. Поместить сборку в GAC. Проанализировать полученную сборку с помощью ILDASM, JetBrains dotPeek.
+- Реализовать методы быстрой сортировки и сортировки слиянием для целочисленного массива (тип проекта Class Library). Протестировать работу методов с использование тестового фреймворка MS Tests.
