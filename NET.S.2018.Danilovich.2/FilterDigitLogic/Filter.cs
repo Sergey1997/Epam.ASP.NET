@@ -50,7 +50,7 @@ namespace Logic
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (IsContain(array[i], digit) == true)
+                if (IsContainForMath(array[i], digit) == true)
                 {
                     result.Add(array[i]);
                 }
@@ -70,7 +70,7 @@ namespace Logic
         /// <returns>   True if contain, false if not. </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static bool IsContain(int element, int digit)
+        private static bool IsContainForMath(int element, int digit)
         {
             if (element < 0)
             {
@@ -87,6 +87,27 @@ namespace Logic
                 element = element / 10;
             }
             while (element != 0);
+
+            return false;
+        }
+        private static bool IsContainForString(int element, int digit)
+        {
+            if (element < 0)
+            {
+                element *= -1;
+            }
+            string str = element.ToString();
+            int i = 0;
+            do
+            {
+                if (int.Parse(str[i].ToString()) % 10 == digit)
+                {
+                    return true;
+                }
+
+                i++;
+            }
+            while (i<str.Length);
 
             return false;
         }
