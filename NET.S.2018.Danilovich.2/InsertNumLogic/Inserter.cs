@@ -11,22 +11,27 @@ namespace InsertNumLogic
     {
         public static int InsertNumber(int firstNumber, int secondNumber, int i, int j)
         {
+            if (i >= j || i < 0 || j < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            
             int result = firstNumber;
 
             for (int k = i; k <= j; k++)
             {
-                int inMask = (1 << (k - i));
-                int sourceMask = (1 << k);
+                int secondMask = (1 << (k - i));
+                int firstMask = (1 << k);
 
-                if ((secondNumber & inMask) != 0)
+                if ((secondNumber & secondMask) != 0)
                 {
-                    result = result | sourceMask;
+                    result = result | firstMask;
                 }
                 else
                 {
-                    if ((firstNumber & sourceMask) != 0)
+                    if ((firstNumber & firstMask) != 0)
                     {
-                        result ^= sourceMask;
+                        result ^= firstMask;
                     }
                 }
             }

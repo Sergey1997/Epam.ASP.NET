@@ -13,9 +13,9 @@ namespace FilterDigitLogicTests
         {
             int[] array = { 55, 123, 52, 85, 23, 41, 31 };
             int digit = 5;
-
             Filter.FilterDigit(ref array, digit);
             int[] expected = { 55, 52, 85 };
+
             CollectionAssert.AreEqual(expected, array);
         }
 
@@ -24,9 +24,21 @@ namespace FilterDigitLogicTests
         {
             int[] array = { -55, 123, -52, 85, 23, 41, 31 };
             int digit = 5;
-
             Filter.FilterDigit(ref array, digit);
             int[] expected = { -55, -52, 85 };
+
+            CollectionAssert.AreEqual(expected, array);
+        }
+
+        [TestMethod]
+        public void FilterDigitTest_WasteOfTime_ReturnedArrayWithTime()
+        {
+            int[] array = { -55, 123, -52, 85, 23, 41, 31 };
+            int digit = 5;
+            long time;
+            Filter.FilterDigit(ref array, digit, out time);
+            int[] expected = { -55, -52, 85 };
+            Console.Write(time.ToString());
             CollectionAssert.AreEqual(expected, array);
         }
 
@@ -36,24 +48,27 @@ namespace FilterDigitLogicTests
         {
             int[] array = null;
             int digit = 5;
+
             Filter.FilterDigit(ref array, digit);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void FilterDigitTest_FilterWithBadDigit_ReturnedEArgumentException()
         {
             int[] array = { 55, 123, 52, 85, 23, 41, 31 };
             int digit = 15;
+
             Filter.FilterDigit(ref array, digit);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void FilterDigitTest_FilterWithBadMinusDigit_ReturnedEArgumentException()
         {
             int[] array = { 55, 123, 52, 85, 23, 41, 31 };
             int digit = -15;
+
             Filter.FilterDigit(ref array, digit);
         }
     }

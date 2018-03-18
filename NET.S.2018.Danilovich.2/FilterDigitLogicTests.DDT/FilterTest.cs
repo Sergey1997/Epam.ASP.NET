@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Logic;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FilterDigitLogicTests.DDT
@@ -39,7 +38,7 @@ namespace FilterDigitLogicTests.DDT
 
             string[] expectedString = expectedResult.Split(',');
 
-            for(int i=0;i < expectedString.Length; i++)
+            for(int i = 0;i < expectedString.Length; i++)
             {
                 expectedList.Add(int.Parse(expectedString[i]));
             }
@@ -59,7 +58,6 @@ namespace FilterDigitLogicTests.DDT
 
             Filter.FilterDigit(ref actuaArray, digit);
             CollectionAssert.AreEqual(expectedArray, actuaArray);
-
         }
     }
 }

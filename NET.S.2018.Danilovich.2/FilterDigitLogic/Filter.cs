@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,14 @@ namespace Logic
         /// <param name="array">    [in,out] The array. </param>
         /// <param name="digit">    The digit. </param>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static void FilterDigit(ref int[] array, int digit, out long millisek)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            FilterDigit(ref array, digit);
+            stopwatch.Stop();
+            millisek = stopwatch.ElapsedMilliseconds;
+        }
 
         public static void FilterDigit(ref int[] array, int digit)
         {
@@ -43,7 +52,7 @@ namespace Logic
 
             if ((digit < 0) || (digit > 9))
             {
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
             }
 
             List<int> result = new List<int>();
@@ -90,12 +99,14 @@ namespace Logic
 
             return false;
         }
+
         private static bool IsContainForString(int element, int digit)
         {
             if (element < 0)
             {
                 element *= -1;
             }
+
             string str = element.ToString();
             int i = 0;
             do
@@ -107,7 +118,7 @@ namespace Logic
 
                 i++;
             }
-            while (i<str.Length);
+            while (i < str.Length);
 
             return false;
         }
