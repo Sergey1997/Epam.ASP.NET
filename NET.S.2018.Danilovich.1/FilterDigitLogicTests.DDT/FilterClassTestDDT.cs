@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FilterDigitLogicTests.DDT
 {
     [TestClass]
-    public class FilterTest
+    public class FilterClassTestDDT
     {
         public TestContext TestContext { get; set; }
 

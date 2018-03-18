@@ -104,78 +104,41 @@ namespace SorterLogic
                 QuickSort(array, left, j);
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   An int[] extension method that merge sort. </summary>
-        ///
-        /// <remarks>   Sergey, 16.03.2018. </remarks>
-        ///
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        ///
-        /// <param name="array">    The array to act on. </param>
-        ///
-        /// <returns>   An int[]. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public static int[] MergeSort(this int[] array)
+        
+        public static void MergeSort(this int[] array)
         {
             if (array == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (array.Length == 1)
-            {
-                return array;
-            }
-
-            int middle = array.Length / 2;
-            return Merge(MergeSort(array.Take(middle).ToArray()), MergeSort(array.Skip(middle).ToArray()));
+            MergeSort(array, 0, array.Length);
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Merges. </summary>
-        ///
-        /// <remarks>   Sergey, 16.03.2018. </remarks>
-        ///
-        /// <param name="arr1"> The first array. </param>
-        /// <param name="arr2"> The second array. </param>
-        ///
-        /// <returns>   An int[]. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private static int[] Merge(int[] arr1, int[] arr2)
+        public static void MergeSort(this int[] array, int start, int end)
         {
-            int a = 0, b = 0;
-            int[] merged = new int[arr1.Length + arr2.Length];
-            for (int i = 0; i < arr1.Length + arr2.Length; i++)
+            int N = end - start;
+            if (N <= 1)
+                return;
+
+            int mid = start + N / 2;
+
+            MergeSort(array, start, mid);
+            MergeSort(array, mid, end);
+
+            int[] temp = new int[N];
+            int i = start, j = mid;
+            for (int k = 0; k < N; k++)
             {
-                if ((b < arr2.Length) && (a < arr1.Length))
-                {
-                    if ((arr1[a] > arr2[b]) && (b < arr2.Length))
-                    {
-                        merged[i] = arr2[b++];
-                    }
-                    else
-                    {
-                        merged[i] = arr1[a++];
-                    }
-                }
-                else
-                {
-                    if (b < arr2.Length)
-                    {
-                        merged[i] = arr2[b++];
-                    }
-                    else
-                    {
-                        merged[i] = arr1[a++];
-                    }
-                }
+                if (i == mid) temp[k] = array[j++];
+                else if (j == end) temp[k] = array[i++];
+                else if (array[j].CompareTo(array[i]) < 0) temp[k] = array[j++];
+                else temp[k] = array[i++];
             }
 
-            return merged;
+            for (int k = 0; k < N; k++)
+            {
+                array[start + k] = temp[k];
+            }
         }
     }
 }

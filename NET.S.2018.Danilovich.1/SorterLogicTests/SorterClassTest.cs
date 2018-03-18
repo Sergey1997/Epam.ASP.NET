@@ -62,9 +62,9 @@ namespace Logic.Tests
         {
             int[] array = { 0, 6, 2, 9, 1, 21, 52 };
             int[] expected = { 0, 1, 2, 6, 9, 21, 52 };
-            int[] actual = array.MergeSort();
+            array.MergeSort();
 
-            CollectionAssert.AreEqual(expected, actual);
+            CollectionAssert.AreEqual(expected, array);
         }
     }
 }
