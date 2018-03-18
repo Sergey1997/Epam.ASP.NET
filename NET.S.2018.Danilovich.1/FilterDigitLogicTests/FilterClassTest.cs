@@ -57,17 +57,7 @@ namespace FilterDigitLogicTests
         public void FilterDigitTest_FilterWithBadDigit_ReturnedEArgumentException()
         {
             int[] array = { 55, 123, 52, 85, 23, 41, 31 };
-            int digit = 15;
-
-            Filter.FilterDigit(ref array, digit);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void FilterDigitTest_FilterWithBadMinusDigit_ReturnedEArgumentException()
-        {
-            int[] array = { 55, 123, 52, 85, 23, 41, 31 };
-            int digit = -15;
+            int digit = -11;
 
             Filter.FilterDigit(ref array, digit);
         }

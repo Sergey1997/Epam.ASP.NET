@@ -1,5 +1,5 @@
 ﻿using System;
-using InsertNumLogic;
+using InsertNumberLogic;
 using NUnit.Framework;
 
 namespace InsertNumberLogicTests.NUnit

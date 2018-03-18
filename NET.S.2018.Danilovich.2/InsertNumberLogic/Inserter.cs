@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsertNumLogic
+namespace InsertNumberLogic
 {
     public static class Inserter
     {
