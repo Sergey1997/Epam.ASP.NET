@@ -104,7 +104,18 @@ namespace SorterLogic
                 QuickSort(array, left, j);
             }
         }
-        
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   An int[] extension method that merge sort. </summary>
+        ///
+        /// <remarks>   Sergey, 18.03.2018. </remarks>
+        ///
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        ///
+        /// <param name="array">    The array to act on. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public static void MergeSort(this int[] array)
         {
             if (array == null)
@@ -114,28 +125,54 @@ namespace SorterLogic
 
             MergeSort(array, 0, array.Length);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>   An int[] extension method that merge sort. </summary>
+        ///
+        /// <remarks>   Sergey, 18.03.2018. </remarks>
+        ///
+        /// <param name="array">    The array to act on. </param>
+        /// <param name="start">    The start. </param>
+        /// <param name="end">      The end. </param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public static void MergeSort(this int[] array, int start, int end)
         {
-            int N = end - start;
-            if (N <= 1)
+            int nextLength = end - start;
+            if (nextLength <= 1)
+            {
                 return;
+            }
 
-            int mid = start + N / 2;
+            int mid = start + (nextLength / 2);
 
             MergeSort(array, start, mid);
             MergeSort(array, mid, end);
 
-            int[] temp = new int[N];
+            int[] temp = new int[nextLength];
             int i = start, j = mid;
-            for (int k = 0; k < N; k++)
+
+            for (int k = 0; k < nextLength; k++)
             {
-                if (i == mid) temp[k] = array[j++];
-                else if (j == end) temp[k] = array[i++];
-                else if (array[j].CompareTo(array[i]) < 0) temp[k] = array[j++];
-                else temp[k] = array[i++];
+                if (i == mid)
+                {
+                    temp[k] = array[j++];
+                }
+                else if (j == end)
+                {
+                    temp[k] = array[i++];
+                }
+                else if (array[j].CompareTo(array[i]) < 0)
+                {
+                    temp[k] = array[j++];
+                }
+                else
+                {
+                    temp[k] = array[i++];
+                }
             }
 
-            for (int k = 0; k < N; k++)
+            for (int k = 0; k < nextLength; k++)
             {
                 array[start + k] = temp[k];
             }
