@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InsertNumberLogic")]
+[assembly: AssemblyTitle("InsertNumberLogicTests.NUnit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InsertNumberLogic")]
+[assembly: AssemblyProduct("InsertNumberLogicTests.NUnit")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b35180c0-743b-4626-9fbf-32f24b72a805")]
+[assembly: Guid("d95f048e-86e3-41b5-a096-499abb82eab5")]
 
 // Version information for an assembly consists of the following four values:
 //

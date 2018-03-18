@@ -22,11 +22,12 @@ namespace FindNextTest_NUnit
         {
             return Finder.FindNextBiggerNumber(number);
         }
+
         [Test]
         public void FindNextMethod_NumberIsNegative_ArgumentException()
         {
             int number = -5;
-            Assert.Throws<ArgumentOutOfRangeException>(() => FindNextBiggerNumber(number));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Finder.FindNextBiggerNumber(number));
         }
     }
 }

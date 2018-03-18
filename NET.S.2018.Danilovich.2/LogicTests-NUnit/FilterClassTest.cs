@@ -1,7 +1,7 @@
 ﻿using Logic;
 using NUnit.Framework;
 
-namespace LogicTests_NUnit
+namespace FilterDigitLogicTests.NUnit
 {
     [TestFixture]
     public class FilterClassTest

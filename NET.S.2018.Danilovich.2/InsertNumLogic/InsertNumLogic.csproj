@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B35180C0-743B-4626-9FBF-32F24B72A805}</ProjectGuid>
+    <ProjectGuid>{5793850D-13FF-482B-BFA4-DBCCE6211BCD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InsertNumberLogic</RootNamespace>
-    <AssemblyName>InsertNumberLogic</AssemblyName>
+    <RootNamespace>InsertNumLogic</RootNamespace>
+    <AssemblyName>InsertNumLogic</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

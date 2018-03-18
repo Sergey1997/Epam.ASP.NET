@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogic", "FilterD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogicTests", "LogicTests\FilterDigitLogicTests.csproj", "{A9FC666B-DBEE-427D-A753-D674772FBBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogicTests-NUnit", "LogicTests-NUnit\FilterDigitLogicTests-NUnit.csproj", "{44862C41-8BA8-4DEF-A141-992EF45D40B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogicTests.NUnit", "LogicTests-NUnit\FilterDigitLogicTests.NUnit.csproj", "{44862C41-8BA8-4DEF-A141-992EF45D40B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNextLogic", "FindNextBiggerNumberLogic\FindNextLogic.csproj", "{148A7BF8-5640-455E-A585-3067A44AD7F9}"
 EndProject
@@ -15,13 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNextTests-NUnit", "Find
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{E056D9E8-E96B-455C-A514-15329907BFC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertNumberLogic", "InsertNumberLogic\InsertNumberLogic.csproj", "{B35180C0-743B-4626-9FBF-32F24B72A805}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNthRootLogic", "FindNthRootLogic\FindNthRootLogic.csproj", "{65672A9D-8C80-4D61-B4E6-F50CEAB9EF24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNthRootLogicTests-NUnit", "FindNthRootLogicTests-NUnit\FindNthRootLogicTests-NUnit.csproj", "{A630B4E5-3E07-4821-B77C-8F529D0AAFF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNthRootLogicTests.NUnit", "FindNthRootLogicTests-NUnit\FindNthRootLogicTests.NUnit.csproj", "{A630B4E5-3E07-4821-B77C-8F529D0AAFF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDigitLogicTests.DDT", "FilterDigitLogicTests.DDT\FilterDigitLogicTests.DDT.csproj", "{2EB9320F-5EAB-4D63-9537-952C4763DEB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertNumLogic", "InsertNumLogic\InsertNumLogic.csproj", "{5793850D-13FF-482B-BFA4-DBCCE6211BCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertNumberLogicTests.NUnit", "InsertNumberLogicTests.NUnit\InsertNumberLogicTests.NUnit.csproj", "{D95F048E-86E3-41B5-A096-499ABB82EAB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +55,6 @@ Global
 		{E056D9E8-E96B-455C-A514-15329907BFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E056D9E8-E96B-455C-A514-15329907BFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E056D9E8-E96B-455C-A514-15329907BFC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B35180C0-743B-4626-9FBF-32F24B72A805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B35180C0-743B-4626-9FBF-32F24B72A805}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B35180C0-743B-4626-9FBF-32F24B72A805}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B35180C0-743B-4626-9FBF-32F24B72A805}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65672A9D-8C80-4D61-B4E6-F50CEAB9EF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65672A9D-8C80-4D61-B4E6-F50CEAB9EF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65672A9D-8C80-4D61-B4E6-F50CEAB9EF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +67,14 @@ Global
 		{2EB9320F-5EAB-4D63-9537-952C4763DEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB9320F-5EAB-4D63-9537-952C4763DEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB9320F-5EAB-4D63-9537-952C4763DEB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5793850D-13FF-482B-BFA4-DBCCE6211BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5793850D-13FF-482B-BFA4-DBCCE6211BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5793850D-13FF-482B-BFA4-DBCCE6211BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5793850D-13FF-482B-BFA4-DBCCE6211BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D95F048E-86E3-41B5-A096-499ABB82EAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95F048E-86E3-41B5-A096-499ABB82EAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95F048E-86E3-41B5-A096-499ABB82EAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95F048E-86E3-41B5-A096-499ABB82EAB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

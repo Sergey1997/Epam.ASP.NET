@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LogicTests
+namespace FilterDigitLogicTests
 {
     [TestClass]
     public class FilterClassTest

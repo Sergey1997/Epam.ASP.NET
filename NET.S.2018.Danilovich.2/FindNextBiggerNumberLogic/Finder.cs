@@ -37,6 +37,7 @@ namespace FindNext
             {
                 throw new ArgumentOutOfRangeException(nameof(number));
             }
+
             List<int> digitElements = new List<int>();
             int startIndexOfSwap = 0;
             int nearestBiggerNumber = 0;

@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 using FindNthRootLogic;
 using NUnit.Framework;
 
-namespace FindNthRootLogicTests_NUnit
+namespace FindNthRootLogicTests.NUnit
 {
     public class NewtonClassTest
     {
-
-
         [TestCase(1, 5, 0.0001, ExpectedResult = 1)]
         [TestCase(8, 3, 0.0001, ExpectedResult = 2)]
         [TestCase(0.001, 3, 0.0001, ExpectedResult = 0.1)]
