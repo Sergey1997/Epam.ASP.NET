@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace InsertNumLogic
 {
-
     public static class Inserter
     {
         public static int InsertNumber(int firstNumber, int secondNumber, int i, int j)
@@ -20,9 +19,8 @@ namespace InsertNumLogic
 
             for (int k = i; k <= j; k++)
             {
-                int secondMask = (1 << (k - i));
-                int firstMask = (1 << k);
-
+                int secondMask = 1 << (k - i);
+                int firstMask = 1 << k;
                 if ((secondNumber & secondMask) != 0)
                 {
                     result = result | firstMask;

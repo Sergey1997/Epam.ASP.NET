@@ -29,10 +29,11 @@ namespace FindNext
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         public static int FindNextBiggerNumber(int number)
         {
-            if (number.ToString()==null)
+            if (number.ToString() == null)
             {
                 throw new ArgumentNullException(nameof(number));
             }
+
             if (number < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(number));
@@ -41,8 +42,6 @@ namespace FindNext
             List<int> digitElements = new List<int>();
             int startIndexOfSwap = 0;
             int nearestBiggerNumber = 0;
-            
-
             digitElements.AddNumbersToList(number);
             digitElements.SwapMainElements(ref startIndexOfSwap);
             digitElements.Reverse();

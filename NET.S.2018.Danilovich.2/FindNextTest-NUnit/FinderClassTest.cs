@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using FindNext;
 using System;
-using System.Diagnostics;
+using FindNext;
 
 namespace FindNextTest_NUnit
 {

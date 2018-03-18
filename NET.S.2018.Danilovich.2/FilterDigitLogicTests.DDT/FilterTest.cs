@@ -16,9 +16,9 @@ namespace FilterDigitLogicTests.DDT
          DataAccessMethod.Sequential)]
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   (Unit Test Method) tests filter logic tests ddt. Bicycle </summary>
+        /// <summary>(Unit Test Method) tests filter logic tests ddt. Bicycle.</summary>
         ///
-        /// <remarks>   Sergey, 18.03.2018. </remarks>
+        /// <remarks>Sergey, 18.03.2018.</remarks>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public void FilterLogicTests_DDTTest()
@@ -38,7 +38,7 @@ namespace FilterDigitLogicTests.DDT
 
             string[] expectedString = expectedResult.Split(',');
 
-            for(int i = 0;i < expectedString.Length; i++)
+            for (int i = 0; i < expectedString.Length; i++)
             {
                 expectedList.Add(int.Parse(expectedString[i]));
             }
@@ -51,7 +51,7 @@ namespace FilterDigitLogicTests.DDT
                 expectedArray[i] = expectedList[i];
             }
 
-            for(int i = 0; i < actuaArray.Length; i++)
+            for (int i = 0; i < actuaArray.Length; i++)
             {
                 actuaArray[i] = actualList[i];
             }
