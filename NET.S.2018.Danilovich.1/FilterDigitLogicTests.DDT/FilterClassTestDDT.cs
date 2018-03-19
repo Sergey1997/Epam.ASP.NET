@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,13 +15,10 @@ namespace FilterDigitLogicTests.DDT
         DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
         "|DataDirectory|\\Filters.xml", "TestCase",
          DataAccessMethod.Sequential)]
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         /// <summary>(Unit Test Method) tests filter logic tests ddt. Bicycle.</summary>
         ///
         /// <remarks>Sergey, 18.03.2018.</remarks>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public void FilterLogicTests_DDTTest()
         {
             string rowInput = TestContext.DataRow["InputArray"].ToString();
@@ -43,21 +41,8 @@ namespace FilterDigitLogicTests.DDT
                 expectedList.Add(int.Parse(expectedString[i]));
             }
 
-            int[] expectedArray = new int[expectedList.Count];
-            int[] actuaArray = new int[actualList.Count];
-
-            for (int i = 0; i < expectedArray.Length; i++)
-            {
-                expectedArray[i] = expectedList[i];
-            }
-
-            for (int i = 0; i < actuaArray.Length; i++)
-            {
-                actuaArray[i] = actualList[i];
-            }
-
-            Filter.FilterDigit(ref actuaArray, digit);
-            CollectionAssert.AreEqual(expectedArray, actuaArray);
+            List<int> actual = actualList.FilterDigit(digit);
+            CollectionAssert.AreEqual(expectedList, actual);
         }
     }
 }

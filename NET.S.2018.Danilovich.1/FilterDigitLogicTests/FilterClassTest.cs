@@ -11,55 +11,54 @@ namespace FilterDigitLogicTests
         [TestMethod]
         public void FilterDigitTest_PositiveEntries_ReturnedFiltredArray()
         {
-            int[] array = { 55, 123, 52, 85, 23, 41, 31 };
+            List<int> array = new List<int>{ 55, 123, 52, 85, 23, 41, 31 };
             int digit = 5;
-            Filter.FilterDigit(ref array, digit);
-            int[] expected = { 55, 52, 85 };
+            List<int> actual = array.FilterDigit(digit);
+            List<int> expected = new List<int>{ 55, 52, 85 };
 
-            CollectionAssert.AreEqual(expected, array);
-        }
-
-        [TestMethod]
-        public void FilterDigitTest_NegativeEntries_ReturnedFiltredArray()
-        {
-            int[] array = { -55, 123, -52, 85, 23, 41, 31 };
-            int digit = 5;
-            Filter.FilterDigit(ref array, digit);
-            int[] expected = { -55, -52, 85 };
-
-            CollectionAssert.AreEqual(expected, array);
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void FilterDigitTest_WasteOfTime_ReturnedArrayWithTime()
         {
-            int[] array = { -55, 123, -52, 85, 23, 41, 31 };
+            List<int> array = new List<int> { -55, 123, -52, 85, 23, 41, 31 };
             int digit = 5;
             long time;
-            Filter.FilterDigit(ref array, digit, out time);
-            int[] expected = { -55, -52, 85 };
-            Console.Write(time.ToString());
-            CollectionAssert.AreEqual(expected, array);
+            List<int> actual = array.FilterDigit(digit, out time);
+            List<int> expected = new List<int> { -55, -52, 85 };
+            CollectionAssert.AreEqual(expected, actual);
         }
 
+
+        [TestMethod]
+        public void FilterDigitTest_NegativeEntries_ReturnedFiltredArray()
+        {
+            List<int> array = new List<int>{ -55, 123, -52, 85, 23, 41, 31 };
+            int digit = 5;
+            List<int> actual = array.FilterDigit(digit);
+            List<int> expected = new List<int>{ -55, -52, 85 };
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FilterDigitTest_FilterOfNullArray_ReturnedNullArgumentException()
         {
-            int[] array = null;
+            List<int> array = null;
             int digit = 5;
 
-            Filter.FilterDigit(ref array, digit);
+            array.FilterDigit(digit);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void FilterDigitTest_FilterWithBadDigit_ReturnedEArgumentException()
         {
-            int[] array = { 55, 123, 52, 85, 23, 41, 31 };
+            List<int> array = new List<int> { -55, 123, -52, 85, 23, 41, 31 };
             int digit = -11;
-
-            Filter.FilterDigit(ref array, digit);
+            array.FilterDigit(digit);
         }
     }
 }

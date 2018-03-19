@@ -1,6 +1,6 @@
 ﻿using System;
-using SorterLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SorterLogic;
 
 namespace Logic.Tests
 {

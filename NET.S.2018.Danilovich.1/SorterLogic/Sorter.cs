@@ -1,23 +1,17 @@
-﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-// file: Sorter.cs
+﻿// file: Sorter.cs
 //
 // summary: Implements the sorter class
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 using System;
 using System.Linq;
 
 namespace SorterLogic
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   A sorter. </summary>
     ///
     /// <remarks>   Sergey, 16.03.2018. </remarks>
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static class Sorter
     {
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   An int[] extension method that quick sort. </summary>
         ///
         /// <remarks>   Sergey, 16.03.2018. </remarks>
@@ -26,8 +20,6 @@ namespace SorterLogic
         ///                                             null. </exception>
         ///
         /// <param name="array">    The array to act on. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static void QuickSort(this int[] array)
         {
             try
@@ -39,8 +31,7 @@ namespace SorterLogic
                 throw e;
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         /// <summary>   An int[] extension method that quick sort. </summary>
         ///
         /// <remarks>   Sergey, 16.03.2018. </remarks>
@@ -53,8 +44,6 @@ namespace SorterLogic
         /// <param name="array">    The array to act on. </param>
         /// <param name="left">     The left. </param>
         /// <param name="right">    The right. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static void QuickSort(this int[] array, int left, int right)
         {
             if (left < 0 || right < 0 || right > array.Length || left > array.Length)
@@ -104,8 +93,7 @@ namespace SorterLogic
                 QuickSort(array, left, j);
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         /// <summary>   An int[] extension method that merge sort. </summary>
         ///
         /// <remarks>   Sergey, 18.03.2018. </remarks>
@@ -114,8 +102,6 @@ namespace SorterLogic
         ///                                             null. </exception>
         ///
         /// <param name="array">    The array to act on. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static void MergeSort(this int[] array)
         {
             if (array == null)
@@ -125,8 +111,7 @@ namespace SorterLogic
 
             MergeSort(array, 0, array.Length);
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         /// <summary>   An int[] extension method that merge sort. </summary>
         ///
         /// <remarks>   Sergey, 18.03.2018. </remarks>
@@ -134,8 +119,6 @@ namespace SorterLogic
         /// <param name="array">    The array to act on. </param>
         /// <param name="start">    The start. </param>
         /// <param name="end">      The end. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static void MergeSort(this int[] array, int start, int end)
         {
             int nextLength = end - start;

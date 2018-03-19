@@ -13,15 +13,11 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>A filter.</summary>
     /// 
     /// <remarks>Sergey, 16.03.2018.</remarks>
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static class Filter
     {
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>Filter digit.</summary>
         ///
         /// <remarks>Sergey, 16.03.2018.</remarks>
@@ -33,17 +29,17 @@ namespace Logic
         ///
         /// <param name="array">    [in,out] The array. </param>
         /// <param name="digit">    The digit. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static void FilterDigit(ref int[] array, int digit, out long millisek)
+        public static List<int> FilterDigit(this List<int> array, int digit, out long millisek)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            FilterDigit(ref array, digit);
+            List<int> result = array.FilterDigit(digit);
             stopwatch.Stop();
             millisek = stopwatch.ElapsedMilliseconds;
+            return result;
         }
 
-        public static void FilterDigit(ref int[] array, int digit)
+        public static List<int> FilterDigit(this List<int> array, int digit)
         {
             if (array == null)
             {
@@ -57,7 +53,7 @@ namespace Logic
 
             List<int> result = new List<int>();
 
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Count; i++)
             {
                 if (IsContainForMath(array[i], digit) == true)
                 {
@@ -65,10 +61,9 @@ namespace Logic
                 }
             }
 
-            array = result.ToArray();
+            return result;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         /// <summary>Query if 'element' is contain.</summary>
         ///
         /// <remarks>Sergey, 16.03.2018.</remarks>
@@ -77,8 +72,6 @@ namespace Logic
         /// <param name="digit">    The digit. </param>
         ///
         /// <returns>   True if contain, false if not. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private static bool IsContainForMath(int element, int digit)
         {
             if (element < 0)

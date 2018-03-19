@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using System.Collections.Generic;
+using Logic;
 using NUnit.Framework;
 
 namespace FilterDigitLogicTests.NUnit
@@ -6,15 +7,17 @@ namespace FilterDigitLogicTests.NUnit
     [TestFixture]
     public class FilterClassTest
     {
-        [Test]
-        [TestCase(new int[] { 54, 125, 321, 32 }, 5, ExpectedResult = new int[] { 54, 125 }, TestName = "FiterDigitUNitTest_FilterWithPositiveValuesOfArray_ReturnedFiltredArray")]
-        [TestCase(new int[] { -5321, 9843, 1241, 1232 }, 3, ExpectedResult = new int[] { -5321, 9843, 1232 }, TestName = "FiterDigitUNitTest_FilterWithNegativeValuesOfArray_ReturnedFiltredArray")]
-        [TestCase(new int[] { 23, 23, 23, 23 }, 4, ExpectedResult = new int[] { }, TestName = "FiterDigitUNitTest_FilterWithOutEntries_ReturnedEmptyArray")]
-       
-        public int[] FilterDigitTests(ref int[] array, int digit)
+        private static object[] sourceList = 
+            {
+            new object[] { new List<int> { 54, 125, 321, 32 }, new List<int> { 125, 321 }, 1, },
+            new object[] { new List<int> { 921, 23, 123, 22 }, new List<int> { 921, 23, 123, 22 }, 2, },
+            };
+
+        [Test, TestCaseSource("sourceList")]
+        public void FilterDigitTests(List<int> actual, List<int> expected, int digit)
         {
-            Filter.FilterDigit(ref array, digit);
-            return array;
+            List<int> actualList = actual.FilterDigit(digit);
+            Assert.AreEqual(expected, actualList);
         }
     }
 }
