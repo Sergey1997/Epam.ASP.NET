@@ -1,6 +1,6 @@
-﻿using InsertNumberLogic;
+﻿using System;
+using InsertNumberLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace InsertNumberLogicTests.MS
 {
@@ -10,11 +10,12 @@ namespace InsertNumberLogicTests.MS
         [TestMethod]
         public void InsertNumberTest_TwoIntNumbers_ConvertedNumber()
         {
-            int actual = Inserter.InsertNumber(8,15,3,8);
+            int actual = Inserter.InsertNumber(8, 15, 3, 8);
             int expected = 120;
 
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertNumberTest_NegativeIndex_ArgumentOutOfRangeException()
