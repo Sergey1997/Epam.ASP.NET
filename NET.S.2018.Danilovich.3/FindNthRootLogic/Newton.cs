@@ -10,29 +10,26 @@ namespace FindNthRootLogic
     {
         public static double FindNthRoot(double number, int degree, double precision)
         {
-            if (degree < 0 || precision < 0)
+            if (degree < 0 || precision < 0 || (number < 0 && degree % 2 == 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(degree));
             }
 
-            double formatDegree = (double)degree;
-            double firstPosition = number / formatDegree;
-            double finalPosition = Step(number, formatDegree, firstPosition);
+            double firstPosition = number / degree;
+            double finalPosition = Step(number, degree, firstPosition);
 
             while (Math.Abs(finalPosition - firstPosition) > precision)
             {
                 firstPosition = finalPosition;
-                finalPosition = Step(number, formatDegree, firstPosition);
+                finalPosition = Step(number, degree, firstPosition);
             }
-
-            string str = precision.ToString();
-
-            return Math.Round(finalPosition, str.Length - 2);
+            
+            return finalPosition;
         }
 
-        private static double Step(double number, double formatDegree, double firstPosition)
+        private static double Step(double number, double degree, double firstPosition)
         {
-            return 1 / formatDegree * ((formatDegree - 1) * firstPosition + number / Math.Pow(firstPosition, (formatDegree - 1)));
+            return 1.0 / degree * (((degree - 1) * firstPosition) + (number / Math.Pow(firstPosition, degree - 1)));
         }
     }
 }

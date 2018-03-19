@@ -10,23 +10,26 @@ namespace FindNthRootLogicTests.NUnit
 {
     public class NewtonClassTest
     {
-        [TestCase(1, 5, 0.0001, ExpectedResult = 1)]
-        [TestCase(8, 3, 0.0001, ExpectedResult = 2)]
-        [TestCase(0.001, 3, 0.0001, ExpectedResult = 0.1)]
-        [TestCase(0.04100625, 4, 0.0001, ExpectedResult = 0.45)]
-        [TestCase(8, 3, 0.0001, ExpectedResult = 2)]
-        [TestCase(0.0279936, 7, 0.0001, ExpectedResult = 0.6)]
-        [TestCase(0.0081, 4, 0.0081, ExpectedResult = 0.3)]
-        [TestCase(-0.008, 3, 0.1, ExpectedResult = -0.2)]
-        [TestCase(0.004241979, 9, 0.00000001, ExpectedResult = 0.545)]
-        [TestCase(1, 1, 0.1, ExpectedResult = 1)]
-        public static double FindNthRootTest(double number, int degree, double eps)
+        private static object[] sourceList =
         {
-            return Newton.FindNthRoot(number, degree, eps);
+             new object[] { 1, 5, 0.0001, 1 },
+             new object[] { 8, 3, 0.0001, 2 },
+             new object[] { 0.001, 3, 0.0001, 0.1 },
+             new object[] { 0.04100625, 4, 0.0001, 0.45 },
+             new object[] { 8, 3, 0.0001, 2 },
+             new object[] { 0.0279936, 7, 0.0001, 0.6 },
+             new object[] { 0.004241979, 9, 0.00000001, 0.545 },
+        };
+
+        [Test, TestCaseSource("sourceList")]
+        public static void FindNthRootTest(double number, int degree, double eps, double expected)
+        {
+            Assert.AreEqual(expected, Newton.FindNthRoot(number, degree, eps), eps);
         }
         
         [TestCase(8, 15, -7, -5)]
         [TestCase(8, 15, -0.6, -0.1)]
+        [TestCase(-9, 2, 0.001, 3)]
         public static void FindNthRootTest_Number_Degree_Precision_ArgumentOutOfRangeException(double number, int degree, double precision, double expected) 
             => Assert.Throws<ArgumentOutOfRangeException>(() => Newton.FindNthRoot(number, degree, precision));
     }
