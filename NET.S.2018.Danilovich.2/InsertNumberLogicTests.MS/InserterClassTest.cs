@@ -24,5 +24,14 @@ namespace InsertNumberLogicTests.MS
             int j = 2;
             Inserter.InsertNumber(8, 15, i, j);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InsertNumberTest_NegativeIndex_ArgumentException()
+        {
+            int i = 5;
+            int j = 2;
+            Inserter.InsertNumber(8, 15, i, j);
+        }
     }
 }

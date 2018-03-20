@@ -12,11 +12,16 @@ namespace InsertNumberLogicTests.NUnit
         {
             return Inserter.InsertNumber(firstNumber, secondNumber, i, j);
         }
-
-        [TestCase(8, 15, 8, 3)]
+        
         [TestCase(8, 15, -1, 5)]
-        [TestCase(8, 15, 5, -2)]
         public static void InsertNumberTest_FirstNumber_SecondNumber_i_j_ArgumentOutOfRangeException(int firstNumber, int secondNumber, int i, int j)
             => Assert.Throws<ArgumentOutOfRangeException>(() => Inserter.InsertNumber(firstNumber, secondNumber, i, j));
+        [TestCase(8, 15, 30, 35)]
+        public static void InsertNumberTest_FirstNumber_SecondNumber_i_jMoreThen31_ArgumentOutOfRangeException(int firstNumber, int secondNumber, int i, int j)
+           => Assert.Throws<ArgumentOutOfRangeException>(() => Inserter.InsertNumber(firstNumber, secondNumber, i, j));
+
+        [TestCase(8, 15, 6, 3)]
+        public static void InsertNumberTest_FirstNumber_SecondNumber_i_j_ArgumentException(int firstNumber, int secondNumber, int i, int j)
+            => Assert.Throws<ArgumentException>(() => Inserter.InsertNumber(firstNumber, secondNumber, i, j));
     }
 }

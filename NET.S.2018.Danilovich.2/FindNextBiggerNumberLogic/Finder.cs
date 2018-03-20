@@ -1,30 +1,22 @@
-﻿// file: Finder.cs
-//
-// summary: Implements the finder class
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace FindNext
 {
-    /// <summary>A finder.</summary>
-    ///
-    /// <remarks>Sergey, 17.03.2018.</remarks>
     public static class Finder
     {
-        /// <summary>   Searches for the next bigger number. </summary>
-        ///
-        /// <remarks>   Sergey, 17.03.2018. </remarks>
-        ///
+        /// <summary>   
+        /// Searches for the next bigger number. 
+        /// if number doesn't exist returns -1
+        /// </summary>
         /// <param name="number">   Number of. </param>
-        ///
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when number less then zero</exception>
         /// <returns>   The found bigger number. </returns>
         public static int FindNextBiggerNumber(int number)
         {
             if (number < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(number));
+                throw new ArgumentOutOfRangeException($"{ nameof(number) } should not be less then zero");
             }
 
             List<int> digitElements = new List<int>();
@@ -46,11 +38,8 @@ namespace FindNext
         }
         
         /// <summary>
-        /// A List&lt;int&gt; extension method that adds the numbers to list to 'number'.
+        /// Add number to List
         /// </summary>
-        ///
-        /// <remarks>   Sergey, 17.03.2018. </remarks>
-        ///
         /// <param name="list">     The list. </param>
         /// <param name="number">   Number of. </param>
         private static void AddNumbersToList(this List<int> list, int number)
@@ -62,12 +51,11 @@ namespace FindNext
             }
         }
         
-        /// <summary>A List&lt;int&gt; extension method that swap main elements.</summary>
-        ///
-        /// <remarks>Sergey, 17.03.2018.</remarks>
-        ///
-        /// <param name="list">         The list. </param>
-        /// <param name="indexOfSwap">  [in,out] The index of swap. </param>
+        /// <summary>
+        /// Extension method that swap main elements.
+        /// </summary>
+        /// <param name="list"> The list. </param>
+        /// <param name="indexOfSwap">  The index of swap. </param>
         private static void SwapMainElements(this List<int> list, ref int indexOfSwap)
         {
             for (int i = 0; i < list.Count - 1; i++)
@@ -83,12 +71,11 @@ namespace FindNext
             }
         }
         
-        /// <summary>A List&lt;int&gt; extension method that sort tail.</summary>
-        ///
-        /// <remarks>Sergey, 17.03.2018.</remarks>
-        ///
-        /// <param name="list">         The list. </param>
-        /// <param name="indexOfSwap">  The index of swap. </param>
+        /// <summary>
+        /// Extension method that sort tail.
+        /// </summary>
+        /// <param name="list">The list. </param>
+        /// <param name="indexOfSwap">  The index of swap. Starting element. </param>
         private static void SortTail(this List<int> list, int indexOfSwap)
         {
             for (int j = list.Count - indexOfSwap; j < list.Count; j++)
@@ -105,19 +92,18 @@ namespace FindNext
             }
         }
         
-        /// <summary>List to int.</summary>
-        ///
-        /// <remarks>Sergey, 17.03.2018.</remarks>
-        ///
+        /// <summary>
+        /// List to int.
+        /// </summary>
         /// <param name="list"> The list. </param>
-        ///
-        /// <returns>   An int. </returns>
+        /// <returns>   An integer result of Bigger number. </returns>
         private static int ListToInt(List<int> list)
         {
             int nearestBiggerNumber = 0;
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0, rate = 1; i < list.Count; i++)
             {
-                nearestBiggerNumber += list[i] * (int)Math.Pow(10, i);
+                nearestBiggerNumber += list[i] * rate;
+                rate *= 10;
             }
 
             return nearestBiggerNumber;
