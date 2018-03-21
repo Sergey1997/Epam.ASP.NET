@@ -85,15 +85,7 @@ namespace MathExtension
                         k *= 2;
                     }
 
-                    while (greatestCommonDivisor % 2 == 0)
-                    {
-                        greatestCommonDivisor /= 2;
-                    }
-
-                    while (numbers[i] % 2 == 0)
-                    {
-                        numbers[i] /= 2;
-                    }
+                    EvenNumberDevBy2(greatestCommonDivisor, numbers[i]);
 
                     if (greatestCommonDivisor >= numbers[i])
                     {
@@ -109,6 +101,22 @@ namespace MathExtension
             }
 
             return greatestCommonDivisor;
+        }
+        
+        /// <summary>   Even number devision by 2. </summary>
+        /// <param name="greatestCommonDivisor">    The greatest common divisor. </param>
+        /// <param name="number">                   Number of. </param>
+        private static void EvenNumberDevBy2(int greatestCommonDivisor, int number)
+        {
+            while (greatestCommonDivisor % 2 == 0)
+            {
+                greatestCommonDivisor /= 2;
+            }
+
+            while (number % 2 == 0)
+            {
+                number /= 2;
+            }
         }
 
         /// <summary>  
