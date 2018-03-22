@@ -30,13 +30,13 @@ namespace DoubleExtension
 
         private static string IdentifyExpOfNumber(double number)
         {
-            string constExponenta = string.Empty;
-            if (DefineConstForExp(number, ref constExponenta) == true)
+            string exponenta = string.Empty;
+            if (DefineConstForExp(number, ref exponenta) == true)
             {
-                return constExponenta;
+                return exponenta;
             }
 
-            ConvertToBinary(number, out string exponenta, out string mantissa);
+            ConvertToBinary(number, out exponenta, out string mantissa);
             int exp = exponenta.Length - 1;
             ConvertToBinary(exp + 1023, out exponenta, out mantissa);
             return exponenta;
@@ -47,13 +47,13 @@ namespace DoubleExtension
         /// <returns>   A string of bits. </returns>
         private static string IdentifyMantissa(double number)
         {
-            string constMantissa = string.Empty;
-            if (DefineConstForMantissa(number, ref constMantissa) == true)
+            string mantissa = string.Empty;
+            if (DefineConstForMantissa(number, ref mantissa) == true)
             {
-                return constMantissa;
+                return mantissa;
             }
 
-            ConvertToBinary(number, out string exponenta, out string mantissa);
+            ConvertToBinary(number, out string exponenta, out mantissa);
             mantissa = mantissa.Insert(0, exponenta.Substring(1));
             exponenta = "1";
             return mantissa;
