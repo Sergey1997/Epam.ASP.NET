@@ -104,7 +104,7 @@ namespace MathExtension
         }
         
         /// <summary>   Even number devision by 2. </summary>
-        /// <param name="greatestCommonDivisor">    The greatest common divisor. </param>
+        /// <param name="greatestCommonDivisor">    The greatest common number. </param>
         /// <param name="number">                   Number of. </param>
         private static void EvenNumberDevBy2(int greatestCommonDivisor, int number)
         {
