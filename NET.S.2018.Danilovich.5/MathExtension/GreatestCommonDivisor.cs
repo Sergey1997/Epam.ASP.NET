@@ -47,6 +47,25 @@ namespace MathExtension
 
             return greatestCommonDivisor;
         }
+        
+        /// <summary>   Euclids algorithm for two numbers. </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
+        public static int EuclidsAlgorithm(int a, int b)
+        {
+            return EuclidsAlgorithm(a, b);
+        }
+        
+        /// <summary>   Euclids algorithm for tree numbers. </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <param name="c">    An int to process. </param>
+        /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
+        public static int EuclidsAlgorithm(int a, int b, int c)
+        {
+            return EuclidsAlgorithm(EuclidsAlgorithm(a, b), c);
+        }
 
         /// <summary>   Binary Euclidean algoritm for search of Greatest common divisor . </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
@@ -102,7 +121,17 @@ namespace MathExtension
 
             return greatestCommonDivisor;
         }
-        
+
+        public static int BinaryEuclideanAlgoritm(int a, int b)
+        {
+            return BinaryEuclideanAlgoritm(a, b);
+        }
+
+        public static int BinaryEuclideanAlgoritm(int a, int b, int c)
+        {
+            return BinaryEuclideanAlgoritm(BinaryEuclideanAlgoritm(a, b), c);
+        }
+
         /// <summary>   Even number devision by 2. </summary>
         /// <param name="greatestCommonDivisor">    The greatest common number. </param>
         /// <param name="number">                   Number of. </param>

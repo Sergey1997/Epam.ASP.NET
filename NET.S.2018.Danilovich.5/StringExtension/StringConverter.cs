@@ -8,38 +8,84 @@ namespace StringExtension
 {
     public static class StringConverter
     {
-        /// <summary>   A string extension method that converters to baseSystem. </summary>
-        /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
-        ///                                                 the required range. </exception>
+        /// <summary>
+        /// A string extension method that converts string representation  to a int number.
+        /// </summary>
+        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
+        ///                                         illegal values. </exception>
         /// <param name="inputString">  The inputString to act on. </param>
-        /// <param name="baseSystem">   The base system. </param>
-        /// <returns>   An int. </returns>
-
-        public static int Converter(this string inputString, int baseSystem)
+        /// <param name="notation">     The notation. </param>
+        /// <returns>   The given data converted to an int. </returns>
+        public static int ToDecimalConverter(this string inputString, Notation notation)
         {
-            inputString = inputString.ToUpper();
-            if (baseSystem < 2 || baseSystem > 16)
+            if (inputString.Length == 0)
             {
-                throw new ArgumentOutOfRangeException($"{ nameof(baseSystem) } must not be less then 2 and more then 16");
+                return 0;
             }
 
-            int res = 0;
-            int j = 0;
+            inputString = inputString.ToUpper();
+
+            int result = 0;
+            int power = 0;
+
             for (int i = inputString.Length - 1; i >= 0; i--)
             {
-                if (inputString[i] >= 'A' && inputString[i] <= 'F')
+                if (power == 0)
                 {
-                    res += (int)((inputString[i] - 55) * Math.Pow(baseSystem, j));
+                    power = 1;
                 }
                 else
                 {
-                    res += (int)((inputString[i] - '0') * Math.Pow(baseSystem, j));
+                    checked
+                    {
+                        power *= notation.BaseSystem;
+                    }
                 }
 
-                j++;
+                char currentPosition = inputString[i];
+
+                if (notation.AvailableChars.Contains(currentPosition))
+                {
+                    int digit = notation.AvailableChars.IndexOf(currentPosition);
+
+                    checked
+                    {
+                        result += digit * power;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"{nameof(currentPosition)} is not contained in available chars of notation");
+                }
             }
 
-            return res;
+            return result;
+        }
+
+        /// <summary>   
+        /// Class for the notation of the number system.
+        /// </summary>
+        public class Notation
+        {
+            private const string PermissibleChars = "0123456789ABCDEF";
+            private const int MinSystem = 2;
+            private const int MaxSystem = 16;
+            
+            public Notation(int baseSystem)
+            {
+                if (baseSystem < MinSystem || baseSystem > MaxSystem)
+                {
+                    throw new ArgumentOutOfRangeException($"{nameof(baseSystem)} must be >= {MinSystem} and <= {MaxSystem}");
+                }
+
+                this.BaseSystem = baseSystem;
+
+                AvailableChars = PermissibleChars.Substring(0, baseSystem);
+            }
+
+            public string AvailableChars { get; }
+
+            public int BaseSystem { get; }
         }
     }
 }
