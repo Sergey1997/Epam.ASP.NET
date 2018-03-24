@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JaggedArrayLibrary
+namespace SortingLibrary
 {
-    public class Class1
+    public interface IStrategy
     {
+        int? Algorithm(int[] array);
     }
 }
