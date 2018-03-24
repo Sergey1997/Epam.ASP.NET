@@ -8,7 +8,7 @@ namespace DoubleExtension.Tests
         private static object[] sourceList =
         {
              new object[] { -255.255, "1100000001101111111010000010100011110101110000101000111101011100" },
-             new object[] { 255.255,"0100000001101111111010000010100011110101110000101000111101011100" },
+             new object[] { 255.255, "0100000001101111111010000010100011110101110000101000111101011100" },
              new object[] { double.MinValue, "1111111111101111111111111111111111111111111111111111111111111111" },
              new object[] { double.MaxValue, "0111111111101111111111111111111111111111111111111111111111111111" },
         };
@@ -27,8 +27,5 @@ namespace DoubleExtension.Tests
         {
             return Double.ConvertDouble(number);
         }
-
-
-
     }
 }
