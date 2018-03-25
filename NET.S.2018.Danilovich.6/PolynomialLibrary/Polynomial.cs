@@ -48,10 +48,11 @@ namespace PolynomialLibrary
         {
             get
             {
-                for (int i = Coefficients.Length - 1 ; i >= 0; i--)
+                for (int i = Coefficients.Length - 1; i >= 0; i--)
                 {
                     return i;
                 }
+
                 return -1;
             }
         }
@@ -169,7 +170,6 @@ namespace PolynomialLibrary
         /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
         /// <see langword="false" />.
         /// </returns>
-
         public override bool Equals(object obj)
         {
             if (obj == null)
