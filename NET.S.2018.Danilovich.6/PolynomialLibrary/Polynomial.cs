@@ -8,10 +8,20 @@ namespace PolynomialLibrary
 {
     public class Polynomial 
     {
-        private readonly double[] coefficients;
+        private double[] coefficients;
 
         public Polynomial(double[] coefficients)
         {
+            if (coefficients == null)
+            {
+                throw new ArgumentNullException(nameof(coefficients));
+            }
+
+            if (coefficients.Length <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(coefficients));
+            }
+
             this.coefficients = coefficients;
         }
 
@@ -19,42 +29,101 @@ namespace PolynomialLibrary
         {
             get
             {
-                return coefficients;
+                return this.coefficients;
             }
         }
+
+        public int Degree
+        {
+            get
+            {
+                for (int i = Coefficients.Length - 1 ; i >= 0; i--)
+                {
+                    return i;
+                }
+                return -1;
+            }
+        }
+
         public static bool operator ==(Polynomial lhs, Polynomial rhs)
         {
-            double lhsResult = lhs.Coefficients[0];
-            double rhsResult = rhs.Coefficients[0];
-
-            for(int i = 1; i < lhs.Coefficients.Length; i++)
-            {
-                lhsResult += Math.Pow(lhs.Coefficients[i], i);
-            }
-            for (int i = 1; i < rhs.Coefficients.Length; i++)
-            {
-                rhsResult += Math.Pow(rhs.Coefficients[i], i);
-            }
-            if (lhsResult == rhsResult)
-            {
-                return true;
-            }
-            else
+            if (lhs.Coefficients.Length != rhs.Coefficients.Length)
             {
                 return false;
             }
+            else
+            {
+                for (int i = 0; i < lhs.Coefficients.Length; i++)
+                {
+                    if (lhs.Coefficients[i] != rhs.Coefficients[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public static bool operator !=(Polynomial lhs, Polynomial rhs)
         {
-            if(lhs == rhs)
+            return lhs == rhs ? false : true;
+        }
+
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
+        {
+            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
+
+            for (int i = 0; i < coeff.Length; i++)
             {
-                return true;
+                coeff[i] = lhs.Coefficients[i] + rhs.Coefficients[i];
             }
-            else
+
+            return new Polynomial(coeff);
+        }
+
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
+        {
+            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
+
+            for (int i = 0; i < coeff.Length; i++)
             {
-                return false;
+                coeff[i] = lhs.Coefficients[i] - rhs.Coefficients[i];
             }
+
+            return new Polynomial(coeff);
+        }
+
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
+        {
+            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
+
+            for (int i = 0; i <= lhs.Coefficients.Length; i++)
+            {
+                for (int j = 0; j < rhs.Coefficients.Length; j++)
+                {
+                    coeff[i + j] = lhs.Coefficients[i] * rhs.Coefficients[i];
+                }
+            }
+
+            return new Polynomial(coeff);
+        }
+
+        public static Polynomial operator /(Polynomial lhs, double dev)
+        {
+            if (dev == 0)
+            {
+                throw new ArgumentException(nameof(dev));
+            }
+
+            double[] coeff = new double[lhs.Coefficients.Length];
+            
+            for (int i = 0; i < coeff.Length; i++)
+            {
+                coeff[i] = lhs.Coefficients[i] / dev;
+            }
+
+            return new Polynomial(coeff);
         }
 
         public override bool Equals(object obj)
