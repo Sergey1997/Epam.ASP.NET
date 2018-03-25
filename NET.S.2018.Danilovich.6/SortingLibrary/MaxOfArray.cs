@@ -8,6 +8,9 @@ namespace SortingLibrary
 {
     public class MaxOfArray : IStrategy
     {
+        /// <summary>   Algorithm for array strategy which get max of numbers in array . </summary>
+        /// <param name="array">    The array. </param>
+        /// <returns>   An max number in array. </returns>
         public int? Algorithm(int[] array)
         {
             if (array is null)

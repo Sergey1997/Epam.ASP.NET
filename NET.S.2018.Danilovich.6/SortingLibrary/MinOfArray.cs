@@ -8,6 +8,9 @@ namespace SortingLibrary
 {
     public class MinOfArray : IStrategy
     {
+        /// <summary>   Algorithm for array strategy - MinOfArray which get min number in array . </summary>
+        /// <param name="array">    The array. </param>
+        /// <returns>   An min int? number. </returns>
         public int? Algorithm(int[] array)
         {
             if (array is null)

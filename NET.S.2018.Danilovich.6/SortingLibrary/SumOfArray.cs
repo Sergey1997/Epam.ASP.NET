@@ -8,6 +8,9 @@ namespace SortingLibrary
 {
     public class SumOfArray : IStrategy
     {
+        /// <summary>   Algorithm for array sum strategy . </summary>
+        /// <param name="array">    The array. </param>
+        /// <returns>   The sum of array. </returns>
         public int? Algorithm(int[] array)
         {
             if (array is null)
@@ -20,6 +23,7 @@ namespace SortingLibrary
             {
                 sum += array[i];
             }
+
             return sum;
         }
     }
