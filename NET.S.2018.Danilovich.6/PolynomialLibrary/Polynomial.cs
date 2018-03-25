@@ -120,11 +120,10 @@ namespace PolynomialLibrary
 
             return new Polynomial(coeff);
         }
-        
-        /// <summary>   Multiplication operator. </summary>
+
+        /// <summary>   Multiplication operator for two polynomials. </summary>
         /// <param name="lhs">  The left hand side. </param>
         /// <param name="rhs">  The right hand side. </param>
-        ///
         /// <returns>   The result of the operation. </returns>
         public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
         {
@@ -140,7 +139,13 @@ namespace PolynomialLibrary
 
             return new Polynomial(coeff);
         }
-
+        
+        /// <summary>   Division operator. </summary>
+        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
+        ///                                         illegal values. </exception>
+        /// <param name="lhs">  The left hand side. </param>
+        /// <param name="dev">  The development. </param>
+        /// <returns>   The result of the operation. </returns>
         public static Polynomial operator /(Polynomial lhs, double dev)
         {
             if (dev == 0)
@@ -157,6 +162,13 @@ namespace PolynomialLibrary
 
             return new Polynomial(coeff);
         }
+        
+        /// <summary>   Determines whether the specified object is equal to the current object. </summary>
+        /// <param name="obj">  The object to compare with the current object. </param>
+        /// <returns>
+        /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
+        /// <see langword="false" />.
+        /// </returns>
 
         public override bool Equals(object obj)
         {
@@ -186,7 +198,9 @@ namespace PolynomialLibrary
 
             return true;
         }
-
+        
+        /// <summary>   Serves as the default hash function. </summary>
+        /// <returns>   A hash code for the current object. </returns>
         public override int GetHashCode()
         {
             int hash = 0;
@@ -197,7 +211,9 @@ namespace PolynomialLibrary
 
             return hash;
         }
-
+        
+        /// <summary>   Returns a string that represents the current object. </summary>
+        /// <returns>   A string that represents the current object. </returns>
         public override string ToString()
         {
             string str = null;

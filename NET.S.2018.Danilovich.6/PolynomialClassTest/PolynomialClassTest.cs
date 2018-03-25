@@ -20,18 +20,5 @@ namespace PolynomialLibrary.Tests
 
             return polynomial.Degree;
         }
-        [Test]
-        [TestCase(new double[] { 1, 2, 5, 4 })]
-        [TestCase(new double[] { 1.2, 2, 1, 5 })]
-        public void PolynomialConstructorsTests(double[] actual)
-        {
-            double[] expected = new double[actual.Length];
-            Polynomial polynomial = new Polynomial(actual);
-
-            Array.Copy(polynomial.Coefficients, expected, polynomial.Coefficients.Length);
-
-            CollectionAssert.AreEqual(expected, polynomial.Coefficients);
-        }
-
     }
 }
