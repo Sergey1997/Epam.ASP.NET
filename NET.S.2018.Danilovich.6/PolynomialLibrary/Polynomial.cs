@@ -6,81 +6,67 @@ using System.Threading.Tasks;
 
 namespace PolynomialLibrary
 {
-    public class Polynomial 
+    /// <summary>   
+    /// A polynomial class. 
+    /// </summary>
+    public class Polynomial
     {
-        /// <summary>   The coefficients. </summary>
-        private double[] coefficients;
-        
-        /// <summary>   Constructor. </summary>
-        /// <exception cref="ArgumentNullException">        Thrown when one or more required arguments
-        ///                                                 are null. </exception>
-        /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
-        ///                                                 the required range. </exception>
-        /// <param name="coefficients"> The coefficients of polinomial. </param>
-        public Polynomial(double[] coefficients)
-        {
-            if (coefficients == null)
-            {
-                throw new ArgumentNullException(nameof(coefficients));
-            }
+        #region Fields
 
-            if (coefficients.Length <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(coefficients));
-            }
+        /// <summary>   
+        /// The coefficients of polinomial. 
+        /// </summary>
+        private readonly double[] coefficients;
 
-            this.coefficients = coefficients;
-        }
-        
-        /// <summary>   Gets the coefficients of polynomial. </summary>
-        /// <value> The coefficients. </value>
-        public double[] Coefficients
+        #endregion
+
+        #region Constructors
+        /// <summary>   Constructor  of polinomial. </summary>
+        /// <param name="accuracy"> The accuracy for right equal. </param>
+        /// <param name="array">    A variable-length parameters list containing coeffitients of polynomial. </param>
+        public Polynomial(double accuracy, params double[] array)
         {
-            get
-            {
-                return this.coefficients;
-            }
+            this.coefficients = array;
+            Accuracy = accuracy;
         }
 
-        /// <summary>   Gets the degree of current polynomial. </summary>
-        /// <value> The degree. </value>
-        public int Degree
-        {
-            get
-            {
-                for (int i = Coefficients.Length - 1; i >= 0; i--)
-                {
-                    return i;
-                }
+        #endregion
 
-                return -1;
-            }
-        }
+        /// <summary>   Gets the accuracy. </summary>
+        /// <value> The accuracy. </value>
+        public double Accuracy { get; } = 0.0001;
 
-        /// <summary>   Equality operator for polynomials. </summary>
+        #region Overloadings
+
+        /// <summary>   Subtraction operator. </summary>
         /// <param name="lhs">  The left hand side. </param>
         /// <param name="rhs">  The right hand side. </param>
-        /// <returns>   The result of the operation - bool. </returns>
-        public static bool operator ==(Polynomial lhs, Polynomial rhs)
+        /// <returns>   The result of the operation. </returns>
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
         {
-            if (lhs.Coefficients.Length != rhs.Coefficients.Length)
-            {
-                return false;
-            }
-            else
-            {
-                for (int i = 0; i < lhs.Coefficients.Length; i++)
-                {
-                    if (lhs.Coefficients[i] != rhs.Coefficients[i])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return Substract(lhs, rhs);
         }
-        
+
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
+        {
+            return Add(lhs, rhs);
+        }
+
+        public static Polynomial operator +(Polynomial lhs, double number)
+        {
+            return Add(lhs, number);
+        }
+
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
+        {
+            return Multiply(lhs, rhs);
+        }
+
+        public static Polynomial operator *(Polynomial lhs, double number)
+        {
+            return Multiply(lhs, number);
+        }
+
         /// <summary>   Inequality operator. </summary>
         /// <param name="lhs">  The left hand side. </param>
         /// <param name="rhs">  The right hand side. </param>
@@ -90,107 +76,169 @@ namespace PolynomialLibrary
             return lhs == rhs ? false : true;
         }
 
-        /// <summary>   Addition operator for two polynomials. </summary>
-        /// <param name="lhs">  The left hand side. </param>
-        /// <param name="rhs">  The right hand side. </param>
-        /// <returns>   The result of the operation (New polynomial). </returns>
-        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
+        public static bool operator ==(Polynomial lhs, Polynomial rhs)
         {
-            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
-
-            for (int i = 0; i < coeff.Length; i++)
-            {
-                coeff[i] = lhs.Coefficients[i] + rhs.Coefficients[i];
-            }
-
-            return new Polynomial(coeff);
+            return IsEquals(lhs, rhs);
         }
 
-        /// <summary>   Subtraction operator for two polynomials. </summary>
+        #endregion
+        #region Public Methods
+        /// <summary>   Adds polynomials. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
         /// <param name="lhs">  The left hand side. </param>
         /// <param name="rhs">  The right hand side. </param>
-        /// <returns>   The result of the operation (New polynomial). </returns>
-        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
+        /// <returns>   A computed polynomial. </returns>
+        public static Polynomial Add(Polynomial lhs, Polynomial rhs)
         {
-            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
-
-            for (int i = 0; i < coeff.Length; i++)
+            if (lhs.coefficients == null || rhs.coefficients == null)
             {
-                coeff[i] = lhs.Coefficients[i] - rhs.Coefficients[i];
+                throw new ArgumentNullException("Arguments cant be a null");
             }
 
-            return new Polynomial(coeff);
-        }
+            int maxLength = Math.Max(lhs.coefficients.Length, rhs.coefficients.Length);
+            int minLength = Math.Min(lhs.coefficients.Length, rhs.coefficients.Length);
+            double[] result = new double[maxLength];
 
-        /// <summary>   Multiplication operator for two polynomials. </summary>
-        /// <param name="lhs">  The left hand side. </param>
-        /// <param name="rhs">  The right hand side. </param>
-        /// <returns>   The result of the operation. </returns>
-        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
-        {
-            double[] coeff = new double[lhs.Coefficients.Length >= rhs.Coefficients.Length ? lhs.Coefficients.Length : rhs.Coefficients.Length];
-
-            for (int i = 0; i <= lhs.Coefficients.Length; i++)
+            if (lhs.coefficients.Length == maxLength)
             {
-                for (int j = 0; j < rhs.Coefficients.Length; j++)
+                Array.Copy(lhs.coefficients, result, maxLength);
+                for (int i = 0; i < minLength; i++)
                 {
-                    coeff[i + j] = lhs.Coefficients[i] * rhs.Coefficients[i];
+                    result[i] += rhs.coefficients[i];
+                }
+            }
+            else
+            {
+                Array.Copy(rhs.coefficients, result, maxLength);
+                for (int i = 0; i < minLength; i++)
+                {
+                    result[i] += lhs.coefficients[i];
                 }
             }
 
-            return new Polynomial(coeff);
+            return new Polynomial(Math.Abs(lhs.Accuracy - rhs.Accuracy), result);
         }
         
-        /// <summary>   Division operator. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
+        /// <summary>   Adds polynomials. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="lhs">      The left hand side. </param>
+        /// <param name="number">   Number of. </param>
+        /// <returns>   A computed polynomial with number. </returns>
+        public static Polynomial Add(Polynomial lhs, double number)
+        {
+            if (lhs.coefficients == null)
+            {
+                throw new ArgumentNullException(nameof(lhs));
+            }
+
+            double[] array = new double[lhs.coefficients.Length + 1];
+            lhs.coefficients.CopyTo(array, 0);
+
+            array[0] += number;
+
+            return new Polynomial(lhs.Accuracy, array);
+        }
+
+        /// <summary>   Multiplies of polynomials. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
         /// <param name="lhs">  The left hand side. </param>
-        /// <param name="dev">  The development. </param>
-        /// <returns>   The result of the operation. </returns>
-        public static Polynomial operator /(Polynomial lhs, double dev)
+        /// <param name="rhs">  The right hand side. </param>
+        /// <returns>   A computed result of multiplying a polynomial. </returns>
+        public static Polynomial Multiply(Polynomial lhs, Polynomial rhs)
         {
-            if (dev == 0)
+            if (lhs.coefficients == null || rhs.coefficients == null)
             {
-                throw new ArgumentException(nameof(dev));
+                throw new ArgumentNullException("Arguments cant be a null");
             }
 
-            double[] coeff = new double[lhs.Coefficients.Length];
-            
-            for (int i = 0; i < coeff.Length; i++)
+            double[] result = new double[lhs.coefficients.Length + rhs.coefficients.Length];
+            for (int i = 0; i < lhs.coefficients.Length; i++)
             {
-                coeff[i] = lhs.Coefficients[i] / dev;
+                for (int j = 0; j < rhs.coefficients.Length; j++)
+                {
+                    result[i + j] += rhs.coefficients[i] * lhs.coefficients[j];
+                }
             }
 
-            return new Polynomial(coeff);
+            return new Polynomial(Math.Abs(lhs.Accuracy - rhs.Accuracy), result);
         }
         
-        /// <summary>   Determines whether the specified object is equal to the current object. </summary>
-        /// <param name="obj">  The object to compare with the current object. </param>
-        /// <returns>
-        /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
-        /// <see langword="false" />.
-        /// </returns>
-        public override bool Equals(object obj)
+        /// <summary>   Multiplies of polynomials. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="lhs">      The left hand side. </param>
+        /// <param name="number">   Number of. </param>
+        /// <returns>   A computed result of multiplying a polynomial with number. </returns>
+        public static Polynomial Multiply(Polynomial lhs, double number)
         {
-            if (obj == null)
+            if (lhs.coefficients == null)
+            {
+                throw new ArgumentNullException(nameof(lhs));
+            }
+
+            double[] array = new double[lhs.coefficients.Length];
+            for (int i = 0; i < lhs.coefficients.Length; i++)
+            {
+                array[i] = lhs.coefficients[i] * number;
+            }
+
+            return new Polynomial(lhs.Accuracy, array);
+        }
+
+        /// <summary>   Substracts. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="lhs">  The left hand side. </param>
+        /// <param name="rhs">  The right hand side. </param>
+        /// <returns>   A Polynomial. </returns>
+        public static Polynomial Substract(Polynomial lhs, Polynomial rhs)
+        {
+            if (lhs.coefficients == null || rhs.coefficients == null)
+            {
+                throw new ArgumentNullException("Arguments cant be a null");
+            }
+
+            int maxLength = Math.Max(lhs.coefficients.Length, rhs.coefficients.Length);
+            int minLength = Math.Min(lhs.coefficients.Length, rhs.coefficients.Length);
+            double[] result = new double[maxLength];
+
+            if (lhs.coefficients.Length == maxLength)
+            {
+                Array.Copy(lhs.coefficients, result, maxLength);
+                for (int i = 0; i < minLength; i++)
+                {
+                    result[i] -= rhs.coefficients[i];
+                }
+            }
+            else
+            {
+                Array.Copy(rhs.coefficients, result, maxLength);
+                for (int i = 0; i < minLength; i++)
+                {
+                    result[i] -= lhs.coefficients[i];
+                }
+            }
+
+            return new Polynomial(Math.Abs(lhs.Accuracy - rhs.Accuracy), result);
+        }
+
+        /// <summary>   Query if 'lhs' is equals. </summary>
+        /// <param name="lhs">  The left hand side. </param>
+        /// <param name="rhs">  The right hand side. </param>
+        /// <returns>   True if equals, false if not. </returns>
+        public static bool IsEquals(Polynomial lhs, Polynomial rhs)
+        {
+            if (lhs.coefficients.Length != rhs.coefficients.Length)
             {
                 return false;
             }
 
-            Polynomial coeff = obj as Polynomial;
-            if (coeff as Polynomial == null)
+            for (int i = 0; i < lhs.coefficients.Length; i++)
             {
-                return false;
-            }
-
-            if (coeff.Coefficients.Length != this.Coefficients.Length)
-            {
-                return false;
-            }
-            
-            for (int i = 0; i < coeff.Coefficients.Length; i++)
-            {
-                if (coeff.Coefficients[i] != this.Coefficients[i])
+                if (lhs.coefficients[i] != rhs.coefficients[i])
                 {
                     return false;
                 }
@@ -198,31 +246,52 @@ namespace PolynomialLibrary
 
             return true;
         }
-        
-        /// <summary>   Serves as the default hash function. </summary>
-        /// <returns>   A hash code for the current object. </returns>
-        public override int GetHashCode()
+
+        /// <summary>   Determines whether the specified object is equal to the current object. </summary>
+        /// <param name="rhs">  The right hand side. </param>
+        /// <returns>
+        /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
+        /// <see langword="false" />.
+        /// </returns>
+        public override bool Equals(object rhs)
         {
-            int hash = 0;
-            for (int i = 0; i < Coefficients.Length; i++)
+            Polynomial polinomial = rhs as Polynomial;
+
+            if (polinomial.coefficients.Length != coefficients.Length)
             {
-                hash += (int)Math.Pow(Coefficients[i], i);
+                return false;
             }
 
-            return hash;
+            for (int i = 0; i < polinomial.coefficients.Length; i++)
+            {
+                if (polinomial.coefficients[i] != coefficients[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
-        
+
         /// <summary>   Returns a string that represents the current object. </summary>
         /// <returns>   A string that represents the current object. </returns>
         public override string ToString()
         {
-            string str = null;
-            for (int i = 0; i < Coefficients.Length; i++)
+            return string.Concat(coefficients);
+        }
+
+        /// <summary>   Serves as the default hash function. </summary>
+        /// <returns>   A hash code for the current object. </returns>
+        public override int GetHashCode()
+        {
+            int hashCode = 0;
+            for (int i = 0; i < this.coefficients.Length; i++)
             {
-                str += Coefficients[i];
+                hashCode += (int)Math.Pow(coefficients[i], i);
             }
 
-            return str;
+            return hashCode;
         }
+        #endregion
     }
 }

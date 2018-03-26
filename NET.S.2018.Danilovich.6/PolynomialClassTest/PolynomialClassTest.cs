@@ -9,30 +9,78 @@ using PolynomialLibrary;
 namespace PolynomialLibrary.Tests
 {
     [TestFixture]
-    public class PolynomialClassTest
+    public class PolynomialTests
     {
-        [Test]
-        [TestCase(new double[] { 5, 324, 2, 1, 43.2 }, ExpectedResult = 4)]
-        [TestCase(new double[] { 21, 4, 6, 12}, ExpectedResult = 3)]
-        public int PolynomialDegreeTests(double[] actual)
+        public static IEnumerable<TestCaseData> AddMethodTestData
         {
-            Polynomial polynomial = new Polynomial(actual);
-
-            return polynomial.Degree;
+            get
+            {
+                yield return new TestCaseData(new Polynomial(0.001, new[] { 1.2, 2, 1, 1 } ),
+                                              new Polynomial(0.001, new[] { 1.2, 2, 6.1, 1, 1 }))
+                                     .Returns(new Polynomial(0.001, new[] { 2.4, 4, 7.1, 2, 1 }));
+            }
         }
 
-        [Test]
-        [TestCase(new double[] { 1, 2, 5, 4 })]
-        [TestCase(new double[] { 1.2, 2, 1, 5 })]
-        public void PolynomialConstructorsTests(double[] actual)
+        [Test, TestCaseSource(nameof(AddMethodTestData))]
+        public Polynomial Polynomial_Plus_Polynomial_Test(Polynomial lhs, Polynomial rhs)
         {
-            double[] expected = new double[actual.Length];
-            Polynomial polynomial = new Polynomial(actual);
-
-            Array.Copy(polynomial.Coefficients, expected, polynomial.Coefficients.Length);
-
-            CollectionAssert.AreEqual(expected, polynomial.Coefficients);
+            return lhs + rhs;
         }
 
+        public static IEnumerable<TestCaseData> MultiplyMethodTestData
+        {
+            get
+            {
+                yield return new TestCaseData(new Polynomial(0.001, new[] { 2d, 2.0 }),
+                                              new Polynomial(0.001, new[] { 2d, 2.0 }))
+                                     .Returns(new Polynomial(0.001, new[] { 4d, 8, 4.0 }));
+            }
+        }
+
+        [Test, TestCaseSource(nameof(MultiplyMethodTestData))]
+        public Polynomial Multiply_Polynomials_Test(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs * rhs;
+        }
+
+        [TestCase(3)]
+        public void Multiply_Polynomial_With_Number_Test(double number)
+        {
+            Polynomial actual = new Polynomial(1, 3, 2) * number;
+            Polynomial expected = new Polynomial(3, 9, 6);
+            Assert.AreEqual(expected, actual);
+        }
+
+        public static IEnumerable<TestCaseData> IsEqualsMethodTestData
+        {
+            get
+            {
+                yield return new TestCaseData(new Polynomial(0.001, new[] { -1.0, 2 }),
+                                              new Polynomial(0.001, new[] { -1.0, 2 }))
+                                     .Returns(true);
+            }
+        }
+
+        [Test, TestCaseSource(nameof(IsEqualsMethodTestData))]
+        public bool IsEquals_Polynomials_Test(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs == rhs;
+        }
+
+        public static IEnumerable<TestCaseData> IsNotEqualsMethodTestData
+        {
+            get
+            {
+                yield return new TestCaseData(new Polynomial(0.001, new[] { -1.0, 2 } ),
+                                              new Polynomial(0.001, new[] { -1.5, 2 }))
+                                     .Returns(true);
+            }
+        }
+
+        [Test, TestCaseSource(nameof(IsNotEqualsMethodTestData))]
+        public bool IsNotEquals_Polynomials_Test(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs != rhs;
+        }
     }
 }
