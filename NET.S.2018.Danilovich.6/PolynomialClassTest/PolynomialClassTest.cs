@@ -15,9 +15,9 @@ namespace PolynomialLibrary.Tests
         {
             get
             {
-                yield return new TestCaseData(new Polynomial(0.001, new[] { 1.2, 2, 1, 1 } ),
-                                              new Polynomial(0.001, new[] { 1.2, 2, 6.1, 1, 1 }))
-                                     .Returns(new Polynomial(0.001, new[] { 2.4, 4, 7.1, 2, 1 }));
+                yield return new TestCaseData(new Polynomial(new[] { 1.2, 2, 1, 1 } ),
+                                              new Polynomial(new[] { 1.2, 2, 6.1, 1, 1 }))
+                                     .Returns(new Polynomial(new[] { 2.4, 4, 7.1, 2, 1 }));
             }
         }
 
@@ -31,9 +31,9 @@ namespace PolynomialLibrary.Tests
         {
             get
             {
-                yield return new TestCaseData(new Polynomial(0.001, new[] { 2d, 2.0 }),
-                                              new Polynomial(0.001, new[] { 2d, 2.0 }))
-                                     .Returns(new Polynomial(0.001, new[] { 4d, 8, 4.0 }));
+                yield return new TestCaseData(new Polynomial(new[] { 2d, 2.0 }),
+                                              new Polynomial(new[] { 2d, 2.0 }))
+                                     .Returns(new Polynomial(new[] { 4d, 8, 4.0 }));
             }
         }
 
@@ -55,8 +55,8 @@ namespace PolynomialLibrary.Tests
         {
             get
             {
-                yield return new TestCaseData(new Polynomial(0.001, new[] { -1.0, 2 }),
-                                              new Polynomial(0.001, new[] { -1.0, 2 }))
+                yield return new TestCaseData(new Polynomial(new[] { -1.0, 2 }),
+                                              new Polynomial(new[] { -1.0, 2 }))
                                      .Returns(true);
             }
         }
@@ -71,8 +71,8 @@ namespace PolynomialLibrary.Tests
         {
             get
             {
-                yield return new TestCaseData(new Polynomial(0.001, new[] { -1.0, 2 } ),
-                                              new Polynomial(0.001, new[] { -1.5, 2 }))
+                yield return new TestCaseData(new Polynomial(new[] { -1.0, 2 } ),
+                                              new Polynomial(new[] { -1.5, 2 }))
                                      .Returns(true);
             }
         }
