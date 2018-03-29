@@ -17,6 +17,7 @@ namespace BankLibrary
 
     public class Account
     {
+        #region private Fields
         /// <summary>   The counter of all accounts. </summary>
         private static int counter = 0;
 
@@ -28,7 +29,8 @@ namespace BankLibrary
 
         /// <summary>   The gradation. </summary>
         private Gradation gradation;
-        
+        #endregion
+        #region Constructor
         /// <summary>   Constructor. </summary>
         /// <param name="man">          The person with properties: string, string, string, string. </param>
         /// <param name="gradation">    The gradation of account rarity. </param>
@@ -38,7 +40,9 @@ namespace BankLibrary
             this.gradation = gradation;
             id = ++counter;
         }
-        
+        #endregion
+
+        #region Properties
         /// <summary>   Gets or sets the balance. </summary>
         /// <value> The balance. </value>
         public decimal Balance { get; set; } = 0;
@@ -94,7 +98,9 @@ namespace BankLibrary
                 throw new ArgumentOutOfRangeException(nameof(gradation));
             }
         }
-        
+        #endregion
+
+        #region Methods
         /// <summary>   Puts the given money on account. </summary>
         /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
         ///                                                 the required range. </exception>
@@ -162,5 +168,6 @@ namespace BankLibrary
 
             return true;
         }
+        #endregion
     }
 }
