@@ -15,6 +15,11 @@ namespace BankLibrary
         /// <param name="passport"> The passport. </param>
         public Man(string name, string surname, string lastname, string passport)
         {
+            if (name == null || surname == null || lastname == null || passport == null)
+            {
+                throw new ArgumentNullException("Need more information about client");
+            }
+
             Name = name;
             Surname = surname;
             Lastname = lastname;
