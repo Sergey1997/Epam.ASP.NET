@@ -8,10 +8,14 @@ namespace BankLibrary
 {
     public sealed class Bank
     {
+        #region Fields
         /// <summary>  The list of accounts in bank </summary>
         /// <value> The accounts. </value>
         public List<Account> Accounts { get; set; } = null;
-        
+        #endregion
+
+        #region Methods
+
         /// <summary>   Opens an account. </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
         ///                                         illegal values. </exception>
@@ -24,7 +28,6 @@ namespace BankLibrary
                 {
                     account
                 };
-                
             }
             else
             {
@@ -72,5 +75,6 @@ namespace BankLibrary
                 throw new ArgumentException($"{(nameof(account))} doesnt find in list");
             }
         }
+        #endregion
     }
 }
