@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace BankLibrary
 {
-    public abstract class Account
+    
+    public class Account
     {
-        private Man man;
-        private Gradation gradation;
-        private decimal balance;
-        public Account();
-
+        private int id;
+        static int counter = 0;
+        public Man man;
+        public Gradation gradation;
+        public decimal balance = 0;
+        public Account(Man man, Gradation gradation)
+        {
+            this.man = new Man(man.Name,man.Surname,man.Lastname);
+            this.gradation = gradation;
+            id = ++counter;
+        }
+        
         private uint Bonuses
         {
             get
@@ -20,7 +28,31 @@ namespace BankLibrary
                 return CostOfBalance * CostOfFiiling;
             }
         }
-        private uint CostOfBalance
+        public virtual void Put(decimal money)
+        {
+            if(money < 0)
+            {
+                throw new ArgumentOutOfRangeException($"{(nameof(money))} cant be less then zero");
+            }
+
+            balance += money;
+        }
+
+        public virtual void Withdraw(decimal money)
+        {
+            if (money < 0)
+            {
+                throw new ArgumentOutOfRangeException($"{(nameof(money))} cant be less then zero");
+            }
+            if(this.balance > money)
+            {
+                throw new ArgumentOutOfRangeException($"{(nameof(money))} cant be more then {nameof(balance)} when withdrawing money");
+            }
+
+            balance -= money;
+        }
+
+        public uint CostOfBalance
         {
             get
             {
@@ -36,10 +68,10 @@ namespace BankLibrary
                         return 7;
                 }
 
-                throw new ArgumentException(nameof(gradation));
+                throw new ArgumentOutOfRangeException(nameof(gradation));
             }
         }
-        private uint CostOfFiiling
+        public uint CostOfFiiling
         {
             get
             {
@@ -55,15 +87,30 @@ namespace BankLibrary
                         return 7;
                 }
 
-                throw new ArgumentException(nameof(gradation));
+                throw new ArgumentOutOfRangeException(nameof(gradation));
             }
         }
-        public override int GetHashCode()
+        public bool Equals(Account other)
         {
-            return base.GetHashCode();
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (!man.Equals(other) || id != other.id || gradation != other.gradation)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
-    enum Gradation
+    public enum Gradation
     {
         Base = 1,
         Silver,

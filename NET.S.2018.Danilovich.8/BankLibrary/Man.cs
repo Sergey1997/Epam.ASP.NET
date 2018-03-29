@@ -8,13 +8,17 @@ namespace BankLibrary
 {
     public class Man
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
         public string Lastname { get; set; }
+        public Man(string Name,string Surname,string Lastname)
+        {
+            this.Name = Name;
+            this.Surname = Surname;
+            this.Lastname = Lastname
+        }
 
         public virtual string GetShortName()
         {
@@ -29,6 +33,7 @@ namespace BankLibrary
             }
 
             Man man = (Man)obj;
+
             if ((Name == man.Name) || man.Name.Equals(Name))
             {
                 if ((Surname == man.Surname) || man.Surname.Equals(Surname))
