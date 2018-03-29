@@ -6,51 +6,69 @@ using System.Threading.Tasks;
 
 namespace BankLibrary
 {
-    public class Bank
+    public sealed class Bank
     {
-        public List<Account> accounts = null;
-
+        /// <summary>  The list of accounts in bank </summary>
+        /// <value> The accounts. </value>
+        public List<Account> Accounts { get; set; } = null;
+        
+        /// <summary>   Opens an account. </summary>
+        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
+        ///                                         illegal values. </exception>
+        /// <param name="account">  The account. </param>
         public void OpenAccount(Account account)
         {
-            if(accounts == null)
+            if (Accounts == null)
             {
-                accounts = new List<Account>
+                Accounts = new List<Account>
                 {
                     account
                 };
             }
             else
             {
-                accounts.Add(account);
+                if (Accounts.Contains(account) == false)
+                {
+                    Accounts.Add(account);
+                }
+                else
+                {
+                    throw new ArgumentException($"{(account)} already exist");
+                }
             }
-            if(account == null)
+
+            if (account == null)
             {
-                throw new ArithmeticException($"{(nameof(account))} is null");
+                throw new ArgumentException($"{(nameof(account))} is null");
             }
-            
         }
+        
+        /// <summary>   Closes an account from the list. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <exception cref="NullReferenceException">   Thrown when a value was unexpectedly null. </exception>
+        /// <exception cref="ArgumentException">        Thrown when one or more arguments have
+        ///                                             unsupported or illegal values. </exception>
+        /// <param name="account">  The account. </param>
         public void CloseAccount(Account account)
         {
             if (account == null)
             {
-                throw new ArithmeticException($"{(nameof(account))} is null");
+                throw new ArgumentNullException($"{(nameof(account))} cant be a null");
             }
 
-            if(accounts == null)
+            if (Accounts == null)
             {
-                throw new Exception("List of accounts is null, nothing to close");
+                throw new NullReferenceException($"{(Accounts)} cant be a null");
             }
 
-            foreach(var item in accounts)
+            if (Accounts.Contains(account) == true)
             {
-                if (item.Equals(account))
-                {
-                    accounts.Remove(item);
-                }
-                else
-                {
-                    throw new ArgumentException($"{(nameof(account))} doesnt find in list");
-                }
+                Accounts.Remove(account);
+            }
+            else
+            {
+                throw new ArgumentException($"{(nameof(account))} doesnt find in list");
             }
         }
     }

@@ -8,41 +8,37 @@ namespace BankLibrary
 {
     public class Man
     {
+        /// <summary>   Constructor of entity man. </summary>
+        /// <param name="name">     The name. </param>
+        /// <param name="surname">  The person's surname. </param>
+        /// <param name="lastname"> The lastname. </param>
+        /// <param name="passport"> The passport. </param>
+        public Man(string name, string surname, string lastname, string passport)
+        {
+            Name = name;
+            Surname = surname;
+            Lastname = lastname;
+            NumberOfPassport = passport;
+        }
+
+        public string NumberOfPassport { get; set; }
+
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
         public string Lastname { get; set; }
-        public Man(string Name,string Surname,string Lastname)
-        {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Lastname = Lastname
-        }
 
-        public virtual string GetShortName()
+        public bool Equals(Man man)
         {
-            return $"{Surname} {Name[0]}.{Lastname[0]}.";
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
+            if (man == null || GetType() != man.GetType())
             {
                 return false;
             }
 
-            Man man = (Man)obj;
-
-            if ((Name == man.Name) || man.Name.Equals(Name))
+            if (Name == man.Name && Surname == man.Surname && Lastname == man.Lastname && NumberOfPassport == man.NumberOfPassport)
             {
-                if ((Surname == man.Surname) || man.Surname.Equals(Surname))
-                {
-                    if ((Lastname == man.Lastname) || man.Lastname.Equals(Lastname))
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
 
             return false;
