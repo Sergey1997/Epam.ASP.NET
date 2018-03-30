@@ -34,10 +34,12 @@ namespace BankLibrary
         /// <summary>   Constructor. </summary>
         /// <param name="man">          The person with properties: string, string, string, string. </param>
         /// <param name="gradation">    The gradation of account rarity. </param>
-        public Account(Man man, Gradation gradation)
+        public Account(Man man, Gradation gradation, uint balance = 0, uint points = 0)
         {
             this.man = new Man(man.Name, man.Surname, man.Lastname, man.NumberOfPassport);
             this.gradation = gradation;
+            this.Balance = balance;
+            this.BonusePoints = points;
             id = ++counter;
         }
         #endregion
@@ -64,11 +66,11 @@ namespace BankLibrary
                     case Gradation.Base:
                         return 1;
                     case Gradation.Silver:
-                        return 3;
+                        return 2;
                     case Gradation.Gold:
-                        return 5;
+                        return 3;
                     case Gradation.Platinum:
-                        return 7;
+                        return 5;
                 }
 
                 throw new ArgumentOutOfRangeException(nameof(gradation));
@@ -88,11 +90,11 @@ namespace BankLibrary
                     case Gradation.Base:
                         return 2;
                     case Gradation.Silver:
-                        return 4;
+                        return 3;
                     case Gradation.Gold:
-                        return 5;
+                        return 4;
                     case Gradation.Platinum:
-                        return 7;
+                        return 6;
                 }
 
                 throw new ArgumentOutOfRangeException(nameof(gradation));

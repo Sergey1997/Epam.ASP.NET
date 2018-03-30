@@ -44,7 +44,6 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Bank.cs" />
-    <Compile Include="IAccount.cs" />
     <Compile Include="Man.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
