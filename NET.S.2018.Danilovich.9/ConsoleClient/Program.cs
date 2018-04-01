@@ -15,7 +15,7 @@ namespace ConsoleClient
             Console.WriteLine(destination);
 
             //Console.WriteLine($"ByteCopy() done. Total bytes: {ByByteCopy(source, destination)}");
-            Console.WriteLine($"ByteCopy() done. Total bytes: {ByLineCopy(source, destination)}");
+            Console.WriteLine($"ByteCopy() done. Total bytes: {InMemoryByBlockCopy(source, destination)}");
             //Console.WriteLine($"ByteCopy() done. Total bytes: {BufferedCopy(source, destination)}");
             //Console.WriteLine($"InMemoryByteCopy() done. Total bytes: {InMemoryByByteCopy(source, destination)}");
 

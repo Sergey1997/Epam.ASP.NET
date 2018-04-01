@@ -6,11 +6,6 @@ using System.Text;
 
 namespace StreamsDemo
 {
-    // C# 6.0 in a Nutshell. Joseph Albahari, Ben Albahari. O'Reilly Media. 2015
-    // Chapter 15: Streams and I/O
-    // Chapter 6: Framework Fundamentals - Text Encodings and Unicode
-    // https://msdn.microsoft.com/ru-ru/library/system.text.encoding(v=vs.110).aspx
-
     public static class StreamsExtension
     {
         #region Public members
@@ -91,8 +86,25 @@ namespace StreamsDemo
 
         public static int InMemoryByBlockCopy(string sourcePath, string destinationPath)
         {
-            // TODO: Use InMemoryByByteCopy method's approach
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+
+            StreamReader reader = new StreamReader(sourcePath);
+            byte[] block = Encoding.UTF8.GetBytes(reader.ReadToEnd());
+            reader.Dispose();
+            int totalBytes = 0;
+            using (MemoryStream memoryStream = new MemoryStream(block, 0, block.Length))
+            {
+                memoryStream.Write(block, 0, block.Length);
+                byte[] newArray = memoryStream.ToArray();
+                Buffer.BlockCopy(block, 0, newArray, 0, newArray.Length);
+                char[] chars = Encoding.UTF8.GetChars(newArray);
+                StreamWriter streamWriter = new StreamWriter(destinationPath);
+                streamWriter.Write(chars);
+                totalBytes = newArray.Length;
+                streamWriter.Close();
+            }
+
+            return totalBytes;
         }
 
         #endregion
@@ -108,7 +120,7 @@ namespace StreamsDemo
             byte[] block = new byte[source.Length];
             source.Read(block, 0, block.Length);
 
-            using (FileStream destination = new FileStream(destinationPath, FileMode.Open,FileAccess.Write))
+            using (FileStream destination = new FileStream(destinationPath, FileMode.Open, FileAccess.Write))
             {
                 using (BufferedStream buffer = new BufferedStream(destination, (int)source.Length))
                 {
