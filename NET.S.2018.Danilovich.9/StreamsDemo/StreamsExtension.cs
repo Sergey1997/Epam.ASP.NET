@@ -42,18 +42,21 @@ namespace StreamsDemo
         {
             InputValidation(sourcePath, destinationPath);
 
-            TextReader reader = new StreamReader(sourcePath);
+            StreamReader reader = new StreamReader(sourcePath);
             byte[] block = Encoding.UTF8.GetBytes(reader.ReadToEnd());
             reader.Dispose();
-            MemoryStream memoryStream = new MemoryStream(block, 0, block.Length);
-            memoryStream.Write(block, 0, block.Length);
-            byte[] newArray = memoryStream.ToArray();
-            memoryStream.Dispose();
-            char[] array = Encoding.UTF8.GetChars(newArray);
-            StreamWriter streamWriter = new StreamWriter(destinationPath);
-            streamWriter.Write(array);
-            int totalBytes = streamWriter.Encoding.GetByteCount(array);
-            streamWriter.Close();
+            int totalBytes = 0;
+            using (MemoryStream memoryStream = new MemoryStream(block, 0, block.Length))
+            {
+                memoryStream.Write(block, 0, block.Length);
+                byte[] newArray = memoryStream.ToArray();
+                memoryStream.Dispose();
+                char[] array = Encoding.UTF8.GetChars(newArray);
+                StreamWriter streamWriter = new StreamWriter(destinationPath);
+                streamWriter.Write(array);
+                totalBytes = newArray.Length;
+                streamWriter.Close();
+            }
 
             return totalBytes;
         }
@@ -123,7 +126,11 @@ namespace StreamsDemo
 
         public static int ByLineCopy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            InputValidation(sourcePath, destinationPath);
+            string[] str = File.ReadAllLines(sourcePath);
+            File.WriteAllLines(destinationPath, str);
+            byte[] bytes = File.ReadAllBytes(destinationPath);
+            return bytes.Length;
         }
 
         #endregion
