@@ -43,8 +43,8 @@
     <Compile Include="Account.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Bank.cs" />
-    <Compile Include="Man.cs" />
+    <Compile Include="AccountService.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

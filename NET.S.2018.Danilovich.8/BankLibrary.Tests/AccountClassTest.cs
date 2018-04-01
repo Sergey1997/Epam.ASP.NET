@@ -5,7 +5,7 @@ namespace BankLibrary.Tests
 {
     public class AccountClassTest
     {
-        Man man = new Man("Sergey", "Danilovich", "Igorevich", "FRM7575");
+        Client man = new Client("Sergey", "Danilovich", "Igorevich", "FRM7575");
         Gradation gradation = Gradation.Platinum;
         [Test]
         public void Account_Constructor_Test()

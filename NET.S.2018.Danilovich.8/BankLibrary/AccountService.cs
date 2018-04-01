@@ -4,9 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// namespace: BankLibrary
+//
+// summary:	
+// add bool for block and unblock accounts
+// email
+// abstract class account:
+//      bool is
+//      номер счёта
+//      Клиент инфо
+//      тип клиента
+//      balance decimal
+//      bonuses
+//      depost
+//      withdraw
+//      close
+//      
+// Template Method
+//      репозиторий получает сохраняет удаляет create read update delete
+//      GetbyId()
+//      
+// AccountService принимает ключ к Account в "репозитории". 
+//      getAccount();
+// интерфейс IRepository
+// 
+// FakeRepsitory: Обёртка листа
+// пао бохари
+// декоратор и адаптер
+// 
+//      
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace BankLibrary
 {
-    public sealed class Bank
+    public sealed class AccountService
     {
         #region Fields
         /// <summary>  The list of accounts in bank </summary>

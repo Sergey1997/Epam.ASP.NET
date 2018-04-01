@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BankLibrary
 {
-    public class Man
+    public class Client
     {
         /// <summary>   Constructor of entity man. </summary>
         /// <param name="name">     The name. </param>
         /// <param name="surname">  The person's surname. </param>
         /// <param name="lastname"> The lastname. </param>
         /// <param name="passport"> The passport. </param>
-        public Man(string name, string surname, string lastname, string passport)
+        public Client(string name, string surname, string lastname, string passport)
         {
             if (name == null || surname == null || lastname == null || passport == null)
             {
@@ -34,7 +34,7 @@ namespace BankLibrary
 
         public string Lastname { get; set; }
 
-        public bool Equals(Man man)
+        public bool Equals(Client man)
         {
             if (man == null || GetType() != man.GetType())
             {

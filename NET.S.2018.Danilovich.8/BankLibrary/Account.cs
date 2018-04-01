@@ -25,7 +25,7 @@ namespace BankLibrary
         private int id;
 
         /// <summary>   The person. </summary>
-        private Man man;
+        private Client man;
 
         /// <summary>   The gradation. </summary>
         private Gradation gradation;
@@ -34,9 +34,9 @@ namespace BankLibrary
         /// <summary>   Constructor. </summary>
         /// <param name="man">          The person with properties: string, string, string, string. </param>
         /// <param name="gradation">    The gradation of account rarity. </param>
-        public Account(Man man, Gradation gradation, uint balance = 0, uint points = 0)
+        public Account(Client man, Gradation gradation, uint balance = 0, uint points = 0)
         {
-            this.man = new Man(man.Name, man.Surname, man.Lastname, man.NumberOfPassport);
+            this.man = new Client(man.Name, man.Surname, man.Lastname, man.NumberOfPassport);
             this.gradation = gradation;
             this.Balance = balance;
             this.BonusePoints = points;

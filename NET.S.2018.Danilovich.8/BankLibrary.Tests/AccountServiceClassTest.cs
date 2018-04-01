@@ -5,17 +5,17 @@ using System;
 
 namespace BankLibrary.Tests
 {
-    class BankClassTest
+    class AccountServiceClassTest
     {
-        Man man = new Man("Sergey", "Danilovich", "Igorevich", "FRM7575");
+        Client man = new Client("Sergey", "Danilovich", "Igorevich", "FRM7575");
         Gradation gradation = Gradation.Platinum;
 
-        Man man1 = new Man("Oleg", "Dobrotsky", "Ivanovich", "Number213");
+        Client man1 = new Client("Oleg", "Dobrotsky", "Ivanovich", "Number213");
         Gradation gradation1 = Gradation.Gold;
         [Test]
         public void OpenAccountTestMethod()
         {
-            Bank bank = new Bank();
+            AccountService bank = new AccountService();
             Account account = new Account(man, gradation);
             Account account1 = new Account(man, gradation);
             List<Account> expected = new List<Account>()
@@ -30,7 +30,7 @@ namespace BankLibrary.Tests
         [Test]
         public void CloseAccountTestMethod()
         {
-            Bank bank = new Bank();
+            AccountService bank = new AccountService();
             Account account = new Account(man, gradation);
             Account account1 = new Account(man, gradation);
             List<Account> expected = new List<Account>()
@@ -46,20 +46,20 @@ namespace BankLibrary.Tests
         [TestCase]
         public void Bank_CloseAccountMethod_ArgumentNullException()
         {
-            Bank bank = new Bank();
+            AccountService bank = new AccountService();
             Assert.Throws<ArgumentNullException>(() => bank.CloseAccount(null));
         }
         [TestCase]
         public void Bank_CloseAccountMethod_NullReferenceException()
         {
-            Bank bank = null;
+            AccountService bank = null;
             Account account = new Account(man, gradation);
             Assert.Throws<NullReferenceException>(() => bank.CloseAccount(account));
         }
         [TestCase]
         public void Bank_CloseAccountMethod_ArgumentException()
         {
-            Bank bank = new Bank();
+            AccountService bank = new AccountService();
             Account account = new Account(man1, gradation1);
             Account actual = new Account(man, gradation);
             bank.OpenAccount(actual);
