@@ -14,7 +14,7 @@ namespace FilterDigitLogicTests.NUnit
              new object[] { new int[] {  4, 53, 74, 27, 4 }, new int[] { 74, 27} , new SameDigit(7) },
              new object[] { new int[] {  33, 24, 3, 37, 4 }, new int[] { 24, 4} , new EvenNumber() },
              new object[] { new int[] {  4, 98, 97, 24, 3 }, new int[] { 4, 24, 3} , new LessThan(7) },
-             new object[] { new int[] {  0, 21, 1, 11, 55 }, new int[] { 0, 21, 1, 11} , new LessThan(2) },
+             new object[] { new int[] {  1, 22, 1, 11, 55 }, new int[] { 1, 1, 11} , new LessThan(2) },
         };
 
         [Test, TestCaseSource("sourceList")]
