@@ -92,28 +92,5 @@ namespace Logic
 
             return false;
         }
-
-        private static bool IsContainForString(int element, int digit)
-        {
-            if (element < 0)
-            {
-                element *= -1;
-            }
-
-            string str = element.ToString();
-            int i = 0;
-            do
-            {
-                if (int.Parse(str[i].ToString()) % 10 == digit)
-                {
-                    return true;
-                }
-
-                i++;
-            }
-            while (i < str.Length);
-
-            return false;
-        }
     }
 }
