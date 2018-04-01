@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace PolynomialLibrary
 {
@@ -34,8 +32,14 @@ namespace PolynomialLibrary
 
         /// <summary>   Gets the accuracy. </summary>
         /// <value> The accuracy. </value>
-        public double Accuracy { get; } = 0.0001;
-        
+        public static double Accuracy { get; set; }
+
+
+        /// <summary>   Static constructor for accuracy. </summary>
+        static Polynomial()
+        {
+            Accuracy = double.Parse(ConfigurationManager.AppSettings["accuracy"]);
+        }
         /// <summary>
         /// Indexer to get or set items within this collection using array index syntax.
         /// </summary>
