@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DigitLogic.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="IPredicate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

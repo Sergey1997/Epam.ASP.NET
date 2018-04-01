@@ -13,12 +13,8 @@ namespace SorterLogic
     public static class Sorter
     {
         /// <summary>   An int[] extension method that quick sort. </summary>
-        ///
-        /// <remarks>   Sergey, 16.03.2018. </remarks>
-        ///
         /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
         ///                                             null. </exception>
-        ///
         /// <param name="array">    The array to act on. </param>
         public static void QuickSort(this int[] array)
         {
@@ -33,14 +29,10 @@ namespace SorterLogic
         }
         
         /// <summary>   An int[] extension method that quick sort. </summary>
-        ///
-        /// <remarks>   Sergey, 16.03.2018. </remarks>
-        ///
         /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
         ///                                                 the required range. </exception>
         /// <exception cref="ArgumentNullException">        Thrown when one or more required arguments
         ///                                                 are null. </exception>
-        ///
         /// <param name="array">    The array to act on. </param>
         /// <param name="left">     The left. </param>
         /// <param name="right">    The right. </param>
@@ -95,12 +87,8 @@ namespace SorterLogic
         }
         
         /// <summary>   An int[] extension method that merge sort. </summary>
-        ///
-        /// <remarks>   Sergey, 18.03.2018. </remarks>
-        ///
         /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
         ///                                             null. </exception>
-        ///
         /// <param name="array">    The array to act on. </param>
         public static void MergeSort(this int[] array)
         {
@@ -113,9 +101,6 @@ namespace SorterLogic
         }
         
         /// <summary>   An int[] extension method that merge sort. </summary>
-        ///
-        /// <remarks>   Sergey, 18.03.2018. </remarks>
-        ///
         /// <param name="array">    The array to act on. </param>
         /// <param name="start">    The start. </param>
         /// <param name="end">      The end. </param>

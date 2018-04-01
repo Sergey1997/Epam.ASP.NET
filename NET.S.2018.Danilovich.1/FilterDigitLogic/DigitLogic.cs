@@ -6,28 +6,76 @@ using System.Threading.Tasks;
 
 namespace FilterDigitLogic
 {
-    class DigitLogic
+    public class SameDigit : IPredicate
     {
-        private int digit;
-        public int Digit
+        public int Digit { get; set; }
+
+        public SameDigit(int digit)
         {
-            get
+            Digit = digit;
+        }
+
+        public bool IsSuitable(int number)
+        {
+            if (number < 0)
             {
-                return digit;
+                number = -number;
             }
-            set
+
+            while (number != 0)
             {
-                if (value < 0 || value > 9)
+                if (number % 10 == Digit)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(digit));
+                    return true;
                 }
 
-                digit = value;
+                number /= 10;
             }
+
+            return false;
         }
-        public DigitLogic(int digit)
+
+    }
+    public class LessThan : IPredicate
+    {
+        public int Digit { get; set; }
+
+        public LessThan(int digit)
         {
-            this.digit = digit;
+            Digit = digit;
+        }
+
+        public bool IsSuitable(int number)
+        {
+            if (number < 0)
+            {
+                number = -number;
+            }
+
+            while (number != 0)
+            {
+                if (number % 10 < Digit)
+                {
+                    return true;
+                }
+
+                number /= 10;
+            }
+
+            return false;
+        }
+    }
+
+    public class EvenNumber : IPredicate
+    {
+        public bool IsSuitable(int number)
+        {
+            if (number % 2 == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -1,78 +1,57 @@
-﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-// file: Filter.cs
-//
-// summary: Implements the filter class
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic
+namespace FilterDigitLogic
 {
     /// <summary>A filter.</summary>
-    /// 
-    /// <remarks>Sergey, 16.03.2018.</remarks>
     public static class Filter
     {
         /// <summary>Filter digit.</summary>
-        ///
-        /// <remarks>Sergey, 16.03.2018.</remarks>
-        ///
         /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
         ///                                             null. </exception>
         /// <exception cref="ArgumentException">        Thrown when one or more arguments have
         ///                                             unsupported or illegal values. </exception>
-        ///
         /// <param name="array">    [in,out] The array. </param>
         /// <param name="digit">    The digit. </param>
-        public static List<int> FilterDigit(this List<int> array, int digit, out long millisek)
+        public static int[] FilterDigit(this int[] array, IPredicate predicate, out long millisek)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            List<int> result = array.FilterDigit(digit);
+            int[] result = array.FilterDigit(predicate);
             stopwatch.Stop();
             millisek = stopwatch.ElapsedMilliseconds;
             return result;
         }
-
-        public static List<int> FilterDigit(this List<int> array, int digit)
+        
+        /// <summary>   Filter digit . </summary>
+        /// <param name="array">        The array. </param>
+        /// <param name="predicate">    The predicate. </param>
+        /// <returns>   An int[] filtered array by predicate . </returns>
+        public static int[] FilterDigit(this int[] array, IPredicate predicate)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if ((digit < 0) || (digit > 9))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
+            InputValidation(array, predicate);
             List<int> result = new List<int>();
 
-            for (int i = 0; i < array.Count; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                if (IsContainForMath(array[i], digit) == true)
+                if (predicate.IsSuitable(array[i]))
                 {
                     result.Add(array[i]);
                 }
             }
 
-            return result;
+            return result.ToArray();
         }
         
         /// <summary>Query if 'element' is contain.</summary>
-        ///
-        /// <remarks>Sergey, 16.03.2018.</remarks>
-        ///
         /// <param name="element">  The element. </param>
         /// <param name="digit">    The digit. </param>
-        ///
         /// <returns>   True if contain, false if not. </returns>
-        private static bool IsContainForMath(int element, int digit)
+        private static bool IsContain(int element, int digit)
         {
             if (element < 0)
             {
@@ -91,6 +70,26 @@ namespace Logic
             while (element != 0);
 
             return false;
+        }
+        
+        /// <summary>   A List&lt;int&gt; extension method that input validation. </summary>
+        /// <exception cref="ArgumentNullException">        Thrown when one or more required arguments
+        ///                                                 are null. </exception>
+        /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
+        ///                                                 the required range. </exception>
+        /// <param name="array">    The array. </param>
+        /// <param name="digit">    The digit. </param>
+        private static void InputValidation(this int[] array, IPredicate predicate)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{(nameof(array))} must not be a null");
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException($"{(nameof(predicate))} must not be a null");
+            }
         }
     }
 }
