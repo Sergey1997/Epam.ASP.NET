@@ -25,7 +25,10 @@ namespace FilterDigitLogicTests.NUnit
         }
         private static object[] sourceListTransform =
         {
-             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 16, 4, 36, 1, 16 } , new Pow(2) }
+             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 16, 4, 36, 1, 16 } , new PositivePow(2) },
+             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 1, 1, 1, 1, 1 } , new PositivePow(0) },
+             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 64, 8, 36*6, 1, 64 } , new PositivePow(3) }
+
         };
 
         [Test, TestCaseSource("sourceListTransform")]

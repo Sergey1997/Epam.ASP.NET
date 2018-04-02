@@ -6,19 +6,27 @@ using System.Threading.Tasks;
 
 namespace FilterDigitLogic
 {
-    public class Pow : ITransformer
+    public class PositivePow : ITransformer
     {
-        public int Degree { get; set; }
-        public Pow(int degree)
+        public PositivePow(int degree)
         {
             Degree = degree;
         }
-        
+
+        public int Degree { get; set; }
+
         public int Transform(int number)
         {
-            for(int i = 1; i < Degree; i++)
+            int result = number;
+
+            if (Degree == 0)
             {
-                number *= number;
+                return 1;
+            }
+
+            for (int i = 1; i < Degree; i++)
+            {
+                number *= result;
             }
 
             return number;

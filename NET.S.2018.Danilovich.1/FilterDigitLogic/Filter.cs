@@ -46,16 +46,21 @@ namespace FilterDigitLogic
 
             return result.ToArray();
         }
+        
+        /// <summary>   An int[] extension method that transformation array. </summary>
+        /// <param name="array">        The array. </param>
+        /// <param name="transform">    The transform. </param>
+        /// <returns>   An int[]. </returns>
         public static int[] TransformationArray(this int[] array, ITransformer transform)
         {
-            List<int> result = new List<int>();
+            InputValidationTransform(array, transform);
 
             for (int i = 0; i < array.Length; i++)
             {
-                result.Add(transform.Transform(array[i]));
+                array[i] = transform.Transform(array[i]);
             }
 
-            return result.ToArray();
+            return array;
         }
         
         /// <summary>Query if 'element' is contain.</summary>
@@ -100,6 +105,24 @@ namespace FilterDigitLogic
             if (predicate == null)
             {
                 throw new ArgumentNullException($"{(nameof(predicate))} must not be a null");
+            }
+        }
+        
+        /// <summary>   An int[] extension method that input validation transform. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="array">        The array. </param>
+        /// <param name="predicate">    The predicate. </param>
+        private static void InputValidationTransform(this int[] array, ITransformer transformer)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{(nameof(array))} must not be a null");
+            }
+
+            if (transformer == null)
+            {
+                throw new ArgumentNullException($"{(nameof(transformer))} must not be a null");
             }
         }
     }
