@@ -63,31 +63,6 @@ namespace FilterDigitLogic
             return array;
         }
         
-        /// <summary>Query if 'element' is contain.</summary>
-        /// <param name="element">  The element. </param>
-        /// <param name="digit">    The digit. </param>
-        /// <returns>   True if contain, false if not. </returns>
-        private static bool IsContain(int element, int digit)
-        {
-            if (element < 0)
-            {
-                element *= -1;
-            }
-
-            do
-            {
-                if (element % 10 == digit)
-                {
-                    return true;
-                }
-
-                element = element / 10;
-            }
-            while (element != 0);
-
-            return false;
-        }
-        
         /// <summary>   A List&lt;int&gt; extension method that input validation. </summary>
         /// <exception cref="ArgumentNullException">        Thrown when one or more required arguments
         ///                                                 are null. </exception>
