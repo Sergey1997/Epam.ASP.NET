@@ -23,6 +23,17 @@ namespace FilterDigitLogicTests.NUnit
             int[] result = array.FilterDigit(predicate);
             Assert.AreEqual(expected, result);
         }
-        
+        private static object[] sourceListTransform =
+        {
+             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 16, 4, 36, 1, 16 } , new Pow(2) }
+        };
+
+        [Test, TestCaseSource("sourceListTransform")]
+        public void FilterDigit_TransformationLogicTest(int[] array, int[] expected, ITransformer transformer)
+        {
+            int[] result = array.TransformationArray(transformer);
+            Assert.AreEqual(expected, result);
+        }
+
     }
 }

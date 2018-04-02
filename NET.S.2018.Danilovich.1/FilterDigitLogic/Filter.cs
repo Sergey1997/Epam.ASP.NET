@@ -46,6 +46,17 @@ namespace FilterDigitLogic
 
             return result.ToArray();
         }
+        public static int[] TransformationArray(this int[] array, ITransformer transform)
+        {
+            List<int> result = new List<int>();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                result.Add(transform.Transform(array[i]));
+            }
+
+            return result.ToArray();
+        }
         
         /// <summary>Query if 'element' is contain.</summary>
         /// <param name="element">  The element. </param>

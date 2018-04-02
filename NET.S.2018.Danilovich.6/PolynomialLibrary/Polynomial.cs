@@ -27,18 +27,18 @@ namespace PolynomialLibrary
             coeffitients = new double[array.Length];
             Array.Copy(array, coeffitients, coeffitients.Length);
         }
-        
+
         #endregion
 
         /// <summary>   Gets the accuracy. </summary>
         /// <value> The accuracy. </value>
-        public static double Accuracy { get; set; }
+        public static double accuracy;
 
 
         /// <summary>   Static constructor for accuracy. </summary>
         static Polynomial()
         {
-            Accuracy = double.Parse(ConfigurationManager.AppSettings["accuracy"]);
+            accuracy = double.Parse(ConfigurationManager.AppSettings["accuracy"]);
         }
         /// <summary>
         /// Indexer to get or set items within this collection using array index syntax.
