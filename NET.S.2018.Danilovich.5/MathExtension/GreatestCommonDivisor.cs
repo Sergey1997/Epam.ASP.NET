@@ -5,59 +5,60 @@ namespace MathExtension
     public class GreatestCommonDivisor
     {
         /// <summary>   Euclids algorithm for int array. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        /// <exception cref="ArgumentException">        Thrown when one or more arguments have
-        ///                                             unsupported or illegal values. </exception>
+        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
+        ///                                         illegal values. </exception>
         /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         public static int EuclidsAlgorithm(params int[] numbers)
         {
-            if (numbers.Length == 0)
+            if (numbers.Length == 1 && numbers[0] == 0)
             {
-                throw new ArgumentNullException($"{nameof(numbers.Length)} must not be zero");
+                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
             }
 
-            int greatestCommonDivisor = FindFirstNotZeroNumber(out int startIndex, numbers);
+            int greatestCommonDivisor = 0;
 
-            if (greatestCommonDivisor == 0)
+            for (int i = 0; i < numbers.Length; i++)
             {
-                throw new ArgumentException($"{nameof(numbers)} at least one of numbers must not be a zero");
-            }
-
-            for (int i = startIndex + 1; i < numbers.Length; i++)
-            {
-                while (greatestCommonDivisor != numbers[i] && numbers[i] != 0)
-                {
-                    if (numbers[i] < 0)
-                    {
-                        numbers[i] = -numbers[i];
-                    }
-
-                    if (greatestCommonDivisor > numbers[i])
-                    {
-                        greatestCommonDivisor -= numbers[i];
-                    }
-                    else
-                    {
-                        numbers[i] -= greatestCommonDivisor;
-                    }
-                }
+                greatestCommonDivisor = EuclidsAlgorithm(greatestCommonDivisor, numbers[i]);
             }
 
             return greatestCommonDivisor;
         }
-        
-        /// <summary>   Euclids algorithm for two numbers. </summary>
+
+        /// <summary>   Euclids algorithm for int array. </summary>
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         public static int EuclidsAlgorithm(int a, int b)
         {
-            return EuclidsAlgorithm(a, b);
+            CheckingForParams(ref a, ref b);
+            if (a == 0)
+            {
+                return b;
+            }
+
+            if (b == 0)
+            {
+                return a;
+            }
+
+            while (a != b)
+            {
+                if (a > b)
+                {
+                    a -= b;
+                }
+                else
+                {
+                    b -= a;
+                }
+            }
+
+            return a;
         }
         
-        /// <summary>   Euclids algorithm for tree numbers. </summary>
+        /// <summary>   Euclids algorithm for int array. </summary>
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <param name="c">    An int to process. </param>
@@ -74,62 +75,89 @@ namespace MathExtension
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         public static int BinaryEuclideanAlgoritm(params int[] numbers)
         {
-            int greatestCommonDivisor = FindFirstNotZeroNumber(out int startIndex, numbers);
-
-            if (greatestCommonDivisor == 0)
+            if (numbers.Length == 1 && numbers[0] == 0)
             {
-                throw new ArgumentException($"{nameof(numbers)} at least one of numbers must not be a zero");
+                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
             }
 
-            for (int i = startIndex + 1; i < numbers.Length; i++)
+            int greatestCommonDivisor = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
             {
-                int k = 1;
-
-                if (numbers[i] == 0)
-                {
-                    numbers[i] = greatestCommonDivisor;
-                }
-
-                while (greatestCommonDivisor != 0 && numbers[i] != 0)
-                {
-                    if (numbers[i] < 0)
-                    {
-                        numbers[i] = -numbers[i];
-                    }
-
-                    while (greatestCommonDivisor % 2 == 0 && numbers[i] % 2 == 0)
-                    {
-                        greatestCommonDivisor /= 2;
-                        numbers[i] /= 2;
-                        k *= 2;
-                    }
-
-                    EvenNumberDevBy2(greatestCommonDivisor, numbers[i]);
-
-                    if (greatestCommonDivisor >= numbers[i])
-                    {
-                        greatestCommonDivisor -= numbers[i];
-                    }
-                    else
-                    {
-                        numbers[i] -= greatestCommonDivisor;
-                    }
-                }
-
-                greatestCommonDivisor = numbers[i] * k;
+                greatestCommonDivisor = BinaryEuclideanAlgoritm(greatestCommonDivisor, numbers[i]);
             }
 
             return greatestCommonDivisor;
         }
-
+        
+        /// <summary>   Binary Euclidean algoritm for search of Greatest common divisor . </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         public static int BinaryEuclideanAlgoritm(int a, int b)
         {
-            return BinaryEuclideanAlgoritm(a, b);
-        }
+            CheckingForParams(ref a, ref b);
 
+            if (a == 0)
+            {
+                return b;
+            }
+
+            if (b == 0)
+            {
+                return a;
+            }
+
+            int k = 1;
+
+            while (a != 0 && b != 0)
+            {
+                while (a % 2 == 0 && b % 2 == 0)
+                {
+                    a /= 2;
+                    b /= 2;
+                    k *= 2;
+                }
+
+                EvenNumberDevBy2(a, b);
+
+                if (a >= b)
+                {
+                    a -= b;
+                }
+                else
+                {
+                    b -= a;
+                }
+            }
+
+            return b * k;
+        }
+        
+        /// <summary>   Binary Euclidean algoritm for search of Greatest common divisor . </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <param name="c">    An int to process. </param>
+        /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         public static int BinaryEuclideanAlgoritm(int a, int b, int c)
         {
             return BinaryEuclideanAlgoritm(BinaryEuclideanAlgoritm(a, b), c);
+        }
+        
+        /// <summary>   Checking for parameters. </summary>
+        /// <param name="a">    [in,out] An int to process. </param>
+        /// <param name="b">    [in,out] An int to process. </param>
+        private static void CheckingForParams(ref int a, ref int b)
+        {
+            if (a < 0)
+            {
+                a = -a;
+            }
+
+            if (b < 0)
+            {
+                b = -b;
+            }
         }
 
         /// <summary>   Even number devision by 2. </summary>
@@ -146,29 +174,6 @@ namespace MathExtension
             {
                 number /= 2;
             }
-        }
-
-        /// <summary>  
-        /// Searches for the first not zero number in numbers. 
-        /// </summary>
-        /// <param name="index"> [out] Index for new point of entry. </param>
-        /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
-        /// <returns>   The found first not zero number. </returns>
-        private static int FindFirstNotZeroNumber(out int index, params int[] numbers)
-        {
-            int greatestCommonDivisor = 0;
-            index = 0;
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                if (numbers[i] != 0)
-                {
-                    greatestCommonDivisor = numbers[i];
-                    index = i;
-                    break;
-                }
-            }
-
-            return Math.Abs(greatestCommonDivisor);
         }
     }
 }

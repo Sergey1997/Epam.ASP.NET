@@ -13,6 +13,8 @@ namespace MathExtension.Tests
              new object[] { 2, new int[] { 36, 22, 0, 0 } },
              new object[] { 5, new int[] { 55, 0, 20, 40 } },
              new object[] { 3, new int[] { 0, 0, 3, 6 } },
+             new object[] { 2, new int[] { 4, 6 } },
+             new object[] { 7, new int[] { 7,7,14 } },
              new object[] { 100, new int[] { 100 } },
         };
         
@@ -28,14 +30,10 @@ namespace MathExtension.Tests
             Assert.AreEqual(expected, GreatestCommonDivisor.BinaryEuclideanAlgoritm(numbers));
         }
         
-        [TestCase(new int[] { 0 })]
-        [TestCase(new int[] { 0, 0, 0 })]
         [TestCase(null)]
         public static void EuclidsAlgorithmTest_Numbers_ArgumentException(params int[] numbers)
             => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.EuclidsAlgorithm(numbers));
-
-        [TestCase(new int[] { 0 })]
-        [TestCase(new int[] { 0, 0, 0 })]
+        
         [TestCase(null)]
         public static void BinaryEuclideanAlgoritmTest_Numbers_ArgumentException(params int[] numbers)
             => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.BinaryEuclideanAlgoritm(numbers));
