@@ -34,8 +34,7 @@ namespace SortingClass.Tests
         [Test, TestCaseSource("sourceList")]
         public void TestMethodForSorting(int[][] actual, int[][] expected, IStrategy strategy)
         {
-            Sorting.Strategy = strategy;
-            Sorting.Sort(actual);
+            Sorting.BubbleSorting(actual,strategy);
             CollectionAssert.AreEqual(expected, actual);
         }
     }
