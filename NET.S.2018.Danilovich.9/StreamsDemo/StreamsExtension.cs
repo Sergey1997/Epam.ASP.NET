@@ -141,8 +141,8 @@ namespace StreamsDemo
             InputValidation(sourcePath, destinationPath);
             string[] str = File.ReadAllLines(sourcePath);
             File.WriteAllLines(destinationPath, str);
-            byte[] bytes = File.ReadAllBytes(destinationPath);
-            return bytes.Length;
+            string[] destinationStrings = File.ReadAllLines(destinationPath);
+            return destinationStrings.Length;
         }
 
         #endregion
@@ -151,6 +151,8 @@ namespace StreamsDemo
 
         public static bool IsContentEquals(string sourcePath, string destinationPath)
         {
+            InputValidation(sourcePath, destinationPath);
+
             bool resultOfEqual = File.ReadAllBytes(sourcePath).SequenceEqual(File.ReadAllBytes(destinationPath));
 
             return resultOfEqual;
