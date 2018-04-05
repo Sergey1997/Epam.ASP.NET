@@ -29,6 +29,7 @@ namespace BookLogic
             ISBN = isbn;
             Author = author;
             Publisher = publisher;
+            Title = title;
             Year = year;
             NumberOfPages = numberOfPages;
             Price = price;
