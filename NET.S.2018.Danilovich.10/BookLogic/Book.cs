@@ -11,6 +11,7 @@ namespace BookLogic
         #region Fields
         private string isbn;
         private string author;
+        private string title;
         private string publisher;
         private double price;
         #endregion
@@ -23,7 +24,7 @@ namespace BookLogic
         /// <param name="year">             The year. </param>
         /// <param name="numberOfPages">    Number of pages. </param>
         /// <param name="price">            The price. </param>
-        public Book(string isbn, string author, string publisher, uint year, uint numberOfPages, double price)
+        public Book(string isbn, string author, string title, string publisher, uint year, uint numberOfPages, double price)
         {
             ISBN = isbn;
             Author = author;
@@ -56,6 +57,16 @@ namespace BookLogic
             set { author = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
         }
         
+        /// <summary>   Gets or sets the title. </summary>
+        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
+        ///                                         illegal values. </exception>
+        /// <value> The title. </value>
+        public string Title
+        {
+            get { return author; }
+            set { title = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
+        }
+
         /// <summary>   Gets or sets the publisher. </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
         ///                                         illegal values. </exception>

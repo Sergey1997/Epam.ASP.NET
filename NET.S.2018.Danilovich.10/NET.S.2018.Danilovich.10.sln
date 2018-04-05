@@ -5,7 +5,11 @@ VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLogic", "BookLogic\BookLogic.csproj", "{EFC583D8-A974-4CE0-B7D3-81F2125549EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{FD77A7F2-5C0E-4F23-A6A4-D4F11AACC8D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleBookTest", "ConsoleTest\ConsoleBookTest.csproj", "{FD77A7F2-5C0E-4F23-A6A4-D4F11AACC8D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookListService", "BookListService\BookListService.csproj", "{8551EBC1-7494-47D9-A7CE-A928E433A9E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStorageLogic", "BookStorageLogic\BookStorageLogic.csproj", "{76CCA322-6630-432E-AA73-07E2EDAABEFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{FD77A7F2-5C0E-4F23-A6A4-D4F11AACC8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD77A7F2-5C0E-4F23-A6A4-D4F11AACC8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD77A7F2-5C0E-4F23-A6A4-D4F11AACC8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8551EBC1-7494-47D9-A7CE-A928E433A9E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8551EBC1-7494-47D9-A7CE-A928E433A9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8551EBC1-7494-47D9-A7CE-A928E433A9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8551EBC1-7494-47D9-A7CE-A928E433A9E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76CCA322-6630-432E-AA73-07E2EDAABEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76CCA322-6630-432E-AA73-07E2EDAABEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76CCA322-6630-432E-AA73-07E2EDAABEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76CCA322-6630-432E-AA73-07E2EDAABEFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
