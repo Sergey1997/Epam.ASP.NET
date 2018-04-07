@@ -9,74 +9,48 @@ namespace MathExtension
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <returns>   An int. </returns>
-        public static int EuclidsGCD(int a, int b)
-        {
-            return Algorithm(a, b, EuclidsAlgorithm);
-        }
+        public static int EuclidsGCD(int a, int b) => Algorithm(a, b, EuclidsAlgorithm);
         
         /// <summary>   Euclids gcd. </summary>
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <param name="c">    An int to process. </param>
         /// <returns>   An int. </returns>
-        public static int EuclidsGCD(int a, int b, int c)
-        {
-            return Algorithm(a, b, c, EuclidsAlgorithm);
-        }
+        public static int EuclidsGCD(int a, int b, int c) => Algorithm(a, b, c, EuclidsAlgorithm);
         
         /// <summary>   Euclids gcd. </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
         ///                                         illegal values. </exception>
         /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
         /// <returns>   An int. </returns>
-        public static int EuclidsGCD(params int[] numbers)
-        {
-            if (numbers.Length == 1 && numbers[0] == 0)
-            {
-                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
-            }
+        public static int EuclidsGCD(params int[] numbers) => Algorithm(EuclidsAlgorithm, numbers);
+        
+        /// <summary>   Binary finding of GCD. </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <returns>   An int - GCD. </returns>
+        public static int BinaryGCD(int a, int b) => Algorithm(a, b, BinaryEuclideanAlgoritm);
+        
+        /// <summary>   Binary finding of GCD. </summary>
+        /// <param name="a">    An int to process. </param>
+        /// <param name="b">    An int to process. </param>
+        /// <param name="c">    An int to process. </param>
+        /// <returns>   An int - GCD. </returns>
+        public static int BinaryGCD(int a, int b, int c) => Algorithm(a, b, c, BinaryEuclideanAlgoritm);
 
-            return Algorithm(EuclidsAlgorithm, numbers);
-        }
-        
-        /// <summary>   Binary finding of GCD. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <returns>   An int - GCD. </returns>
-        public static int BinaryGCD(int a, int b)
-        {
-            return Algorithm(a, b, BinaryEuclideanAlgoritm);
-        }
-        
-        /// <summary>   Binary finding of GCD. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <param name="c">    An int to process. </param>
-        /// <returns>   An int - GCD. </returns>
-        public static int BinaryGCD(int a, int b, int c)
-        {
-            return Algorithm(a, b, c, BinaryEuclideanAlgoritm);
-        }
-        
         /// <summary>   Binary finding of GCD. </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
         ///                                         illegal values. </exception>
         /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
         /// <returns>   An int. </returns>
-        public static int BinaryGCD(params int[] numbers)
-        {
-            return Algorithm(BinaryEuclideanAlgoritm, numbers);
-        }
-        
+        public static int BinaryGCD(params int[] numbers) => Algorithm(BinaryEuclideanAlgoritm, numbers);
+
         /// <summary>   Common euclids algorithm. </summary>
         /// <param name="a">            An int to process. </param>
         /// <param name="b">            An int to process. </param>
         /// <param name="Algorithm">    The algorithm of finding GCD. </param>
         /// <returns>   An int. </returns>
-        private static int Algorithm(int a, int b, Func<int, int, int> algorithm)
-        {
-            return algorithm(a, b);
-        }
+        private static int Algorithm(int a, int b, Func<int, int, int> algorithm) => algorithm(a, b);
         
         /// <summary>   Common euclids algorithm. </summary>
         /// <param name="a">            An int to process. </param>
