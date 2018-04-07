@@ -10,6 +10,7 @@ namespace FilterDigitLogic
     /// <summary>A filter.</summary>
     public static class Filter
     {
+        public delegate int TransformerDelegate(int value);
         /// <summary>Filter digit.</summary>
         /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
         ///                                             null. </exception>
@@ -51,13 +52,13 @@ namespace FilterDigitLogic
         /// <param name="array">        The array. </param>
         /// <param name="transform">    The transform. </param>
         /// <returns>   An int[]. </returns>
-        public static int[] TransformationArray(this int[] array, ITransformer transform)
+        public static int[] TransformationArray(this int[] array, TransformerDelegate transform)
         {
             InputValidationTransform(array, transform);
 
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = transform.Transform(array[i]);
+                array[i] = transform.Invoke(array[i]);
             }
 
             return array;
@@ -88,7 +89,7 @@ namespace FilterDigitLogic
         ///                                             null. </exception>
         /// <param name="array">        The array. </param>
         /// <param name="predicate">    The predicate. </param>
-        private static void InputValidationTransform(this int[] array, ITransformer transformer)
+        private static void InputValidationTransform(this int[] array, TransformerDelegate transformer)
         {
             if (array == null)
             {

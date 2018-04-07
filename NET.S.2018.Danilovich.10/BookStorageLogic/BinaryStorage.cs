@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using BookLogic;
+using NLog;
 
 namespace BookStorageLogic
 {
     public interface IBookStorage
     {
-        void SaveBooks(List<Book> books);
+        //implement readBooks(List<Book> books)
+        void SaveBooks(List<Book> books);//Change List<Book> to IEnumerable<Book>
     }
 
     public class BinaryStorage : IBookStorage
-    {        
+    {
         /// <summary>   Constructor of file. </summary>
         /// <exception cref="FileNotFoundException">    Thrown when the requested file is not present. </exception>
         /// <param name="path"> Full pathname of the file. </param>
@@ -22,7 +24,7 @@ namespace BookStorageLogic
             {
                 throw new FileNotFoundException($"{path} is not found");
             }
-
+            //change path to config
             Path = path;
         }
         
@@ -34,13 +36,15 @@ namespace BookStorageLogic
         /// <param name="books">    The books. </param>
         public void SaveBooks(List<Book> books)
         {
-            FileStream fileStream = new FileStream(Path, FileMode.Open, FileAccess.ReadWrite);
-            BinaryWriter binaryWriter = new BinaryWriter(fileStream);
-            binaryWriter.Write(books.Count);
-
-            foreach (Book book in books)
+            using (FileStream fileStream = new FileStream(Path, FileMode.Open, FileAccess.ReadWrite))
+            using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
             {
-                WriteBook(book, binaryWriter);
+                binaryWriter.Write(books.Count);
+
+                foreach (Book book in books)
+                {
+                    WriteBook(book, binaryWriter);
+                }
             }
         }
         

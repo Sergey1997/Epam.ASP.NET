@@ -115,17 +115,19 @@ namespace StreamsDemo
         {
             InputValidation(sourcePath, destinationPath);
             int totalBytes = 0;
-            
-            FileStream source = File.OpenRead(sourcePath);
-            byte[] block = new byte[source.Length];
-            source.Read(block, 0, block.Length);
 
-            using (FileStream destination = new FileStream(destinationPath, FileMode.Open, FileAccess.Write))
+            using (FileStream source = File.OpenRead(sourcePath))
             {
-                using (BufferedStream buffer = new BufferedStream(destination, (int)source.Length))
+                byte[] block = new byte[source.Length];
+                source.Read(block, 0, block.Length);
+
+                using (FileStream destination = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.Write))
                 {
-                    buffer.Write(block, 0, block.Length);
-                    totalBytes = (int)destination.Length;
+                    using (BufferedStream buffer = new BufferedStream(destination, (int)source.Length))
+                    {
+                        buffer.Write(block, 0, block.Length);
+                        totalBytes = (int)destination.Length;
+                    }
                 }
             }
 

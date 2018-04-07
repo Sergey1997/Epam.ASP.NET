@@ -8,7 +8,7 @@ namespace BookListService
     /// <summary>   Interface for finding books in Book List predicate. </summary>
     public interface IPredicate
     {
-        bool Finder(Book book);
+        bool IsFind(Book book);
     }
 
     public class BookList
@@ -16,6 +16,8 @@ namespace BookListService
         #region Constructors
         public BookList()
         {
+            //ILogger - custom exceptions
+            //change to IEnumerable
             Books = new List<Book>();
         }
         #endregion
@@ -84,7 +86,7 @@ namespace BookListService
             {
                 Book book = Books[i];
 
-                if (predicate.Finder(book))
+                if (predicate.IsFind(book))
                 {
                     return book;
                 }

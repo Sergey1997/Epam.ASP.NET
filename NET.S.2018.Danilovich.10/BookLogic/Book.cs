@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BookLogic
 {
-    public class Book : IComparable, IComparable<Book>, IEquatable<Book>
+    public class Book : IComparable, IComparable<Book>, IEquatable<Book>, IFormattable
     {
+        // validation fields - maybe method ValidateHelper
+        // implementation iFormattable
+        // isbn - maybe struct of fields
+        // 
         #region Fields
         private string isbn;
         private string author;
@@ -45,7 +51,7 @@ namespace BookLogic
         public string ISBN
         {
             get { return isbn; }
-            set { isbn = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
+            private set { isbn = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
         }
         
         /// <summary>   Gets or sets the author. </summary>
@@ -55,7 +61,7 @@ namespace BookLogic
         public string Author
         {
             get { return author; }
-            set { author = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
+            private set { author = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
         }
         
         /// <summary>   Gets or sets the title. </summary>
@@ -65,7 +71,7 @@ namespace BookLogic
         public string Title
         {
             get { return author; }
-            set { title = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
+            private set { title = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
         }
 
         /// <summary>   Gets or sets the publisher. </summary>
@@ -75,16 +81,16 @@ namespace BookLogic
         public string Publisher
         {
             get { return publisher; }
-            set { publisher = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
+            private set { publisher = value ?? throw new ArgumentException($"{ (nameof(value))} doesnt correct"); }
         }
         
         /// <summary>   Auto-property, Gets or sets the year. </summary>
         /// <value> The year. </value>
-        public uint Year { get; set; }
+        public uint Year { get; private set; }
         
         /// <summary>   Gets or sets the number of pages. </summary>
         /// <value> The total number of pages of Book. </value>
-        public uint NumberOfPages { get; set; }
+        public uint NumberOfPages { get; private set; }
 
         /// <summary>   Gets or sets the price. </summary>
         /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
@@ -97,7 +103,7 @@ namespace BookLogic
                 return price;
             }
 
-            set
+            private set
             {
                 if (value < 0)
                 {
@@ -154,6 +160,7 @@ namespace BookLogic
                 return true;
             }
 
+            //сравнение 
             return ISBN == book.ISBN;
         }
         
@@ -181,6 +188,89 @@ namespace BookLogic
             }
 
             return Price.CompareTo(book.Price);
+        }
+
+        /// <summary>   Serves as the default hash function. </summary>
+        /// <returns>   A hash code for the current object. </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return this.ToString("G", CultureInfo.CurrentCulture);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            string defaultFormat = "G";
+
+            if (format == null)
+            {
+                format = defaultFormat;
+            }
+
+            if (formatProvider == null)
+            {
+                formatProvider = CultureInfo.CurrentCulture;
+            }
+
+            format = format.ToUpper();
+
+            string generalFormat =
+                "ISBN,AUT,TT,PB,PBY,PG,PR";
+            string shortFormat =
+                "AUT,TT";
+
+            if (format == "G")
+                format = generalFormat;
+
+            if (format == "S")
+                format = shortFormat;
+
+
+            string[] fmtParts = format.Split(',');
+
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < fmtParts.Length; i++)
+            {
+                if (i != 0)
+                {
+                    result.Append(", ");
+                }
+
+                switch (fmtParts[i])
+                {
+                    case "ISBN":
+                        result.Append(ISBN.ToString());
+                        break;
+                    case "AUT":
+                        result.Append(Author.ToString(formatProvider));
+                        break;
+                    case "TT":
+                        result.Append(Title.ToString(formatProvider));
+                        break;
+                    case "PB":
+                        result.Append(Publisher.ToString(formatProvider));
+                        break;
+                    case "PBY":
+                        result.Append(Year.ToString(formatProvider));
+                        break;
+                    case "PG":
+                        result.Append($"P.{NumberOfPages.ToString(formatProvider)}");
+                        break;
+                    case "PR":
+                        result.Append(Price.ToString(formatProvider));
+                        break;
+                    default:
+                        throw new FormatException($"{fmtParts[i]} format is not supported");
+                }
+            }
+
+            return result.ToString();
+
         }
         #endregion
     }

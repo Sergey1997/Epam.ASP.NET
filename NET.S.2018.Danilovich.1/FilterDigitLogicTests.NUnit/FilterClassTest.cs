@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using FilterDigitLogic;
 using NUnit.Framework;
+using static FilterDigitLogic.Filter;
 
 namespace FilterDigitLogicTests.NUnit
 {
     [TestFixture]
     public class FilterClassTest
     {
-
+        
         private static object[] sourceList =
         {
              new object[] { new int[] {  4, 53, 74, 27, 4 }, new int[] { 74, 27} , new SameDigit(7) },
@@ -25,14 +26,12 @@ namespace FilterDigitLogicTests.NUnit
         }
         private static object[] sourceListTransform =
         {
-             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 16, 4, 36, 1, 16 } , new PositivePow(2) },
-             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 1, 1, 1, 1, 1 } , new PositivePow(0) },
-             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 64, 8, 36*6, 1, 64 } , new PositivePow(3) }
+             new object[] { new int[] {  4, 2, 6, 1, 4 }, new int[] { 16, 4, 36, 1, 16 } , new TransformerDelegate(TransformerSquare.Square) }
 
         };
 
         [Test, TestCaseSource("sourceListTransform")]
-        public void FilterDigit_TransformationLogicTest(int[] array, int[] expected, ITransformer transformer)
+        public void FilterDigit_TransformationLogicTest(int[] array, int[] expected, TransformerDelegate transformer)
         {
             int[] result = array.TransformationArray(transformer);
             Assert.AreEqual(expected, result);

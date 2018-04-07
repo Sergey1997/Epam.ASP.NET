@@ -9,7 +9,6 @@ namespace ConsoleBookTest
     {
         static void Main(string[] args)
         {
-
             Book book1 = new Book("qqq", "www", "www","www", 1995, 1000, 132);
             Book book2 = new Book("qq1q", "ww2w", "ww3w", "ww4w", 1995, 1200, 90);
             Book book3 = new Book("qqq", "www", "www", "www", 1995, 800, 175.0);
