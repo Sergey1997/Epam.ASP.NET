@@ -5,84 +5,18 @@ namespace MathExtension
 {
     public class GreatestCommonDivisor
     {
-        /// <summary>   Euclids gcd. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <returns>   An int. </returns>
-        public static int EuclidsGCD(int a, int b) => Algorithm(a, b, EuclidsAlgorithm);
-        
-        /// <summary>   Euclids gcd. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <param name="c">    An int to process. </param>
-        /// <returns>   An int. </returns>
-        public static int EuclidsGCD(int a, int b, int c) => Algorithm(a, b, c, EuclidsAlgorithm);
-        
-        /// <summary>   Euclids gcd. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
+        /// <summary>   Delegate for finding a GCD of numbers. </summary>
         /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
-        /// <returns>   An int. </returns>
-        public static int EuclidsGCD(params int[] numbers) => Algorithm(EuclidsAlgorithm, numbers);
+        /// <returns>   An int value - GCD. </returns>
+        public delegate int FindGCD(params int[] numbers);
         
-        /// <summary>   Binary finding of GCD. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <returns>   An int - GCD. </returns>
-        public static int BinaryGCD(int a, int b) => Algorithm(a, b, BinaryEuclideanAlgoritm);
-        
-        /// <summary>   Binary finding of GCD. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <param name="c">    An int to process. </param>
-        /// <returns>   An int - GCD. </returns>
-        public static int BinaryGCD(int a, int b, int c) => Algorithm(a, b, c, BinaryEuclideanAlgoritm);
-
-        /// <summary>   Binary finding of GCD. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
+        /// <summary>   Gcd for euclid. </summary>
+        /// <param name="findGCD">  The find gcd delegate. </param>
         /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
-        /// <returns>   An int. </returns>
-        public static int BinaryGCD(params int[] numbers) => Algorithm(BinaryEuclideanAlgoritm, numbers);
-
-        /// <summary>   Common euclids algorithm. </summary>
-        /// <param name="a">            An int to process. </param>
-        /// <param name="b">            An int to process. </param>
-        /// <param name="Algorithm">    The algorithm of finding GCD. </param>
-        /// <returns>   An int. </returns>
-        private static int Algorithm(int a, int b, Func<int, int, int> algorithm) => algorithm(a, b);
-        
-        /// <summary>   Common euclids algorithm. </summary>
-        /// <param name="a">            An int to process. </param>
-        /// <param name="b">            An int to process. </param>
-        /// <param name="c">            An int to process. </param>
-        /// <param name="Algorithm">    The algorithm of finding GCD. </param>
-        /// <returns>   An int. </returns>
-        private static int Algorithm(int a, int b, int c, Func<int, int, int> algorithm)
+        /// <returns>   An int value. </returns>
+        public int GCDForEuclid(FindGCD findGCD, params int[] numbers)
         {
-            return algorithm(algorithm(a, b), c);
-        }
-        
-        /// <summary>   Common euclids algorithm. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
-        /// <param name="Algorithm">    The algorithm of finding GCD. </param>
-        /// <param name="numbers">      A variable-length parameters list containing numbers. </param>
-        /// <returns>   An int. </returns>
-        private static int Algorithm(Func<int, int, int> algorithm, params int[] numbers)
-        {
-            if (numbers.Length == 1 && numbers[0] == 0)
-            {
-                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
-            }
-
-            int answer = 0;
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                answer = algorithm(answer, numbers[i]);
-            }
-
-            return answer;
+            return findGCD.Invoke(numbers);
         }
 
         /// <summary>   Euclids algorithm for int array. </summary>
@@ -92,6 +26,11 @@ namespace MathExtension
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
         private static int EuclidsAlgorithm(params int[] numbers)
         {
+            if (numbers.Length == 1 && numbers[0] == 0)
+            {
+                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
+            }
+
             int greatestCommonDivisor = 0;
 
             for (int i = 0; i < numbers.Length; i++)
@@ -250,6 +189,21 @@ namespace MathExtension
             {
                 number /= 2;
             }
+        }
+
+        public static class FingingGCD
+        {
+            public static int Find(int a, int b) => EuclidsAlgorithm(a, b);
+
+            public static int Find(int a, int b, int c) => EuclidsAlgorithm(EuclidsAlgorithm(a, b), c);
+
+            public static int Find(params int[] numbers) => EuclidsAlgorithm(numbers);
+
+            public static int FindBinary(int a, int b) => BinaryEuclideanAlgoritm(a, b);
+
+            public static int FindBinary(int a, int b, int c) => BinaryEuclideanAlgoritm(EuclidsAlgorithm(a, b), c);
+
+            public static int FindBinary(params int[] numbers) => BinaryEuclideanAlgoritm(numbers);
         }
     }
 }

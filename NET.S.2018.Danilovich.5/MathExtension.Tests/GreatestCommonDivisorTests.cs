@@ -36,33 +36,33 @@ namespace MathExtension.Tests
         [Test, TestCaseSource("sourceList")]
         public static void EuclidsAlgorithmTest(int expected, params int[] numbers)
         {
-            Assert.AreEqual(expected, GreatestCommonDivisor.EuclidsGCD(numbers));
+            Assert.AreEqual(expected, GreatestCommonDivisor.FingingGCD.Find(numbers));
         }
 
         [Test, TestCaseSource("sourceList")]
         public static void EuclidsBinaryAlgorithmTest(int expected, params int[] numbers)
         {
-            Assert.AreEqual(expected, GreatestCommonDivisor.BinaryGCD(numbers));
+            Assert.AreEqual(expected, GreatestCommonDivisor.FingingGCD.FindBinary(numbers));
         }
         
         [TestCase(null)]
         public static void EuclidsAlgorithmTest_Numbers_ArgumentException(params int[] numbers)
-            => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.EuclidsGCD(numbers));
+            => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.FingingGCD.Find(numbers));
         
         [TestCase(null)]
         public static void BinaryEuclideanAlgoritmTest_Numbers_ArgumentException(params int[] numbers)
-            => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.BinaryGCD(numbers));
+            => Assert.Throws<ArgumentException>(() => GreatestCommonDivisor.FingingGCD.Find(numbers));
 
         [Test, TestCaseSource("sourceList1")]
         public static void EuclidsGCDAlgorithmTest(int expected, int a, int b)
         {
-            Assert.AreEqual(expected, GreatestCommonDivisor.EuclidsGCD(a, b));
+            Assert.AreEqual(expected, GreatestCommonDivisor.FingingGCD.Find(a, b));
         }
 
         [Test, TestCaseSource("sourceList2")]
         public static void BinaryEuclidsGCDAlgorithmTest(int expected, params int[] numbers)
         {
-            Assert.AreEqual(expected, GreatestCommonDivisor.BinaryGCD(numbers));
+            Assert.AreEqual(expected, GreatestCommonDivisor.FingingGCD.FindBinary(numbers));
         }
     }
 }
