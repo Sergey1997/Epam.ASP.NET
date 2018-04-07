@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension", "..\NET.S.2018.Danilovich.5\MathExtension\MathExtension.csproj", "{AC841DB4-A5E1-4156-9977-86546A6806C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension", "MathExtension\MathExtension.csproj", "{AC841DB4-A5E1-4156-9977-86546A6806C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension.Tests", "..\NET.S.2018.Danilovich.5\MathExtension.Tests\MathExtension.Tests.csproj", "{EA2F70F4-160C-4B24-B1D1-3F214CCEF5D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension.Tests", "MathExtension.Tests\MathExtension.Tests.csproj", "{EA2F70F4-160C-4B24-B1D1-3F214CCEF5D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
