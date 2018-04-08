@@ -27,11 +27,7 @@ namespace MathExtension
         /// <param name="b">        An int to process. </param>
         /// <param name="c">        An int to process. </param>
         /// <returns>   An int value. </returns>
-        public static int EuclidMethodForFindingGCD(FindingDelegateGCD findGCD, int a, int b, int c)
-        {
-            ValidateData(findGCD);
-            return findGCD(findGCD.Invoke(a, b), c);
-        }
+        public static int EuclidMethodForFindingGCD(FindingDelegateGCD findGCD, int a, int b, int c) => findGCD(findGCD.Invoke(a, b), c);
         
         /// <summary>   Gcd for a two numbers. </summary>
         /// <param name="findGCD">  The find gcd delegate. </param>
@@ -48,7 +44,7 @@ namespace MathExtension
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
-        private static int EuclidsAlgorithm(int a, int b)
+        public static int EuclidsAlgorithm(int a, int b)
         {
             CheckingForParams(ref a, ref b);
             if (a == 0)
@@ -80,7 +76,7 @@ namespace MathExtension
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
         /// <returns>   Greatest Common Divisor of numbers like a integer value . </returns>
-        private static int BinaryEuclideanAlgoritm(int a, int b)
+        public static int BinaryEuclideanAlgoritm(int a, int b)
         {
             CheckingForParams(ref a, ref b);
 

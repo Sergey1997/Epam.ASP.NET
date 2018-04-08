@@ -18,8 +18,4 @@ namespace FilterDigitLogic
     {
         public static int Square(int number) => number * number;
     }
-    public static class Transformer
-    {
-        public static int Square(int number) => number * number;
-    }
 }
