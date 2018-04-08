@@ -32,11 +32,42 @@ namespace SortingClass.Tests
                             new int[][] { new int[] { 5 }, null, null },
                             new MaxOfArray() },
         };
-        
-        [Test, TestCaseSource("sourceList")]
-        public void TestMethodForSorting(int[][] actual, int[][] expected, IComparer<int[]> strategy)
+        private static object[] sourceListForDelegate =
         {
-            Sorting.Sort(actual,strategy.Compare);
+             new object[] { new int[][] { new int[] { 1, 3, 5, 7, 9 }, new int[] { 0, 2, 4, 6 }, new int[] { 43, 223, 12 }, new int[] { 532, 22 }, new int[] { 2, 11 } },
+                            new int[][] { new int[] { 0, 2, 4, 6 }, new int[] { 2, 11 }, new int[] { 1, 3, 5, 7, 9 }, new int[] { 43, 223, 12 }, new int[] { 532, 22 } },
+                            new ComparerDelegate(new SumOfArray().Compare) },
+             new object[] { new int[][] { new int[] { 1, 3 }, new int[] { 0, 2 }, new int[] { -2, 5 } },
+                            new int[][] { new int[] { 0, 2 }, new int[] { 1, 3 }, new int[] { -2, 5 } },
+                            new ComparerDelegate(new MaxOfArray().Compare) },
+             new object[] { new int[][] { new int[] { -2, 3 }, new int[] { -5, 2 }, new int[] { 8, 5 } },
+                            new int[][] { new int[] { -5, 2 }, new int[] { -2, 3 }, new int[] { 8, 5 } },
+                            new ComparerDelegate(new MinOfArray().Compare) },
+             new object[] { new int[][] { new int[] { -2, 9 }, null, new int[] { 8, 5 }, new int[] { 53, 5 } },
+                            new int[][] { new int[] { 8, 5 }, new int[] { -2, 9 }, new int[] { 53, 5 }, null },
+                            new ComparerDelegate(new MaxOfArray().Compare) },
+             new object[] { new int[][] { new int[] { -2, 9 }, null, new int[] { 8, 5 }, null },
+                            new int[][] { new int[] { 8, 5 }, new int[] { -2, 9 }, null, null },
+                            new ComparerDelegate(new MaxOfArray().Compare) },
+             new object[] { new int[][] { null, null },
+                            new int[][] { null, null },
+                            new ComparerDelegate(new MaxOfArray().Compare) },
+             new object[] { new int[][] { null, new int[] { 5 }, null },
+                            new int[][] { new int[] { 5 }, null, null },
+                            new ComparerDelegate(new MaxOfArray().Compare) },
+        };
+
+        [Test, TestCaseSource("sourceList")]
+        public void TestMethodForSorting(int[][] actual, int[][] expected, IComparer<int[]> comparer)
+        {
+            Sorting.Sort(actual, comparer.Compare);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [Test, TestCaseSource("sourceListForDelegate")]
+        public void TestMethodForSortingDelegate(int[][] actual, int[][] expected, ComparerDelegate comparerDelegate)
+        {
+            Sorting.Sort(actual, comparerDelegate);
             CollectionAssert.AreEqual(expected, actual);
         }
     }
