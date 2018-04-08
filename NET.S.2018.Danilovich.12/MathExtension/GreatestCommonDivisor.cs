@@ -194,7 +194,7 @@ namespace MathExtension
         
         /// <summary>   A finding gcd class. </summary>
         public static class FindingGCD
-        {
+        {   
             public static int Find(int a, int b) => EuclidsAlgorithm(a, b);
 
             public static int FindBinary(int a, int b) => BinaryEuclideanAlgoritm(a, b);
