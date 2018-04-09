@@ -5,39 +5,17 @@ namespace MathExtension
 {
     public class GreatestCommonDivisor
     {
-        /// <summary>   Delegate for finging GCD of numbers. </summary>
-        /// <param name="a">    An int to process. </param>
-        /// <param name="b">    An int to process. </param>
-        /// <returns>   An GCD - int. </returns>
-        public delegate int FindingDelegateGCD(int a, int b);
+        private delegate int SelectedMethodDelegate(int a, int b);
 
-        /// <summary>   Gcd for a lot of numbers. </summary>
-        /// <param name="findGCD">  The find gcd delegate. </param>
-        /// <param name="numbers">  A variable-length parameters list containing numbers. </param>
-        /// <returns>   An int value. </returns>
-        public static int EuclidMethodForFindingGCD(FindingDelegateGCD findGCD, params int[] numbers)
+        public static int EuclidsAlgorithm(params int[] numbers)
         {
-            ValidateData(findGCD, numbers);
-            return GetGCD(findGCD, numbers);
+            SelectedMethodDelegate selectedMethod = new SelectedMethodDelegate(EuclidsAlgorithm);
+            return GcdForAlgorithm(selectedMethod, numbers);
         }
 
-        /// <summary>   Gcd for a tree numbers. </summary>
-        /// <param name="findGCD">  The find gcd delegate. </param>
-        /// <param name="a">        An int to process. </param>
-        /// <param name="b">        An int to process. </param>
-        /// <param name="c">        An int to process. </param>
-        /// <returns>   An int value. </returns>
-        public static int EuclidMethodForFindingGCD(FindingDelegateGCD findGCD, int a, int b, int c) => findGCD(findGCD.Invoke(a, b), c);
-        
-        /// <summary>   Gcd for a two numbers. </summary>
-        /// <param name="findGCD">  The find gcd delegate. </param>
-        /// <param name="a">        An int to process. </param>
-        /// <param name="b">        An int to process. </param>
-        /// <returns>   An int value. </returns>
-        public static int EuclidMethodForFindingGCD(FindingDelegateGCD findGCD, int a, int b)
+        public static int EuclidsAlgorithm(int a, int b, int c)
         {
-            ValidateData(findGCD);
-            return findGCD.Invoke(a, b);
+            return EuclidsAlgorithm(EuclidsAlgorithm(a, b), c);
         }
 
         /// <summary>   Euclids algorithm for int array. </summary>
@@ -71,7 +49,18 @@ namespace MathExtension
 
             return a;
         }
-        
+
+        public static int BinaryEuclideanAlgoritm(params int[] numbers)
+        {
+            SelectedMethodDelegate selectedMethod = new SelectedMethodDelegate(BinaryEuclideanAlgoritm);
+            return GcdForAlgorithm(selectedMethod, numbers);
+        }
+
+        public static int BinaryEuclideanAlgoritm(int a, int b, int c)
+        {
+            return BinaryEuclideanAlgoritm(BinaryEuclideanAlgoritm(a, b), c);
+        }
+
         /// <summary>   Binary Euclidean algoritm for search of Greatest common divisor . </summary>
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
@@ -115,7 +104,20 @@ namespace MathExtension
 
             return b * k;
         }
-        
+
+        private static int GcdForAlgorithm(SelectedMethodDelegate selectedMethod, params int[] numbers)
+        {
+            ValidationData(selectedMethod, numbers);
+            int greatestCommonDivisor = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                greatestCommonDivisor = selectedMethod(greatestCommonDivisor, numbers[i]);
+            }
+
+            return greatestCommonDivisor;
+        }
+
         /// <summary>   Checking for parameters. </summary>
         /// <param name="a">    [in,out] An int to process. </param>
         /// <param name="b">    [in,out] An int to process. </param>
@@ -132,50 +134,6 @@ namespace MathExtension
             }
         }
         
-        /// <summary>   Validates the data described by findGCD. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        /// <param name="findGCD">  The find gcd delegate. </param>
-        private static void ValidateData(FindingDelegateGCD findingDelegate)
-        {
-            if (findingDelegate == null)
-            {
-                throw new ArgumentNullException($"{(nameof(findingDelegate))} cant be a null");
-            }
-        }
-        
-        /// <summary>   Validates the data described by findGCD. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        /// <exception cref="ArgumentException">        Thrown when one or more arguments have
-        ///                                             unsupported or illegal values. </exception>
-        /// <param name="findingDelegate">  The finding delegate. </param>
-        /// <param name="numbers">          A variable-length parameters list containing numbers. </param>
-        private static void ValidateData(FindingDelegateGCD findingDelegate, params int[] numbers)
-        {
-            if (findingDelegate == null)
-            {
-                throw new ArgumentNullException($"{(nameof(findingDelegate))} cant be a null");
-            }
-
-            if (numbers.Length == 1 && numbers[0] == 0)
-            {
-                throw new ArgumentException($"{nameof(numbers)} cant have length is one and element zero");
-            }
-        }
-
-        private static int GetGCD(FindingDelegateGCD findingDelegate, params int[] numbers)
-        {
-            int greatestCommonDivisor = 0;
-
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                greatestCommonDivisor = findingDelegate(greatestCommonDivisor, numbers[i]);
-            }
-
-            return greatestCommonDivisor;
-        }
-
         /// <summary>   Even number devision by 2. </summary>
         /// <param name="greatestCommonDivisor">    The greatest common number. </param>
         /// <param name="number">                   Number of. </param>
@@ -191,13 +149,23 @@ namespace MathExtension
                 number /= 2;
             }
         }
-        
-        /// <summary>   A finding gcd class. </summary>
-        public static class FindingGCD
-        {   
-            public static int Find(int a, int b) => EuclidsAlgorithm(a, b);
 
-            public static int FindBinary(int a, int b) => BinaryEuclideanAlgoritm(a, b);
+        /// <summary>
+        /// validation data for algth
+        /// </summary>
+        /// <param name="selectedMethod">SelectedMethodDelegate</param>
+        /// <param name="numbers">param int[]</param>
+        private static void ValidationData(SelectedMethodDelegate selectedMethod, params int[] numbers)
+        {
+            if (selectedMethod == null)
+            {
+                throw new ArgumentNullException($"{ (nameof(selectedMethod))} cant be a null");
+            }
+
+            if (numbers.Length == 1 && numbers[0] == 0)
+            {
+                throw new ArgumentNullException($"{ (nameof(numbers))} cant be a zero");
+            }
         }
     }
 }
