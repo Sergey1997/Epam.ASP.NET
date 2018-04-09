@@ -5,54 +5,39 @@ using System.Reflection;
 
 namespace SortingLibrary
 {
-    /// <summary>
-    /// Comparer delegate for arrays
-    /// </summary>
-    /// <param name="lhs"></param>
-    /// <param name="rhs"></param>
-    /// <returns>Result of compare</returns>
-    public delegate int ComparerDelegate(int[] lhs, int[] rhs);
-
     public static class Sorting
     {
         /// <summary>
         /// Sorting jagged array by delegate
         /// </summary>
-        /// <param name="jaggedArray"></param>
-        /// <param name="comparerDelegate"></param>
-        public static void Sort(int[][] array, ComparerDelegate comparerDelegate)
+        /// <param name="jaggedArray"> an array int[][] </param>
+        /// <param name="comparerDelegate"> Func<int[], int[], int> </param>
+        public static void SortForDelegate(int[][] array, Func<int[], int[], int> comparerDelegate)
         {
-            IComparer<int[]> comparer = (IComparer<int[]>)comparerDelegate.Target;
+            DataValidation(array, comparerDelegate);
+
+            IComparer<int[]> comparer = new Adapter(comparerDelegate);
+
             BubbleSorting(array, comparer);
         }
 
         /// <summary>
         /// Sorting jagged array by delegate
         /// </summary>
-        /// <param name="jaggedArray"></param>
-        /// <param name="comparerDelegate"></param>
-        public static void Sort(int[][] array, IComparer<int[]> comparer)
+        /// <param name="jaggedArray"> an array int[][] </param>
+        /// <param name="comparer"> IComparer<int[]> </param>
+        public static void SortForIterface(int[][] array, IComparer<int[]> comparer)
         {
-            MethodInfo methodInfo = comparer.GetType().GetMethod("Compare");
-            ComparerDelegate @delegate = (ComparerDelegate)Delegate.CreateDelegate(typeof(ComparerDelegate), null, methodInfo);
+            DataValidation(array, comparer);
+            Func<int[], int[], int> comparerDelegate = comparer.Compare;
 
-            BubbleSorting(array, @delegate);
+            BubbleSorting(array, comparerDelegate);
         }
         
-        /// <summary>   Bubble sorting for int[][] array by using a IStrategy. </summary>
+        /// <summary>   Bubble sorting for int[][] array by using a IComparer. </summary>
         /// <param name="array">                The array for sorting. </param>
         private static void BubbleSorting(int[][] array, IComparer<int[]> comparer)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException($"{(nameof(array))} cant be a null)");
-            }
-
-            if (comparer == null)
-            {
-                throw new ArgumentNullException($"{(nameof(comparer))} cant be a null)");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length - 1 - i; j++)
@@ -65,20 +50,10 @@ namespace SortingLibrary
             }
         }
 
-        /// <summary>   Bubble sorting for int[][] array by using a IStrategy. </summary>
+        /// <summary>   Bubble sorting for int[][] array by using a Delegate. </summary>
         /// <param name="array">                The array for sorting. </param>
-        private static void BubbleSorting(int[][] array, ComparerDelegate comparerDelegate)
+        private static void BubbleSorting(int[][] array, Func<int[], int[], int> comparerDelegate)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException($"{(nameof(array))} cant be a null)");
-            }
-
-            if (comparerDelegate == null)
-            {
-                throw new ArgumentNullException($"{(nameof(comparerDelegate))} cant be a null)");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length - 1 - i; j++)
@@ -99,6 +74,42 @@ namespace SortingLibrary
             int[] temp = lhs;
             lhs = rhs;
             rhs = temp;
+        }
+
+        /// <summary>
+        /// Validation of data jagged array
+        /// </summary>
+        /// <param name="array">an array int[][]</param>
+        /// <param name="comparerDelegate">delegate Func<int[], int[], int></param>
+        private static void DataValidation(int[][] array, Func<int[], int[], int> comparerDelegate)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{(nameof(array))} cant be a null)");
+            }
+
+            if (comparerDelegate == null)
+            {
+                throw new ArgumentNullException($"{(nameof(comparerDelegate))} cant be a null)");
+            }
+        }
+
+        /// <summary>
+        /// Validation of data jagged array
+        /// </summary>
+        /// <param name="array">an array int[][]</param>
+        /// <param name="comparerDelegate">Interface IComparer</param>
+        private static void DataValidation(int[][] array, IComparer<int[]> comparer)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{(nameof(array))} cant be a null)");
+            }
+
+            if (comparer == null)
+            {
+                throw new ArgumentNullException($"{(nameof(comparer))} cant be a null)");
+            }
         }
     }
 }

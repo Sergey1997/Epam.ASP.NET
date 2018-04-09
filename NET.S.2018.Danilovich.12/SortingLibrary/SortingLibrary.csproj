@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter.cs" />
     <Compile Include="MaxOfArray.cs" />
     <Compile Include="MinOfArray.cs" />
     <Compile Include="Sorting.cs" />
