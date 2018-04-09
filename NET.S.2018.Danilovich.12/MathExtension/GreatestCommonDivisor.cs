@@ -9,7 +9,7 @@ namespace MathExtension
 
         public static int EuclidsAlgorithm(params int[] numbers)
         {
-            SelectedMethodDelegate selectedMethod = new SelectedMethodDelegate(EuclidsAlgorithm);
+            Func<int, int, int> selectedMethod = new Func<int, int, int>(EuclidsAlgorithm);
             return GcdForAlgorithm(selectedMethod, numbers);
         }
 
@@ -50,12 +50,24 @@ namespace MathExtension
             return a;
         }
 
+        /// <summary>
+        /// Binary Euclidean Algoritm for params
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns>GCD</returns>
         public static int BinaryEuclideanAlgoritm(params int[] numbers)
         {
-            SelectedMethodDelegate selectedMethod = new SelectedMethodDelegate(BinaryEuclideanAlgoritm);
+            Func<int, int, int> selectedMethod = new Func<int, int, int>(BinaryEuclideanAlgoritm);
             return GcdForAlgorithm(selectedMethod, numbers);
         }
 
+        /// <summary>
+        /// Binary Euclidean Algoritm for tree parameters
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns>GCD</returns>
         public static int BinaryEuclideanAlgoritm(int a, int b, int c)
         {
             return BinaryEuclideanAlgoritm(BinaryEuclideanAlgoritm(a, b), c);
@@ -105,7 +117,7 @@ namespace MathExtension
             return b * k;
         }
 
-        private static int GcdForAlgorithm(SelectedMethodDelegate selectedMethod, params int[] numbers)
+        private static int GcdForAlgorithm(Func<int, int, int> selectedMethod, params int[] numbers)
         {
             ValidationData(selectedMethod, numbers);
             int greatestCommonDivisor = 0;
@@ -155,7 +167,7 @@ namespace MathExtension
         /// </summary>
         /// <param name="selectedMethod">SelectedMethodDelegate</param>
         /// <param name="numbers">param int[]</param>
-        private static void ValidationData(SelectedMethodDelegate selectedMethod, params int[] numbers)
+        private static void ValidationData(Func<int, int, int> selectedMethod, params int[] numbers)
         {
             if (selectedMethod == null)
             {
