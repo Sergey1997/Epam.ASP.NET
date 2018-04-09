@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BookLogic;
 using BookStorageLogic;
+using Logging;
 
 namespace BookListService
 {
@@ -13,12 +14,15 @@ namespace BookListService
 
     public class BookList
     {
+        private NLogger logger;
+
         #region Constructors
-        public BookList()
+        public BookList(NLogger logger)
         {
             //ILogger - custom exceptions
             //change to IEnumerable
             Books = new List<Book>();
+            this.logger = logger;
         }
         #endregion
 
@@ -40,12 +44,15 @@ namespace BookListService
         {
             if (book == null)
             {
+                logger.WriteError($"{nameof(book)} is null");
                 throw new ArgumentNullException($"{nameof(book)} is null");
             }
 
             Books.Add(book);
+            logger.WriteInfo($"{nameof(book)} added to list");
+
         }
-        
+
         /// <summary>   Removes the book described by book. </summary>
         /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
         ///                                             null. </exception>
@@ -56,6 +63,7 @@ namespace BookListService
         {
             if (book == null)
             {
+                logger.WriteError($"{nameof(book)} is null");
                 throw new ArgumentNullException($"{nameof(book)} cant be a null");
             }
 
@@ -63,9 +71,12 @@ namespace BookListService
             if (index != -1)
             {
                 Books.RemoveAt(index);
+                logger.WriteInfo($"{nameof(book)} removed from list");
+
             }
             else
             {
+                logger.WriteError($"{nameof(book)} is not found");
                 throw new ArgumentException($"{nameof(book)} is not found");
             }
         }
@@ -79,19 +90,22 @@ namespace BookListService
         {
             if (predicate == null)
             {
+                logger.WriteError($"{nameof(predicate)} is null");
                 throw new ArgumentNullException($"{nameof(predicate)} cant be a null");
             }
 
+            Book book = Books[0];
+
             for (int i = 0; i < Books.Count; i++)
             {
-                Book book = Books[i];
-
                 if (predicate.IsFind(book))
                 {
+                    logger.WriteInfo($"{nameof(book)} was found");
                     return book;
                 }
             }
 
+            logger.WriteInfo($"{nameof(book)} wasn't found");
             return null;
         }
         
@@ -104,9 +118,11 @@ namespace BookListService
             if (comparer != null)
             {
                 Books.Sort(comparer);
+                logger.WriteInfo($"{nameof(Books)} successfully sorted");
             }
             else
             {
+                logger.WriteError($"{nameof(comparer)} is null");
                 throw new ArgumentNullException($"{nameof(comparer)} cant be a null");
             }
         }
@@ -119,10 +135,12 @@ namespace BookListService
         {
             if (storage == null)
             {
+                logger.WriteError($"{nameof(storage)} is null");
                 throw new ArgumentNullException($"{nameof(storage)} cant be a null");
             }
 
             storage.SaveBooks(Books);
+            logger.WriteInfo($"Books added to {nameof(storage)}");
         }
         #endregion
     }
