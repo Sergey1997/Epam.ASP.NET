@@ -5,8 +5,6 @@ namespace MathExtension
 {
     public class GreatestCommonDivisor
     {
-        private delegate int SelectedMethodDelegate(int a, int b);
-
         public static int EuclidsAlgorithm(params int[] numbers)
         {
             Func<int, int, int> selectedMethod = new Func<int, int, int>(EuclidsAlgorithm);
