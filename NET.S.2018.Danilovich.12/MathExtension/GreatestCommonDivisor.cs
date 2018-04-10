@@ -10,10 +10,7 @@ namespace MathExtension
         /// </summary>
         /// <param name="numbers">int[]</param>
         /// <returns>Greatest common divisor</returns>
-        public static int EuclidsAlgorithm(params int[] numbers)
-        {
-            return GcdForAlgorithm(new Func<int, int, int>(EuclidsAlgorithm), numbers);
-        }
+        public static int EuclidsAlgorithm(params int[] numbers) => GcdForAlgorithm(new Func<int, int, int>(EuclidsAlgorithm), numbers);
 
         /// <summary>
         /// Euclids algorithm fr tree params
@@ -22,10 +19,7 @@ namespace MathExtension
         /// <param name="b">int</param>
         /// <param name="c">int</param>
         /// <returns>Greatest common divisor</returns>
-        public static int EuclidsAlgorithm(int a, int b, int c)
-        {
-            return EuclidsAlgorithm(EuclidsAlgorithm(a, b), c);
-        }
+        public static int EuclidsAlgorithm(int a, int b, int c) => GcdForAlgorithm(new Func<int, int, int>(EuclidsAlgorithm), a, b, c);
 
         /// <summary>   Euclids algorithm for int array. </summary>
         /// <param name="a">    An int to process. </param>
@@ -64,23 +58,17 @@ namespace MathExtension
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns>Greatest common divisor</returns>
-        public static int BinaryEuclideanAlgoritm(params int[] numbers)
-        {
-            return GcdForAlgorithm(new Func<int, int, int>(BinaryEuclideanAlgoritm), numbers);
-        }
+        public static int BinaryEuclideanAlgoritm(params int[] numbers) => GcdForAlgorithm(new Func<int, int, int>(BinaryEuclideanAlgoritm), numbers);
 
         /// <summary>
-        /// Binary Euclidean Algoritm for tree parameters
+        /// Binary euclideam algorithm
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns>GCD</returns>
-        public static int BinaryEuclideanAlgoritm(int a, int b, int c)
-        {
-            return BinaryEuclideanAlgoritm(BinaryEuclideanAlgoritm(a, b), c);
-        }
-
+        /// <param name="a">int</param>
+        /// <param name="b">int</param>
+        /// <param name="c">int</param>
+        /// <returns>Greatest Common Divisor of numbers like a integer value</returns>
+        public static int BinaryEuclideanAlgoritm(int a, int b, int c) => GcdForAlgorithm(new Func<int, int, int>(BinaryEuclideanAlgoritm), a, b, c);
+        
         /// <summary>   Binary Euclidean algoritm for search of Greatest common divisor . </summary>
         /// <param name="a">    An int to process. </param>
         /// <param name="b">    An int to process. </param>
@@ -142,6 +130,18 @@ namespace MathExtension
             }
 
             return greatestCommonDivisor;
+        }
+
+        /// <summary>
+        /// Binary Euclidean Algoritm for tree parameters
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns>GCD</returns>
+        private static int GcdForAlgorithm(Func<int, int, int> selectedMethod, int a, int b, int c)
+        {
+            return selectedMethod(selectedMethod(a, b), c);
         }
 
         /// <summary>   Checking for parameters. </summary>
