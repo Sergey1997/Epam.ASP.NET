@@ -4,7 +4,7 @@ using static MathExtension.GreatestCommonDivisor;
 
 namespace MathExtension.Tests
 {
-    public class GreatestCommonDivisorTests
+    public static class GreatestCommonDivisorTests
     {
         private static object[] sourceListForParams =
         {

@@ -3,14 +3,25 @@ using System.Linq.Expressions;
 
 namespace MathExtension
 {
-    public class GreatestCommonDivisor
+    public static class GreatestCommonDivisor
     {
+        /// <summary>
+        /// Euclids Algorithm for params
+        /// </summary>
+        /// <param name="numbers">int[]</param>
+        /// <returns>Greatest common divisor</returns>
         public static int EuclidsAlgorithm(params int[] numbers)
         {
-            Func<int, int, int> selectedMethod = new Func<int, int, int>(EuclidsAlgorithm);
-            return GcdForAlgorithm(selectedMethod, numbers);
+            return GcdForAlgorithm(new Func<int, int, int>(EuclidsAlgorithm), numbers);
         }
 
+        /// <summary>
+        /// Euclids algorithm fr tree params
+        /// </summary>
+        /// <param name="a">int</param>
+        /// <param name="b">int</param>
+        /// <param name="c">int</param>
+        /// <returns>Greatest common divisor</returns>
         public static int EuclidsAlgorithm(int a, int b, int c)
         {
             return EuclidsAlgorithm(EuclidsAlgorithm(a, b), c);
@@ -52,11 +63,10 @@ namespace MathExtension
         /// Binary Euclidean Algoritm for params
         /// </summary>
         /// <param name="numbers"></param>
-        /// <returns>GCD</returns>
+        /// <returns>Greatest common divisor</returns>
         public static int BinaryEuclideanAlgoritm(params int[] numbers)
         {
-            Func<int, int, int> selectedMethod = new Func<int, int, int>(BinaryEuclideanAlgoritm);
-            return GcdForAlgorithm(selectedMethod, numbers);
+            return GcdForAlgorithm(new Func<int, int, int>(BinaryEuclideanAlgoritm), numbers);
         }
 
         /// <summary>
@@ -115,6 +125,12 @@ namespace MathExtension
             return b * k;
         }
 
+        /// <summary>
+        /// Common approach for finging Greatest common divisor
+        /// </summary>
+        /// <param name="selectedMethod">select method</param>
+        /// <param name="numbers"></param>
+        /// <returns>Greatest common divisor</returns>
         private static int GcdForAlgorithm(Func<int, int, int> selectedMethod, params int[] numbers)
         {
             ValidationData(selectedMethod, numbers);
