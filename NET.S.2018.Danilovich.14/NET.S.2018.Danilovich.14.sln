@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension", "MathExtens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension.Tests", "MathExtension.Tests\MathExtension.Tests.csproj", "{EBE71B7D-40C2-427F-99B9-7983B2FA3F2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{237617B0-3706-4D72-8DE9-A79008BEBEBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EBE71B7D-40C2-427F-99B9-7983B2FA3F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBE71B7D-40C2-427F-99B9-7983B2FA3F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBE71B7D-40C2-427F-99B9-7983B2FA3F2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237617B0-3706-4D72-8DE9-A79008BEBEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237617B0-3706-4D72-8DE9-A79008BEBEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237617B0-3706-4D72-8DE9-A79008BEBEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237617B0-3706-4D72-8DE9-A79008BEBEBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
