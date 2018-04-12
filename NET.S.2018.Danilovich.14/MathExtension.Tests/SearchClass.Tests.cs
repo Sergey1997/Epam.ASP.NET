@@ -44,4 +44,14 @@ namespace MathExtension.Tests
             return array.BinarySearch(c);
         }
     }
+    public class FibonacciClassTest
+    {
+        [Test]
+        public void FibonacciSequenceTest()
+        {
+            int[] array = Fibonacci.GenerateSequenceOfFibonacci(10);
+            Assert.AreEqual(new int[] { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 }, array);
+        }
+    }
+
 }
