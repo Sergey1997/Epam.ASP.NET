@@ -16,11 +16,21 @@ namespace MathExtension
         public static int[] GenerateSequenceOfFibonacci(uint size)
         {
             int[] array = new int[size];
+
+            if (size == 0)
+            {
+                return array;
+            }
+
             array[0] = 1;
             array[1] = 1;
+
             for (int i = 2; i < size; i++)
             {
-                array[i] = array[i - 1] + array[i - 2];
+                checked
+                {
+                    array[i] = array[i - 1] + array[i - 2];
+                }
             }
 
             return array;
