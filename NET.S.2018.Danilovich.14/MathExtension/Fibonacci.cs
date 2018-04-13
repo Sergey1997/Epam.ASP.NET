@@ -13,9 +13,9 @@ namespace MathExtension
         /// </summary>
         /// <param name="size">size of generated array</param>
         /// <returns></returns>
-        public static int[] GenerateSequenceOfFibonacci(uint size)
+        public static ulong[] GenerateSequenceOfFibonacci(uint size)
         {
-            int[] array = new int[size];
+            ulong[] array = new ulong[size];
 
             if (size == 0)
             {

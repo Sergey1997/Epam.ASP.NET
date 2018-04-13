@@ -49,15 +49,8 @@ namespace MathExtension.Tests
         [Test]
         public void FibonacciSequenceTest()
         {
-            int[] array = Fibonacci.GenerateSequenceOfFibonacci(10);
-            Assert.AreEqual(new int[] { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 }, array);
-        }
-
-        [Test]
-        public void FibonacciNegativeSequenceTest()
-        {
-            int[] array = Fibonacci.GenerateSequenceOfFibonacci(10);
-            Assert.AreEqual(new int[] { -1, -1, -2, -3, -5, -8, -13, -21, -34, -55 }, array);
+            ulong[] array = Fibonacci.GenerateSequenceOfFibonacci(10);
+            Assert.AreEqual(new ulong[] { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 }, array);
         }
     }
 
