@@ -17,7 +17,7 @@ namespace FilterDigitLogic
         ///                                             unsupported or illegal values. </exception>
         /// <param name="array">    [in,out] The array. </param>
         /// <param name="digit">    The digit. </param>
-        public static T[] FilterDigit<T>(this T[] array, T value, Func<T,T,bool> predicate, out long millisek)
+        public static T[] FilterDigit<T>(this T[] array, T value, Func<T, T, bool> predicate, out long millisek)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -31,7 +31,7 @@ namespace FilterDigitLogic
         /// <param name="array">        The array. </param>
         /// <param name="predicate">    The predicate. </param>
         /// <returns>   An int[] filtered array by predicate . </returns>
-        public static T[] FilterDigit<T>(this T[] array, T value, Func<T,T,bool> predicate)
+        public static T[] FilterDigit<T>(this T[] array, T value, Func<T, T, bool> predicate)
         {
             InputValidation(array, predicate);
             List<T> result = new List<T>();
