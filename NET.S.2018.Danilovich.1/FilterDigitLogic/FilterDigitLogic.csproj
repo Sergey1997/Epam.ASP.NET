@@ -42,12 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DigitLogic.cs" />
     <Compile Include="Filter.cs" />
-    <Compile Include="IPredicate.cs" />
-    <Compile Include="ITransformer.cs" />
+    <Compile Include="FilterLogic.cs" />
+    <Compile Include="Transformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransformLogic.cs" />
+    <Compile Include="TransformerLogic.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

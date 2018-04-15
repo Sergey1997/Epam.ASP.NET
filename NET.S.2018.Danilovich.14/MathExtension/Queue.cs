@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathExtension
 {
-    public class Queue<T>
+    public class Queue<T> 
     {
         #region Fields
         private T[] array = default(T[]);

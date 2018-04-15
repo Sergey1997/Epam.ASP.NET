@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FilterDigitLogicTests.DDT
@@ -9,8 +8,7 @@ namespace FilterDigitLogicTests.DDT
     public class FilterClassTestDDT
     {
         public TestContext TestContext { get; set; }
-
-        [TestMethod]
+        
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\Filters.xml"),
         DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
         "|DataDirectory|\\Filters.xml", "TestCase",
