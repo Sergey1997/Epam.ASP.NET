@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace MathExtension
 {
@@ -13,27 +14,26 @@ namespace MathExtension
         /// </summary>
         /// <param name="size">size of generated array</param>
         /// <returns></returns>
-        public static ulong[] GenerateSequenceOfFibonacci(uint size)
+        public static IEnumerable<BigInteger> GenerateSequenceOfFibonacci(uint size)
         {
-            ulong[] array = new ulong[size];
+            BigInteger[] array = new BigInteger[size];
 
-            if (size == 0)
+            if (size == 0)  
             {
-                return array;
+                throw new ArgumentException($"{ (nameof(size))} of array of sequence a zero");
             }
 
-            array[0] = 1;
-            array[1] = 1;
+            yield return array[0] = 1;
+            yield return array[1] = 1;
 
             for (int i = 2; i < size; i++)
             {
                 checked
                 {
-                    array[i] = array[i - 1] + array[i - 2];
+                    yield return array[i] = array[i - 1] + array[i - 2];
                 }
+                
             }
-
-            return array;
         }
     }
 }

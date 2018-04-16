@@ -8,6 +8,16 @@ namespace MathExtension
 {
     public static class Search 
     {
+        public static int BinarySearch<T>(this T[] array, T item, Comparison<T> comparison)
+        {
+            Array.Sort(array, comparison);
+            return BinarySearch(array, item, comparison);
+        }
+        public static int BinarySearch<T>(this T[] array, T item, IComparer<T> comparer)
+        {
+            Array.Sort(array, comparer);
+            return BinarySearch(array, item, 0, array.Length, comparer);
+        }
         /// <summary>
         /// Binary search with default comparer of type
         /// </summary>
@@ -18,7 +28,7 @@ namespace MathExtension
         public static int BinarySearch<T>(this T[] array, T value)
         {           
             Array.Sort(array, Comparer<T>.Default);
-            return BinarySearch(array, value, Comparer<T>.Default);
+            return BinarySearch(array, value, 0, array.Length, Comparer<T>.Default);
         }
 
         /// <summary>
@@ -29,12 +39,14 @@ namespace MathExtension
         /// <param name="value">value for finding</param>
         /// <param name="comparer">comparer</param>
         /// <returns></returns>
-        private static int BinarySearch<T>(T[] list, T value, IComparer<T> comparer)
+        private static int BinarySearch<T>(T[] list, T value, int left, int right, IComparer<T> comparer)
         {
             DataValidation(list, value, comparer);
 
-            int start = 0;
-            int end = list.Count();
+            comparer = comparer ?? Comparer<T>.Default;
+
+            int start = left;
+            int end = right;
             while (start < end)
             {
                 int mid = start + ((end - start) / 2);
