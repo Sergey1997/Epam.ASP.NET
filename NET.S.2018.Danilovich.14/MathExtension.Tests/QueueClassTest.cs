@@ -9,8 +9,8 @@ namespace MathExtension.Tests
         public void QueueAddTest()
         {
             Queue<string> queue = new Queue<string>();
-            queue.Add("qqq");
-            queue.Add("www");
+            queue.Enqueue("qqq");
+            queue.Enqueue("www");
             Assert.AreEqual(new string[2] { "qqq", "www" }, queue.ToArray());
         }
 
@@ -18,10 +18,10 @@ namespace MathExtension.Tests
         public void QueueRemoveTest()
         {
             Queue<string> queue = new Queue<string>();
-            queue.Add("qqq");
-            queue.Add("www");
-            queue.Remove();
-            queue.Remove();
+            queue.Enqueue("qqq");
+            queue.Enqueue("www");
+            queue.Dequeue();
+            queue.Dequeue();
             Assert.AreEqual(new string[0] { }, queue.ToArray());
         }
 
@@ -29,7 +29,7 @@ namespace MathExtension.Tests
         public void QueueTrueContainsTest()
         {
             Queue<string> queue = new Queue<string>();
-            queue.Add("qqq");
+            queue.Enqueue("qqq");
             Assert.AreEqual(true, queue.Contains("qqq"));
         }
 
@@ -37,7 +37,7 @@ namespace MathExtension.Tests
         public void QueueFalseContainsTest()
         {
             Queue<string> queue = new Queue<string>();
-            queue.Add("qqq");
+            queue.Enqueue("qqq");
             Assert.AreEqual(false, queue.Contains("www"));
         }
 
@@ -45,7 +45,7 @@ namespace MathExtension.Tests
         public void QueueClearTest()
         {
             Queue<string> queue = new Queue<string>();
-            queue.Add("qqq");
+            queue.Enqueue("qqq");
             queue.Clear();
             Assert.AreEqual(new string[0] { }, queue.ToArray());
         }

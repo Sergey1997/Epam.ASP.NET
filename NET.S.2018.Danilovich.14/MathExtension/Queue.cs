@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,25 @@ using System.Threading.Tasks;
 
 namespace MathExtension
 {
-    public class Queue<T> 
+    public class Queue<T> : IEnumerable<T>
     {
         #region Fields
         private T[] array = default(T[]);
         private int head;
         private int tail;
+        private int version;
         #endregion
         #region Constructors
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Queue()
         {
             array = new T[0];
+            head = 0;
+            tail = 0;
+            version = 0;
+            Count = 0;
         }
 
         /// <summary>
@@ -28,6 +37,7 @@ namespace MathExtension
             array = new T[size];
             head = 0;
             tail = 0;
+            version = 0;
             Count = 0;
         }
 
@@ -35,6 +45,24 @@ namespace MathExtension
 
         #region Properties
         public int Count { get; private set; }
+        
+        /// <summary>
+        /// Indexer 
+        /// </summary>
+        /// <param name="index">index of array</param>
+        /// <returns></returns>
+        public T this[int index]
+        {
+            get
+            {
+                return array[index];
+            }
+
+            private set
+            {
+                array[index] = value;
+            }
+        }
         #endregion
 
         #region Methods
@@ -42,7 +70,7 @@ namespace MathExtension
         /// Add element to Queue
         /// </summary>
         /// <param name="item">element for adding</param>
-        public void Add(T item)
+        public void Enqueue(T item)
         {
             if (Count == array.Length)
             {
@@ -53,13 +81,14 @@ namespace MathExtension
             array[Count] = item;
             tail = (tail + 1) % array.Length;
             Count++;
+            version++;
         }
 
         /// <summary>
         /// Remove last element in queue
         /// </summary>
         /// <returns>Removed element</returns>
-        public T Remove()
+        public T Dequeue()
         {   
             if (Count == 0)
             {
@@ -80,6 +109,7 @@ namespace MathExtension
             }
 
             Count--;
+            version++;
             return removed;
         }
 
@@ -157,6 +187,96 @@ namespace MathExtension
             }
 
             return arr;
+        }
+        
+        public IEnumerator<T> GetEnumerator() => new Enumerator(this);
+
+        IEnumerator IEnumerable.GetEnumerator() => array.GetEnumerator();
+
+        /// <summary>
+        /// struct Enumerator for foreach
+        /// </summary>
+        private struct Enumerator : IEnumerator<T>
+        {
+            private readonly Queue<T> queue;
+            private readonly int version;
+            private T currentElement;
+            private int index;
+
+            public Enumerator(Queue<T> queue)
+            {
+                this.queue = queue;
+                version = queue.version;
+                index = 0;
+                currentElement = default(T);
+                if (queue.Count == 0)
+                {
+                    index = -1;
+                }
+            }
+
+            T IEnumerator<T>.Current
+            {
+                get
+                {
+                    if (index == 0 || index > queue.Count)
+                    {
+                        throw new ArgumentException($"{(nameof(index))} doesnt correct");
+                    }
+
+                    return currentElement;
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    if (index == 0 || index > queue.Count)
+                    {
+                        throw new ArgumentException($"{(nameof(index))} doesnt correct");
+                    }
+
+                    return currentElement;
+                }
+            }
+
+            public bool MoveNext()
+            {
+                if (version != queue.version)
+                {
+                    throw new InvalidOperationException("Queue was changed!");
+                }
+
+                if (index < 0)
+                {
+                    currentElement = default(T);
+                    return false;
+                }
+
+                currentElement = queue[index];
+                index++;
+                if (index == queue.Count)
+                {
+                    index = -1;
+                }
+
+                return true;
+            }
+
+            void IDisposable.Dispose()
+            {
+            }
+
+            public void Reset()
+            {
+                if (version != queue.version)
+                {
+                    throw new InvalidOperationException("Queue was changed!");
+                }
+
+                index = 0;
+            }
         }
         #endregion
     }
