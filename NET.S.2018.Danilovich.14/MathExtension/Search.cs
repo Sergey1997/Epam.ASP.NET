@@ -8,28 +8,57 @@ namespace MathExtension
 {
     public static class Search 
     {
-        public static int BinarySearch<T>(this T[] array, T item, Comparison<T> comparison)
-        {
-            Array.Sort(array, comparison);
-            return BinarySearch(array, item, comparison);
-        }
-        public static int BinarySearch<T>(this T[] array, T item, IComparer<T> comparer)
-        {
-            Array.Sort(array, comparer);
-            return BinarySearch(array, item, 0, array.Length, comparer);
-        }
+        /// <summary>
+        /// Reload of Binary search with IComparer<typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">type</typeparam>
+        /// <param name="array">array</param>
+        /// <param name="item">item for finding</param>
+        /// <param name="comparer">comparer</param>
+        /// <returns>The value found</returns>
+        public static int BinarySearch<T>(this T[] array, T item, IComparer<T> comparer) => BinarySearch(array, item, 0, array.Length, comparer.Compare);
+
+        /// <summary>
+        /// Reload of Binary search with IComparer<typeparamref name="T"/> 
+        /// </summary>
+        /// <typeparam name="T">T param</typeparam>
+        /// <param name="array">inputing array</param>
+        /// <param name="item">item for finding</param>
+        /// <param name="left">left hand side</param>
+        /// <param name="right">right hand side</param>
+        /// <param name="comparer">comparer</param>
+        /// <returns>The value found</returns>
+        public static int BinarySearch<T>(this T[] array, T item, int left, int right, IComparer<T> comparer) => BinarySearch(array, item, left, right, comparer.Compare);
+
         /// <summary>
         /// Binary search with default comparer of type
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array">array</param>
         /// <param name="value">value for finding</param>
-        /// <returns></returns>
-        public static int BinarySearch<T>(this T[] array, T value)
-        {           
-            Array.Sort(array, Comparer<T>.Default);
-            return BinarySearch(array, value, 0, array.Length, Comparer<T>.Default);
-        }
+        /// <returns>The value found</returns>
+        public static int BinarySearch<T>(this T[] array, T value) => BinarySearch(array, value, 0, array.Length, Comparer<T>.Default.Compare);
+
+        /// <summary>
+        /// Reload of Binary search
+        /// </summary>
+        /// <typeparam name="T">T param</typeparam>
+        /// <param name="array">inputing array</param>
+        /// <param name="item">item for finding</param>
+        /// <param name="left">left hand side</param>
+        /// <param name="right">right hand side</param>
+        /// <returns>The value found</returns>
+        public static int BinarySearch<T>(this T[] array, T value, int left, int right) => BinarySearch(array, value, left, right, Comparer<T>.Default.Compare);
+
+        /// <summary>
+        /// Reload of Binary search with Comparison<typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">T param</typeparam>
+        /// <param name="array">inputing array</param>
+        /// <param name="item">item for finding</param>
+        /// <param name="comparison"></param>
+        /// <returns>The value found</returns>
+        public static int BinarySearch<T>(this T[] array, T item, Comparison<T> comparison) => BinarySearch(array, item, 0, array.Length, comparison);
 
         /// <summary>
         /// Binary search 
@@ -39,18 +68,16 @@ namespace MathExtension
         /// <param name="value">value for finding</param>
         /// <param name="comparer">comparer</param>
         /// <returns></returns>
-        private static int BinarySearch<T>(T[] list, T value, int left, int right, IComparer<T> comparer)
+        private static int BinarySearch<T>(T[] array, T value, int left, int right, Comparison<T> comparison)
         {
-            DataValidation(list, value, comparer);
+            DataValidation(array, value, comparison);
 
-            comparer = comparer ?? Comparer<T>.Default;
-
-            int start = left;
-            int end = right;
-            while (start < end)
+            Array.Sort(array, comparison);
+            
+            while (left <= right)
             {
-                int mid = start + ((end - start) / 2);
-                int result = comparer.Compare(list[mid], value);
+                int mid = left + ((right - left) / 2);
+                int result = comparison.Invoke(array[mid], value);
                 if (result == 0)
                 {
                     return mid;
@@ -58,11 +85,11 @@ namespace MathExtension
 
                 if (result < 0)
                 {
-                    start = mid + 1;
+                    left = mid + 1;
                 }
                 else
                 {
-                    end = mid - 1;
+                    right = mid - 1;
                 }
             }
 
@@ -76,7 +103,7 @@ namespace MathExtension
         /// <param name="list">array</param>
         /// <param name="value">value</param>
         /// <param name="comparer">comparer</param>
-        private static void DataValidation<T>(T[] list, T value, IComparer<T> comparer)
+        private static void DataValidation<T>(T[] list, T value, Comparison<T> comparison)
         {
             if (list.Length == 0)
             {
@@ -88,9 +115,9 @@ namespace MathExtension
                 throw new ArgumentNullException($"{(value)} cant be a null");
             }
 
-            if (comparer == null)
+            if (comparison == null)
             {
-                throw new ArgumentNullException($"{(comparer)} cant be a null");
+                throw new ArgumentNullException($"{(comparison)} cant be a null");
             }
         }
     }

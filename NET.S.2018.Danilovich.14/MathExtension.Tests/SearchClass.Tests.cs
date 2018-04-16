@@ -7,11 +7,11 @@ namespace MathExtension.Tests
     public class SearchClassTest
     {
         [Test]
-        [TestCase(ExpectedResult = 1)]
+        [TestCase(ExpectedResult = 3)]
         public int BinarySearch_IntgerArray_IndexOfOccurrence()
         {
             int[] array = { 3241, 2, 1, 41, 231, 2 };
-            return array.BinarySearch(2);
+            return array.BinarySearch(41, 0, 3);
         }
 
         [Test]
@@ -41,17 +41,7 @@ namespace MathExtension.Tests
 
             Client[] array = new Client[] { a, b, c, d };
 
-            return array.BinarySearch(c);
+            return array.BinarySearch(c, 1, 2);
         }
     }
-    public class FibonacciClassTest
-    {
-        [Test]
-        public void FibonacciSequenceTest()
-        {
-            ulong[] array = Fibonacci.GenerateSequenceOfFibonacci(10);
-            Assert.AreEqual(new ulong[] { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 }, array);
-        }
-    }
-
 }

@@ -1,10 +1,9 @@
 ﻿using NUnit.Framework;
-using MathExtension;
 
 namespace MathExtension.Tests
 {
     [TestFixture]
-    class QueueClassTest
+    public class QueueClassTest
     {
         [Test]
         public void QueueAddTest()
@@ -14,6 +13,7 @@ namespace MathExtension.Tests
             queue.Add("www");
             Assert.AreEqual(new string[2] { "qqq", "www" }, queue.ToArray());
         }
+
         [Test]
         public void QueueRemoveTest()
         {
@@ -22,8 +22,9 @@ namespace MathExtension.Tests
             queue.Add("www");
             queue.Remove();
             queue.Remove();
-            Assert.AreEqual(new string[0] {  }, queue.ToArray());
+            Assert.AreEqual(new string[0] { }, queue.ToArray());
         }
+
         [Test]
         public void QueueTrueContainsTest()
         {
@@ -31,6 +32,7 @@ namespace MathExtension.Tests
             queue.Add("qqq");
             Assert.AreEqual(true, queue.Contains("qqq"));
         }
+
         [Test]
         public void QueueFalseContainsTest()
         {
@@ -38,6 +40,7 @@ namespace MathExtension.Tests
             queue.Add("qqq");
             Assert.AreEqual(false, queue.Contains("www"));
         }
+
         [Test]
         public void QueueClearTest()
         {

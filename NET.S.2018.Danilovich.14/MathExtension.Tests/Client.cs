@@ -34,6 +34,7 @@ namespace BankLibrary
         public string Surname { get; set; }
 
         public string Lastname { get; set; }
+
         public int Age { get; set; }
 
         public bool Equals(Client man)
@@ -53,12 +54,16 @@ namespace BankLibrary
 
         public int CompareTo(Client b)
         {
-            if (b is null) return 1;
+            if (b is null)
+            {
+                return 1;
+            }
 
             if (Age == b.Age)
             {
                 return 0;
             }
+
             if (Age > b.Age)
             {
                 return 1;
@@ -69,5 +74,4 @@ namespace BankLibrary
             }
         }
     }
-    
 }
