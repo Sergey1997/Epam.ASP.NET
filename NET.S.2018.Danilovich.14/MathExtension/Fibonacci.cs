@@ -13,19 +13,20 @@ namespace MathExtension
         /// <returns></returns>
         public static IEnumerable<BigInteger> GenerateSequenceOfFibonacci(uint size)
         {
-            BigInteger[] array = new BigInteger[size];
-
             if (size == 0)  
             {
                 throw new ArgumentException($"{ (nameof(size))} of array of sequence a zero");
             }
 
-            yield return array[0] = 1;
-            yield return array[1] = 1;
+            return GenerateHelper();
 
-            for (int i = 2; i < size; i++)
+            IEnumerable<BigInteger> GenerateHelper()
             {
-                checked
+                BigInteger[] array = new BigInteger[size];
+                yield return array[0] = 1;
+                yield return array[1] = 1;
+
+                for (int i = 2; i < size; i++)
                 {
                     yield return array[i] = array[i - 1] + array[i - 2];
                 }

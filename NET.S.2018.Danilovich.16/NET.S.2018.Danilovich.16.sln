@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTreeLogic", "BinarySearchTreeLogic\BinarySearchTreeLogic.csproj", "{2C7A82FC-9726-4C37-ADCD-AA6FDA9E59AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixLogic", "MatrixLogic\MatrixLogic.csproj", "{361B1D3E-6394-4FEB-8F4D-42AB565F075A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixLogic.Tests", "MatrixLogic.Tests\MatrixLogic.Tests.csproj", "{59DDE619-9C8B-45C0-B16B-012E099C4230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{A24A32F1-F8B9-4948-88EC-DA61C4DA029C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +15,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C7A82FC-9726-4C37-ADCD-AA6FDA9E59AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C7A82FC-9726-4C37-ADCD-AA6FDA9E59AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C7A82FC-9726-4C37-ADCD-AA6FDA9E59AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C7A82FC-9726-4C37-ADCD-AA6FDA9E59AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361B1D3E-6394-4FEB-8F4D-42AB565F075A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361B1D3E-6394-4FEB-8F4D-42AB565F075A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361B1D3E-6394-4FEB-8F4D-42AB565F075A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361B1D3E-6394-4FEB-8F4D-42AB565F075A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59DDE619-9C8B-45C0-B16B-012E099C4230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DDE619-9C8B-45C0-B16B-012E099C4230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DDE619-9C8B-45C0-B16B-012E099C4230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DDE619-9C8B-45C0-B16B-012E099C4230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24A32F1-F8B9-4948-88EC-DA61C4DA029C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24A32F1-F8B9-4948-88EC-DA61C4DA029C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24A32F1-F8B9-4948-88EC-DA61C4DA029C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24A32F1-F8B9-4948-88EC-DA61C4DA029C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4DC108EA-3414-4094-8695-B0DC27EF5D9A}
+		SolutionGuid = {CF08DF30-DC2E-4B68-9983-AD20CD26BC8A}
 	EndGlobalSection
 EndGlobal
