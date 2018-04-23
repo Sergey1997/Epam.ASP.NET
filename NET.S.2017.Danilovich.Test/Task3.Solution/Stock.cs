@@ -12,9 +12,7 @@ namespace Task3.Solution
 
         public void Imitation()
         {
-            var currentCourse = new RepletionEventArgs();
-            currentCourse.USD = 28;
-            currentCourse.EUR = 37;
+            RepletionEventArgs currentCourse = new RepletionEventArgs(28,37);
             Random random = new Random();
             for (int i = 0; i < 5; i++)
             {

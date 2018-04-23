@@ -10,14 +10,10 @@ namespace Task3.Solution
     {
         public int USD { get; set; }
         public int EUR { get; set; }
-        RepletionEventArgs(int usd, int eur)
+        public RepletionEventArgs(int usd, int eur)
         {
             USD = usd;
             EUR = eur;
-        }
-
-        public RepletionEventArgs()
-        {
         }
     }
 }
