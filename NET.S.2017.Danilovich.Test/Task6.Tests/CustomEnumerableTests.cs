@@ -36,14 +36,11 @@ namespace Task6.Tests
         {
             double[] expected = { 1, 2, 2.5, 3.3, 4.05757575757576, 4.87086926018965, 5.70389834408211, 6.55785277425587, 7.42763417076325, 8.31053343902137 };
 
-            var actual = Generator.Generate<double>(1, 2, 10, (a, b) => b + a/b).ToArray();
-            for (int i = 0; i < 10; i++)
-            {
-                Assert.AreEqual(expected[i], actual[i], 0.000000000001);
-            }
-
-            //IComparer comparer = new Comparator();
-            //CollectionAssert.AreEqual(expected, actual, comparer);
+            var actual = Generator.Generate<double>(1, 2, 10, (a, b) => b + a / b);
+            
+            IComparer comparer = new Comparator(0.00001);
+            
+            CollectionAssert.AreEqual(expected, actual, comparer);
         }
     }
 }

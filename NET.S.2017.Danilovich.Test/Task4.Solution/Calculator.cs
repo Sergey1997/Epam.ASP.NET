@@ -11,7 +11,7 @@ namespace Task4.Solution
         public double CalculateAverage(List<double> values, ICalculator calculator) => calculator.CalculateAverage(values);
         public double CalculateAverage(List<double> values, Func<List<double>, double> calculator) =>  calculator(values);
 
-        public static double CustomCalculateAverage(List<double> values)
+        public double CustomCalculateAverage(List<double> values)
         {
             if (values == null)
             {

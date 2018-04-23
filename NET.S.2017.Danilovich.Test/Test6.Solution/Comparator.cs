@@ -9,14 +9,25 @@ namespace Test6.Solution
 {
     public class Comparator : IComparer
     {
+        public double Accuracy { get; set; }
+        public Comparator(double accuracy)
+        {
+            Accuracy = accuracy;
+        }
 
         public int Compare(object x, object y)
         {
-            if (Math.Abs((double)x - (double)y) > 0.00001)
+            double[] lhs = (double[])x;
+            double[] rhs = (double[])y;
+            for(int i = 0; i < lhs.Length; i++)
             {
-                return 1;
+                if(Math.Abs(lhs[i]) - Math.Abs(rhs[i]) < Accuracy)
+                {
+                    return -1;
+                }
             }
-            return -1;
+
+            return 1;
         }
     }
 }
