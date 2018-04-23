@@ -13,7 +13,7 @@ namespace Task_2
 
         }
 
-        public override byte[] GenerateFileContent(int contentLength)
+        internal override byte[] GenerateFileContent(int contentLength)
         {
             string temp = RandomString(contentLength);
 

@@ -11,7 +11,7 @@ namespace Task_2
 
         }
 
-        public override byte[] GenerateFileContent(int contentLength)
+        internal override byte[] GenerateFileContent(int contentLength)
         {
             var random = new Random();
 
