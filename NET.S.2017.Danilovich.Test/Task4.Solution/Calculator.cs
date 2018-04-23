@@ -6,9 +6,20 @@ using System.Threading.Tasks;
 
 namespace Task4.Solution
 {
-    class Calculator
+    public class Calculator
     {
-        public double CalculateAvarage(List<double> values, ICalculator calculator) => calculator.CalculateAverage(values);
+        public double CalculateAverage(List<double> values, ICalculator calculator) => calculator.CalculateAverage(values);
+        public double CalculateAverage(List<double> values, Func<List<double>, double> calculator) =>  calculator(values);
+
+        public static double CustomCalculateAverage(List<double> values)
+        {
+            if (values == null)
+            {
+                throw new ArgumentNullException($"{(nameof(values))} musnt be a null");
+            }
+
+            return values.Sum() / values.Count;
+        }
     }
     public class MeanCalculator : ICalculator
     {
