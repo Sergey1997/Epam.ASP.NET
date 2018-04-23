@@ -17,16 +17,10 @@ namespace Test6.Solution
 
         public int Compare(object x, object y)
         {
-            double[] lhs = (double[])x;
-            double[] rhs = (double[])y;
-            for(int i = 0; i < lhs.Length; i++)
+            if (Math.Abs((double)x) - Math.Abs((double)y) < Accuracy)
             {
-                if(Math.Abs(lhs[i]) - Math.Abs(rhs[i]) < Accuracy)
-                {
-                    return -1;
-                }
+                return 0;
             }
-
             return 1;
         }
     }
