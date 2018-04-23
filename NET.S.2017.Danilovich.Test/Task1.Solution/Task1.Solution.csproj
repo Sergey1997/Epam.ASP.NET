@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryFileRepository.cs" />
-    <Compile Include="CustomValidator.cs" />
+    <Compile Include="CharsValidator.cs" />
+    <Compile Include="LengthValidator.cs" />
+    <Compile Include="StringValidator.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="PasswordCheckerService.cs" />

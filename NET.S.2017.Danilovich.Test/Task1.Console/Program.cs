@@ -13,9 +13,17 @@ namespace Task1.Console
         {
             IRepository sqlRepository = new SqlRepository();
             IRepository binaryFileRepository = new BinaryFileRepository();
+            IValidator[] enumerables =
+            {
+                new StringValidator(), new LengthValidator()
+            };
+            IValidator[] enumerables2 =
+            {
+                new StringValidator()
+            };
 
-            PasswordCheckerService checkerService = new PasswordCheckerService(sqlRepository, new CustomValidator());
-            PasswordCheckerService checkerService2 = new PasswordCheckerService(binaryFileRepository, new CustomValidator());
+            PasswordCheckerService checkerService = new PasswordCheckerService(sqlRepository, enumerables);
+            PasswordCheckerService checkerService2 = new PasswordCheckerService(binaryFileRepository, enumerables2);
 
             System.Console.WriteLine(checkerService.VerifyPassword("GoodPassword1"));
             System.Console.WriteLine(checkerService2.VerifyPassword("badpass"));
