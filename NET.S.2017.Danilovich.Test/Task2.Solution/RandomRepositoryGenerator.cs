@@ -11,7 +11,7 @@ namespace Task2.Solution
     {
         public string WorkingDirectory { get; }
         public string FileExtension { get; }
-        public abstract byte[] GenerateFileContent(int contentLength);
+        internal abstract byte[] GenerateFileContent(int contentLength);
         public RandomRepositoryGenerator(string workingDirectory, string fileExtension)
         {
             WorkingDirectory = workingDirectory;
