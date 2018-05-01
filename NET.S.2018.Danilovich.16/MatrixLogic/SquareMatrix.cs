@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace MatrixLogic
 {
-    public class SquareMatrix<T> : Matrix<T>
+    public class SquareMatrix<T> : IEnumerable<T>
     {
+        private T[,] Matrix { get; set; }
+
         public SquareMatrix()
         {
             this.Size = 1;
-            this.matrix = new T[this.Size, this.Size];
+            this.Matrix = new T[this.Size, this.Size];
         }
 
         public SquareMatrix(int size)
@@ -22,7 +25,7 @@ namespace MatrixLogic
             }
 
             this.Size = size;
-            this.matrix = new T[size, size];
+            this.Matrix = new T[size, size];
         }
 
         public SquareMatrix(T[,] array)
@@ -32,16 +35,16 @@ namespace MatrixLogic
                 throw new ArgumentNullException($"{(nameof(array))} is null");
             }
 
-            this.matrix = new T[array.GetLength(0), array.GetLength(0)];
+            this.Matrix = new T[array.GetLength(0), array.GetLength(0)];
             this.Size = array.GetLength(0);
-            Array.Copy(array, this.matrix, array.Length);
+            Array.Copy(array, this.Matrix, array.Length);
         }
 
         public int Size { get; set; }
 
-        public override T this[int i, int j]
+        public virtual T this[int i, int j]
         {
-            get => this.matrix[i, j];
+            get => this.Matrix[i, j];
             set
             {
                 if (i > this.Size || j > this.Size || i < 0 || j < 0)
@@ -49,8 +52,26 @@ namespace MatrixLogic
                     throw new ArgumentOutOfRangeException("Indexes doesnt correct");
                 }
 
-                this.matrix[i, j] = value;
+                this.Matrix[i, j] = value;
             }
+        }
+
+        public void Accept(IMatrixVisitor<T> visitor)
+        {
+            visitor.Visit((dynamic)this);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var item in Matrix)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

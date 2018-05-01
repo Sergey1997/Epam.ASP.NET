@@ -10,8 +10,8 @@ namespace MatrixLogic
     {
         SquareMatrix<T> Visit(SquareMatrix<T> matrix);
 
-        SquareMatrix<T> Visit(SymmetricMatrix<T> matrix);
+        SymmetricMatrix<T> Visit(SymmetricMatrix<T> matrix);
 
-        SquareMatrix<T> Visit(DiagonalMatrix<T> matrix);
+        DiagonalMatrix<T> Visit(DiagonalMatrix<T> matrix);
     }
 }

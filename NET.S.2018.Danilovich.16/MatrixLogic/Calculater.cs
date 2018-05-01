@@ -8,39 +8,47 @@ namespace MatrixLogic
 {
     public class Calculater<T> : IMatrixVisitor<T>
     {
-        private Matrix<T> temp;
+        private SquareMatrix<T> temp;
 
-        public Calculater(Matrix<T> other)
+        public Calculater(SquareMatrix<T> other)
         {
             temp = other;
         }
 
-        public SquareMatrix<T> Visit(SquareMatrix<T> matrix)
+        public SquareMatrix<T> Visit(SquareMatrix<T> Matrix)
         {
-            return Add(matrix);
-        }
-
-        public SquareMatrix<T> Visit(SymmetricMatrix<T> matrix)
-        {
-            return Add(matrix);
-        }
-
-        public SquareMatrix<T> Visit(DiagonalMatrix<T> matrix)
-        {
-            return Add(matrix);
-        }
-
-        private SquareMatrix<T> Add(SquareMatrix<T> matrix)
-        {
-            for (int i = 0; i < matrix.Size; i++)
+            for (int i = 0; i < Matrix.Size; i++)
             {
-                for (int j = 0; j < matrix.Size; j++)
+                for (int j = 0; j < Matrix.Size; j++)
                 {
-                    matrix[i, j] += (dynamic)temp[i, j];
+                    Matrix[i, j] += (dynamic)temp[i, j];
                 }
             }
 
-            return matrix;
+            return Matrix;
+        }
+
+        public SymmetricMatrix<T> Visit(SymmetricMatrix<T> Matrix)
+        {
+            for (int i = 0; i < Matrix.Size; i++)
+            {
+                for (int j = 0; j < i + 1; j++)
+                {
+                    Matrix[i, j] +=  (dynamic)temp[i, j];
+                }
+            }
+
+            return Matrix;
+        }
+
+        public DiagonalMatrix<T> Visit(DiagonalMatrix<T> Matrix)
+        {
+            for (int i = 0; i < Matrix.Size; i++)
+            {
+                Matrix[i, 0] += (dynamic)temp[i, 0];
+            }
+
+            return Matrix;
         }
     }
 }

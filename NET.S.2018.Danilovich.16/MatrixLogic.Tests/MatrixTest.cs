@@ -9,47 +9,23 @@ namespace MatrixLogic.Tests
     [TestFixture]
     public class MatrixTest
     {
-        int[,] expectedSquare = new int[,]
+        public static int[,] expectedSquare = new int[,]
         {
             {2,4,6 },
             {8,10,12 },
             {14,16,18 }
         };
 
-        public static readonly SquareMatrix<int> SquareMatrix =
-             new SquareMatrix<int>(new[,]
-                 {
-                    {1, 2, 3 },
-                    {4, 5, 6 },
-                    {7, 8, 9 }
-                 });
-        int[,] expectedDiagonal = new int[,]
+        
+        public static SquareMatrix<int> SquareMatrix = new SquareMatrix<int>(new[,]
         {
-            {2,0,0 },
-            {0,10,0 },
-            {0,0,18 }
-        };
+        {1, 2, 3 },
+        {4, 5, 6 },
+        {7, 8, 9 }
+        });
 
-        public static readonly SquareMatrix<int> DiagonalMatrix =
-             new DiagonalMatrix<int>(new[,]
-                 {
-                    {1, 0, 0 },
-                    {0, 5, 0 },
-                    {0, 0, 9 }
-                 });
-        int[,] expectedSymmetric = new int[,]
-        {
-            {2,8,12 },
-            {8,10,24 },
-            {12,24,18 }
-        };
-        public static readonly SquareMatrix<int> SymmetricMatrix =
-             new SymmetricMatrix<int>(new[,]
-                 {
-                    {1, 2, 3 },
-                    {2, 5, 6 },
-                    {3, 6, 9 }
-                 });
+        public readonly DiagonalMatrix<int> DiagonalMatrix = new DiagonalMatrix<int>(new[] { 1, 2 });
+
         [Test]
         public void SquareMatrixConstructorTest()
         {
@@ -60,29 +36,51 @@ namespace MatrixLogic.Tests
         [Test]
         public void SymmetricMatrixConstructorTest()
         {
-            SymmetricMatrix<int> actual = new SymmetricMatrix<int>(3)
-            {
-                [0, 1] = 2
-            };
-            int[,] expected = new int[3, 3];
-            expected[0, 1] = 2;
-            expected[1, 0] = 2;
-            Assert.AreEqual(expected, actual);
+           SquareMatrix<int> expected = new SymmetricMatrix<int>(new int[3][]
+           {
+            new int[] {1},
+            new int[] {1, 2},
+            new int[] {1 ,2, 3}
+           });
+           int[][] expectedSquare = new int[3][]
+           {
+            new int[] {1},
+            new int[] {1, 2},
+            new int[] {1 ,2, 3}
+           };
+
+            SquareMatrix<int> actual = new SymmetricMatrix<int>(expectedSquare);
+            CollectionAssert.AreEqual(expected, actual);
         }
         [Test]
         public void SquareMatrixSumTest()
         {
             Assert.AreEqual(expectedSquare, SquareMatrix.Sum(SquareMatrix));
         }
+
         [Test]
         public void DiagonalMatrixSumTest()
         {
-            Assert.AreEqual(expectedDiagonal, DiagonalMatrix.Sum(DiagonalMatrix));
+            int[] array = new int[] { 1, 2 };
+            int[] ex = new int[] { 2, 4 };
+            DiagonalMatrix<int> expected = new DiagonalMatrix<int>(ex);
+            DiagonalMatrix<int> actual = new DiagonalMatrix<int>(array);
+
+            Assert.AreEqual(expected, actual.Sum(actual));
         }
         [Test]
-        public void SymmeetricMatrixSumTest()
+        public void SymetricMatrixSumTest()
         {
-            Assert.AreEqual(expectedSymmetric, SymmetricMatrix.Sum(SymmetricMatrix));
+           int[][] expectedSymmetricMatrix = new int[3][]
+           {
+            new int[] {1},
+            new int[] {1, 2},
+            new int[] {1 ,2, 3}
+           };
+
+            SquareMatrix<int> expected = new SymmetricMatrix<int>(expectedSymmetricMatrix);
+            SquareMatrix<int> actual = new SymmetricMatrix<int>(expectedSymmetricMatrix);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

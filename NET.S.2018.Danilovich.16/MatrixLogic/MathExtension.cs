@@ -8,7 +8,7 @@ namespace MatrixLogic
 {
     public static class MatrixExtension
     {
-        public static Matrix<T> Sum<T>(this Matrix<T> matrix, Matrix<T> other)
+        public static SquareMatrix<T> Sum<T>(this SquareMatrix<T> matrix, SquareMatrix<T> other)
         {
             if (other is null)
             {

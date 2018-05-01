@@ -8,36 +8,51 @@ namespace MatrixLogic
 {
     public class SymmetricMatrix<T> : SquareMatrix<T>
     {
-        public SymmetricMatrix(int size) : base(size)
+
+        public T[][] Matrix { get; set; }
+        public SymmetricMatrix(int size)
         {
+            if (size < 1)
+            {
+                throw new ArgumentOutOfRangeException($"{(nameof(size))} must not be less than one");
+            }
+
+            this.Size = size;
+            this.Matrix = new T[size][];
+
+            for (int i = 0; i < size; i++)
+            {
+                Matrix[i] = new T[i + 1];
+            }
         }
 
-        public SymmetricMatrix(T[,] array)
+        public SymmetricMatrix(T[][] array)
         {
             if (array is null)
             {
                 throw new ArgumentNullException($"{(nameof(array))} is null");
             }
 
-            for (int i = 0; i < array.GetLength(0); i++)
+            this.Matrix = new T[array.GetLength(0)][];
+            this.Size = array.GetLength(0);
+
+            for(int i = 0; i < this.Size; i++)
             {
-                for (int j = 0; j < array.GetLength(0); j++)
-                {
-                    if (array[i, j] != (dynamic)array[j, i])
-                    {
-                        throw new ArgumentException($"{(nameof(array))} doesnt a symmetric matrix");
-                    }
-                }
+                Matrix[i] = new T[i + 1];
             }
 
-            this.matrix = new T[array.GetLength(0), array.GetLength(0)];
-            this.Size = array.GetLength(0);
-            Array.Copy(array, this.matrix, array.Length);
+            for(int i = 0; i < Matrix.Length; i++)
+            {
+                for(int j = 0; j < this.Matrix[i].Length; j++)
+                {
+                    Matrix[i][j] = array[i][j];
+                }
+            }
         }
 
-        public override T this[int i, int j]
+        public override T this[int i,int j]
         {
-            get => this.matrix[i, j];
+            get => this.Matrix[i][j];
             set
             {
                 if (i > this.Size || j > this.Size || i < 0 || j < 0)
@@ -45,8 +60,7 @@ namespace MatrixLogic
                     throw new ArgumentOutOfRangeException("Indexes doesnt correct");
                 }
 
-                this.matrix[i, j] = value;
-                this.matrix[j, i] = value;
+                this.Matrix[i][j] = value;
             }
         }
     }
