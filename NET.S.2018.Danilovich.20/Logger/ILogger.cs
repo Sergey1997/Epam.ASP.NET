@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XMLParserLogic
+namespace Logger
 {
-    public class Url
+    public interface ILogger
     {
+        void Log(string message);
     }
 }

@@ -17,11 +17,11 @@
 
             Document document = new Document(parts);
 
-            Console.WriteLine(document.ToHtml());
+            Console.WriteLine(document.ConvertToHtml());
 
-            Console.WriteLine(document.ToPlainText());
+            Console.WriteLine(document.ConvertToLaTex());
 
-            Console.WriteLine(document.ToLaTeX());
+            Console.WriteLine(document.ConvertToPlainText());
         }
     }
 }
