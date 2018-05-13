@@ -19,13 +19,19 @@ namespace BankLibrary
     {
         #region private Fields
         /// <summary>   The counter of all accounts. </summary>
-        private static int counter = 0;
+        private static uint counter = 0;
 
         /// <summary>   The identifier of account. </summary>
-        private int id;
+        private uint id;
 
         /// <summary>   The person. </summary>
         private Client man;
+
+        /// <summary>   Bonus points on the account. </summary>
+        private int bonusPoints;
+
+        /// <summary>   Bonus points on the account. </summary>
+        private decimal balance;
 
         /// <summary>   The gradation. </summary>
         private Gradation gradation;
@@ -34,7 +40,7 @@ namespace BankLibrary
         /// <summary>   Constructor. </summary>
         /// <param name="man">          The person with properties: string, string, string, string. </param>
         /// <param name="gradation">    The gradation of account rarity. </param>
-        public Account(Client man, Gradation gradation, uint balance = 0, uint points = 0)
+        public Account(Client man, Gradation gradation, decimal balance, decimal points)
         {
             this.man = new Client(man.Name, man.Surname, man.Lastname, man.NumberOfPassport);
             this.gradation = gradation;
@@ -45,14 +51,55 @@ namespace BankLibrary
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Getter and setter for identifier of account
+        /// </summary>
+        public int Id
+        {
+            get => this.id;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"{(nameof(value))} cant be less than zero");
+                }
+
+                id = value;
+            }
+        }
+
         /// <summary>   Gets or sets the balance. </summary>
         /// <value> The balance. </value>
-        public decimal Balance { get; set; } = 0;
-        
+        public decimal Balance
+        {
+            get => balance;
+            set
+            {
+                if(value < 0)
+                {
+                    throw new ArgumentException($"{(nameof(value))} cant be less than zero");
+                }
+
+                balance = value;
+            }
+        }
+
         /// <summary>   Gets or sets the bonuse points. </summary>
         /// <value> The bonuse points. </value>
-        public uint BonusePoints { get; set; } = 0;
-        
+        public decimal BonusPoints
+        {
+            get => bonusPoints;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"{(nameof(value))} cant be less than zero");
+                }
+
+                bonusPoints = value;
+            }
+        }
+
         /// <summary>   Gets the cost of balance, prop for calculate points. </summary>
         /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
         ///                                                 the required range. </exception>

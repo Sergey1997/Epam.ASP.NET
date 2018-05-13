@@ -40,11 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BankAccount.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\GradationLogic\GradationTypes\Base.cs" />
+    <Compile Include="Entities\GradationLogic\Gradation.cs" />
+    <Compile Include="Entities\GradationLogic\GradationLogicCounter.cs" />
+    <Compile Include="Entities\GradationLogic\GradationFactory.cs" />
+    <Compile Include="Entities\GradationLogic\GradationTypes\Gold.cs" />
+    <Compile Include="Entities\GradationLogic\GradationTypes\Platinum.cs" />
+    <Compile Include="Entities\GradationLogic\GradationTypes\Silver.cs" />
+    <Compile Include="Interfaces\IBankAccountService.cs" />
+    <Compile Include="Interfaces\IGenerator.cs" />
+    <Compile Include="Interfaces\IGradationCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

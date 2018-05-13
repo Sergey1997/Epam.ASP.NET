@@ -3,50 +3,39 @@ using System.Linq;
 using BLL.Interface.Entities;
 using BLL.Interface.Interfaces;
 using DependencyResolver;
+//using DependencyResolver;
 using Ninject;
 
 namespace ConsolePL
 {
     class Program
     {
-        private static readonly IKernel resolver;
+        private static readonly IKernel Resolver;
 
         static Program()
         {
-            resolver = new StandardKernel();
-            resolver.ConfigurateResolver();
+            Resolver = new StandardKernel();
+            Resolver.ConfigurateResolver();
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            IAccountService service = resolver.Get<IAccountService>();
-            IAccountNumberCreateService creator = resolver.Get<IAccountNumberCreateService>();
+            IBankAccountService accountService = Resolver.Get<IBankAccountService>();
 
-            service.OpenAccount("Account owner 1", AccountType.Base, creator);
-            service.OpenAccount("Account owner 2", AccountType.Base, creator);
-            service.OpenAccount("Account owner 3", AccountType.Silver, creator);
-            service.OpenAccount("Account owner 4", AccountType.Base, creator);
-
-            var creditNumbers = service.GetAllAccounts().Select(acc => acc.AccountNumber).ToArray();
-
-            foreach (var t in creditNumbers)
+            Client c1 = new Client("12321", "323", "112", "32231");
+            Client c2 = new Client("12321", "323", "112", "eqwqwe");
+            accountService.Open(c1, Gradation.Gold);
+            accountService.Open(c2, Gradation.Platinum);
+            foreach(var item in accountService.GetAllAccounts())
             {
-                service.DepositAccount(t, 100);
+                Console.WriteLine(item.ToString());
             }
-
-            foreach (var item in service.GetAllAccounts())
+            accountService.Put(1, 120);
+            accountService.Withdraw(1, 50);
+            foreach (var item in accountService.GetAllAccounts())
             {
-                Console.WriteLine(item);
-            }
+                Console.WriteLine(item.ToString());
 
-            foreach (var t in creditNumbers)
-            {
-                service.WithdrawAccount(t, 10);
-            }
-
-            foreach (var item in service.GetAllAccounts())
-            {
-                Console.WriteLine(item);
             }
         }
     }
